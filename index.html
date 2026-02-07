@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buenas Noches, Sintonía - Homenaje</title>
+    <title>Buenas Noches, Sintonía - Homenaje FM 90</title>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
         :root { --gold: #ffcc00; --dark-gold: #d4af37; --bg: #05070a; --neon: 0 0 15px rgba(255, 204, 0, 0.6); }
@@ -11,47 +11,49 @@
         body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%, #120a05 80%); }
 
         .main-header { text-align: center; margin-bottom: 10px; }
-        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 6vw, 3.5rem); font-style: italic; color: var(--gold); margin: 0; line-height: 1; text-shadow: var(--neon); }
-        .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color: #eee; margin: 5px 0; }
-        .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
+        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 5vw, 3rem); font-style: italic; color: var(--gold); margin: 0; text-shadow: var(--neon); }
+        .conductor { font-family: 'Alex Brush', cursive; font-size: 1.8rem; color: #eee; margin: 5px 0; }
+        .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
 
-        /* Controles Retro */
-        .controls-row { display: flex; gap: 15px; margin: 20px 0; z-index: 10; }
-        .btn-retro { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; box-shadow: var(--neon); }
+        .controls-row { display: flex; gap: 10px; margin: 15px 0; z-index: 10; flex-wrap: wrap; justify-content: center; }
+        .btn-retro { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 8px 15px; border-radius: 5px; font-weight: 900; cursor: pointer; font-size: 0.7rem; transition: 0.3s; box-shadow: var(--neon); }
         .btn-retro:hover { background: var(--gold); color: black; }
         
-        .stage-container { position: relative; width: 100%; max-width: 550px; display: flex; flex-direction: column; align-items: center; margin: 15px 0; }
+        .stage-container { position: relative; width: 100%; max-width: 500px; display: flex; flex-direction: column; align-items: center; margin: 10px 0; }
+        .turntable { width: 300px; height: 300px; background: #221a15; border: 8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .vinyl { width: 260px; height: 260px; background: radial-gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 15px auto; position: relative; animation: spin 4s linear infinite; animation-play-state: paused; border: 2px solid #333; }
+        .label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 75px; height: 75px; background: #b01e1e; border-radius: 50%; border: 2px solid gold; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; text-align: center; color: white; font-weight: bold; }
+        #arm { position: absolute; top: 30px; right: 25px; width: 120px; height: 8px; background: #aaa; transform-origin: 90% 50%; transform: rotate(25deg); transition: 1.2s; z-index: 10; border-radius: 4px; }
 
-        /* Tocadiscos y TV */
-        .turntable { width: 320px; height: 320px; background: #221a15; border: 8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-        .vinyl { width: 280px; height: 280px; background: radial-gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 20px auto; position: relative; animation: spin 4s linear infinite; animation-play-state: paused; border: 2px solid #333; }
-        .label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border-radius: 50%; border: 2px solid gold; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; text-align: center; color: white; font-weight: bold; }
-        #arm { position: absolute; top: 30px; right: 25px; width: 130px; height: 8px; background: #aaa; transform-origin: 90% 50%; transform: rotate(25deg); transition: 1.2s; z-index: 10; border-radius: 4px; }
-
-        .tv-vintage { display: none; width: 100%; height: 320px; background: #4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 12px; position: relative; }
-        .tv-screen { width: 100%; height: 100%; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #222; position: relative; }
+        .tv-vintage { display: none; width: 100%; height: 280px; background: #4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 10px; position: relative; }
+        .tv-screen { width: 100%; height: 100%; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #222; }
         
-        #song-title { color: var(--gold); font-size: 0.9rem; margin-top: 15px; font-weight: bold; text-align: center; height: 1.2rem; min-height: 1.2rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
+        #song-title { color: var(--gold); font-size: 0.8rem; margin: 10px 0; font-weight: bold; text-align: center; min-height: 1rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
 
-        .btn-main { background: var(--gold); color: black; border: none; padding: 15px 45px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.2rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; pointer-events: none; margin-top: 10px; }
+        .btn-main { background: var(--gold); color: black; border: none; padding: 12px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.1rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; pointer-events: none; }
         .btn-main.active { opacity: 1; pointer-events: auto; }
 
-        /* Donación */
-        .donation-box { margin-top: 40px; text-align: center; border: 2px solid var(--dark-gold); padding: 20px; border-radius: 20px; background: rgba(0, 0, 0, 0.4); box-shadow: var(--neon); width: 220px; }
-        .qr-img { width: 150px; height: 150px; background: white; margin: 10px auto; display: block; border-radius: 10px; border: 3px solid var(--gold); }
+        /* Área de Interacción Oculta */
+        .interaction-area { margin-top: 25px; display: flex; gap: 15px; }
+        .btn-action { background: #333; color: white; border: 1px solid #555; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .btn-action:hover { background: #444; border-color: var(--gold); }
+        
+        #donation-panel { display: none; margin-top: 15px; text-align: center; border: 1px solid var(--gold); padding: 15px; border-radius: 15px; background: rgba(0,0,0,0.6); animation: fadeIn 0.5s; }
+        .qr-img { width: 140px; height: 140px; background: white; margin: 10px auto; display: block; border-radius: 8px; border: 2px solid var(--gold); }
 
-        /* Adornos */
-        .decoration { position: absolute; color: var(--gold); font-size: 24px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; filter: drop-shadow(0 0 5px var(--gold)); }
-        @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); opacity: 0; } }
+        .decoration { position: absolute; color: var(--gold); font-size: 22px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; }
+        @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-300px) scale(1.2); opacity: 0; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
     <header class="main-header">
+        <div class="sub-header">Homenaje a la inolvidable</div>
         <h1 class="main-title">Buenas Noches, Sintonía</h1>
         <div class="conductor">de Gonzalo Gorriti</div>
-        <div class="sub-header">FM 90 RADIO ALTIPLANO</div>
+        <div class="sub-header">FM 90 - RADIO ALTIPLANO LA PAZ</div>
     </header>
 
     <div class="controls-row">
@@ -65,64 +67,69 @@
             <div id="arm"></div>
             <div class="vinyl" id="disc"><div class="label">FM 90<br>RADIO<br>ALTIPLANO</div></div>
         </div>
-
         <div id="tv-stage" class="tv-vintage">
             <div class="tv-screen"><div id="player"></div></div>
         </div>
         <div id="song-title"></div>
     </div>
 
-    <button class="btn-main" onclick="togglePlayback()" id="play-btn">ESPERANDO SEÑAL...</button>
+    <button class="btn-main" onclick="togglePlayback()" id="play-btn">CONECTANDO...</button>
 
-    <div class="donation-box">
-        <span style="font-size: 0.9rem; color: var(--gold); font-weight: bold;">APOYA EL PROYECTO</span>
-        <img src="takenos.png" alt="Donación QR" class="qr-img">
-        <p style="font-size: 0.8rem; margin-top: 10px;">Escanea para aportar</p>
+    <div class="interaction-area">
+        <button class="btn-action" onclick="toggleDonation()">📼 APOYAR SITIO</button>
+        <button class="btn-action" onclick="location.href='mailto:borisuria@://gmail.com Radio Altiplano'">✉️ CONTACTO</button>
     </div>
+
+    <div id="donation-panel">
+        <p style="font-size: 0.8rem; color: var(--gold); margin: 0;">"Si quieres colaborar para mantener este sitio puedes ayudar"</p>
+        <img src="takenos.png" alt="Donación" class="qr-img">
+        <p style="font-size: 0.7rem;">Escanea el código QR para donar</p>
+    </div>
+
+    <footer style="max-width: 600px; text-align: center; margin-top: 30px; opacity: 0.6; font-size: 0.7rem;">
+        Homenaje cultural sin fines de lucro. Recordando la magia de la radio paceña.
+    </footer>
 
     <script>
         let player;
         let playing = false;
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
 
-        // Carga de API YouTube corregida
         var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
+        tag.src = "https://www.youtube.com";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
+                height: '100%', width: '100%',
                 playerVars: {
-                    listType: 'playlist',
-                    list: playlistId,
-                    autoplay: 0,
-                    controls: 0,
-                    disablekb: 1,
-                    modestbranding: 1,
-                    rel: 0,
-                    loop: 1
+                    listType: 'playlist', list: playlistId,
+                    autoplay: 0, controls: 0, disablekb: 1, modestbranding: 1, rel: 0,
+                    origin: window.location.origin, widget_referrer: window.location.origin
                 },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
+                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': onPlayerError }
             });
         }
 
         function onPlayerReady(event) {
             const btn = document.getElementById('play-btn');
             btn.classList.add('active');
-            btn.innerText = "SINTONIZAR EMISORA";
+            btn.innerText = "SINTONIZAR";
             player.setShuffle(true);
+        }
+
+        function onPlayerError(event) {
+            // Si el video está prohibido o falla, saltar al siguiente tras 2 segundos
+            console.log("Video no disponible, saltando...");
+            document.getElementById('song-title').innerText = "Buscando señal estable...";
+            setTimeout(() => { player.nextVideo(); }, 2000);
         }
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.PLAYING) {
                 const videoData = player.getVideoData();
-                document.getElementById('song-title').innerText = "Vibrando con: " + videoData.title;
+                document.getElementById('song-title').innerText = "EN SINTONÍA: " + videoData.title;
             }
             if (event.data === YT.PlayerState.ENDED) { player.nextVideo(); }
         }
@@ -138,7 +145,7 @@
                 disc.style.animationPlayState = 'running';
                 player.playVideoAt(Math.floor(Math.random() * 20)); 
                 document.body.classList.add('amber-mode');
-                btn.innerText = "APAGAR RADIO";
+                btn.innerText = "APAGAR";
                 nextBtn.style.display = 'block';
                 playing = true;
                 spawnDecorations();
@@ -147,11 +154,17 @@
                 disc.style.animationPlayState = 'paused';
                 player.pauseVideo();
                 document.body.classList.remove('amber-mode');
-                btn.innerText = "SINTONIZAR EMISORA";
+                btn.innerText = "SINTONIZAR";
                 nextBtn.style.display = 'none';
                 document.getElementById('song-title').innerText = "";
                 playing = false;
             }
+        }
+
+        function toggleDonation() {
+            const panel = document.getElementById('donation-panel');
+            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
         function nextVideo() { if(player) player.nextVideo(); }
