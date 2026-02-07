@@ -11,52 +11,49 @@
         body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%, #120a05 80%); }
 
         .main-header { text-align: center; margin-bottom: 10px; }
-        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 5vw, 3rem); font-style: italic; color: var(--gold); margin: 0; text-shadow: var(--neon); }
-        .conductor { font-family: 'Alex Brush', cursive; font-size: 1.8rem; color: #eee; margin: 5px 0; }
-        .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 6vw, 3.5rem); font-style: italic; color: var(--gold); margin: 0; line-height: 1; text-shadow: var(--neon); }
+        .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color: #eee; margin: 5px 0; }
+        .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
 
         .controls-row { display: flex; gap: 10px; margin: 15px 0; z-index: 10; }
-        .btn-retro { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 8px 15px; border-radius: 5px; font-weight: 900; cursor: pointer; font-size: 0.7rem; transition: 0.3s; box-shadow: var(--neon); }
+        .btn-view { padding: 8px 15px; cursor: pointer; background: #1a1a1a; color: gold; border: 1px solid gold; font-weight: bold; border-radius: 4px; font-size: 0.8rem; }
         
-        .stage-container { position: relative; width: 100%; max-width: 500px; display: flex; flex-direction: column; align-items: center; margin: 10px 0; }
-        .turntable { width: 300px; height: 300px; background: #221a15; border: 8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-        .vinyl { width: 260px; height: 260px; background: radial-gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 15px auto; position: relative; animation: spin 4s linear infinite; animation-play-state: paused; border: 2px solid #333; }
-        .label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 75px; height: 75px; background: #b01e1e; border-radius: 50%; border: 2px solid gold; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; text-align: center; color: white; font-weight: bold; }
-        #arm { position: absolute; top: 30px; right: 25px; width: 120px; height: 8px; background: #aaa; transform-origin: 90% 50%; transform: rotate(25deg); transition: 1.2s; z-index: 10; border-radius: 4px; }
+        .stage-container { position: relative; width: 100%; max-width: 550px; display: flex; flex-direction: column; align-items: center; margin: 15px 0; }
+        .turntable { width: 320px; height: 320px; background: #221a15; border: 8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+        .vinyl { width: 280px; height: 280px; background: radial-gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 20px auto; position: relative; animation: spin 4s linear infinite; animation-play-state: paused; border: 2px solid #333; }
+        .label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border-radius: 50%; border: 2px solid gold; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; text-align: center; color: white; font-weight: bold; }
+        #arm { position: absolute; top: 30px; right: 25px; width: 130px; height: 8px; background: #aaa; transform-origin: 90% 50%; transform: rotate(25deg); transition: 1.2s; z-index: 10; border-radius: 4px; }
 
-        .tv-vintage { display: none; width: 100%; height: 280px; background: #4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 10px; position: relative; }
-        .tv-screen { width: 100%; height: 100%; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #222; }
+        .tv-vintage { display: none; width: 100%; height: 320px; background: #4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 12px; position: relative; }
+        .tv-screen { width: 100%; height: 100%; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #222; position: relative; }
         
-        #song-title { color: var(--gold); font-size: 0.8rem; margin: 10px 0; font-weight: bold; text-align: center; min-height: 1.2rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
+        #song-title { color: var(--gold); font-size: 0.9rem; margin-top: 15px; font-weight: bold; text-align: center; height: 1.2rem; min-height: 1.2rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
 
-        .btn-main { background: var(--gold); color: black; border: none; padding: 12px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.1rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; pointer-events: none; }
+        .btn-main { background: var(--gold); color: black; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 900; cursor: pointer; font-size: 1rem; box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3); transition: 0.3s; pointer-events: none; opacity: 0.5; }
         .btn-main.active { opacity: 1; pointer-events: auto; }
 
-        .interaction-area { margin-top: 25px; display: flex; gap: 15px; }
-        .btn-action { background: #111; color: var(--gold); border: 1px solid var(--gold); padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; box-shadow: var(--neon); font-weight: bold; }
-        
-        #donation-panel { display: none; margin-top: 15px; text-align: center; border: 2px solid var(--gold); padding: 15px; border-radius: 15px; background: rgba(0,0,0,0.8); animation: fadeIn 0.5s; width: 250px; }
-        .qr-img { width: 140px; height: 140px; background: white; margin: 10px auto; display: block; border: 2px solid var(--gold); border-radius: 5px; }
+        /* Botones nuevos */
+        .extra-btns { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-small { background: rgba(255,204,0,0.1); color: var(--gold); border: 1px solid var(--gold); padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 0.75rem; text-decoration: none; }
+        #donation-qr { display: none; margin-top: 15px; border: 1px solid var(--gold); padding: 10px; border-radius: 10px; background: #000; }
 
-        .decoration { position: absolute; color: var(--gold); font-size: 22px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; }
-        @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-300px) scale(1.2); opacity: 0; } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .note { position: absolute; color: var(--gold); font-size: 20px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; }
+        @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); opacity: 0; } }
     </style>
 </head>
 <body>
 
     <header class="main-header">
-        <div class="sub-header">Homenaje a la legendaria</div>
         <h1 class="main-title">Buenas Noches, Sintonía</h1>
         <div class="conductor">de Gonzalo Gorriti</div>
-        <div class="sub-header">FM 90 - RADIO ALTIPLANO LA PAZ</div>
+        <div class="sub-header">FM 90 RADIO ALTIPLANO LA PAZ</div>
     </header>
 
     <div class="controls-row">
-        <button class="btn-retro" onclick="setView('radio')">📻 RADIO</button>
-        <button class="btn-retro" onclick="setView('tv')">📺 TV</button>
-        <button class="btn-retro" onclick="nextVideo()" id="next-btn" style="display:none;">⏭ SALTAR</button>
+        <button class="btn-view" onclick="setView('radio')">📻 RADIO</button>
+        <button class="btn-view" onclick="setView('tv')">📺 TV</button>
+        <button class="btn-view" onclick="nextVideo()" id="next-btn" style="display:none;">⏭ SIGUIENTE</button>
     </div>
 
     <div class="stage-container">
@@ -70,19 +67,19 @@
         <div id="song-title"></div>
     </div>
 
-    <button class="btn-main" onclick="togglePlayback()" id="play-btn">CONECTANDO...</button>
+    <button class="btn-main" onclick="togglePlayback()" id="play-btn">ESPERANDO SEÑAL...</button>
 
-    <div class="interaction-area">
-        <button class="btn-action" onclick="toggleDonation()">📼 APOYAR (CASSETTE)</button>
-        <button class="btn-action" onclick="window.location.href='mailto:borisuria@://gmail.com Radio Altiplano'">✉️ CONTACTO</button>
+    <div class="extra-btns">
+        <button class="btn-small" onclick="toggleQR()">📼 APOYAR (CASSETTE)</button>
+        <a href="mailto:borisuria@gmail.com" class="btn-small">✉️ CONTACTO</a>
     </div>
 
-    <div id="donation-panel">
-        <p style="font-size: 0.8rem; color: var(--gold); margin-bottom: 10px;">"Si quieres colaborar para mantener este sitio puedes ayudar"</p>
-        <img src="takenos.png" alt="Donación" class="qr-img">
+    <div id="donation-qr">
+        <p style="font-size: 0.75rem; color: var(--gold);">Si quieres colaborar para mantener este sitio puedes ayudar:</p>
+        <img src="takenos.png" alt="QR" style="width: 130px; height: 130px; display: block; margin: 0 auto; border: 2px solid var(--gold);">
     </div>
 
-    <!-- CARGA DE API DE YOUTUBE (MODO SEGURO) -->
+    <!-- CARGA DE API DE YOUTUBE -->
     <script src="https://www.youtube.com"></script>
 
     <script>
@@ -90,80 +87,44 @@
         let playing = false;
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
 
-        // Función que llama YouTube automáticamente
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                playerVars: {
-                    listType: 'playlist',
-                    list: playlistId,
-                    autoplay: 0,
-                    controls: 0,
-                    disablekb: 1,
-                    modestbranding: 1,
-                    rel: 0
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange,
-                    'onError': onPlayerError
-                }
+                height: '100%', width: '100%',
+                playerVars: { listType: 'playlist', list: playlistId, controls: 0, disablekb: 1, modestbranding: 1, rel: 0, loop: 1 },
+                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': function() { player.nextVideo(); } }
             });
         }
 
         function onPlayerReady(event) {
             const btn = document.getElementById('play-btn');
             btn.classList.add('active');
-            btn.innerText = "SINTONIZAR";
+            btn.innerText = "SINTONIZAR EMISORA";
             player.setShuffle(true);
-        }
-
-        function onPlayerError(event) {
-            console.log("Error de video, saltando...");
-            player.nextVideo();
         }
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.PLAYING) {
-                const videoData = player.getVideoData();
-                document.getElementById('song-title').innerText = "SONANDO: " + videoData.title;
+                document.getElementById('song-title').innerText = "Sonando: " + player.getVideoData().title;
             }
-            if (event.data === YT.PlayerState.ENDED) {
-                player.nextVideo();
-            }
+            if (event.data === YT.PlayerState.ENDED) { player.nextVideo(); }
         }
 
         function togglePlayback() {
-            const arm = document.getElementById('arm');
-            const disc = document.getElementById('disc');
-            const btn = document.getElementById('play-btn');
-            const nextBtn = document.getElementById('next-btn');
-
+            const arm = document.getElementById('arm'), disc = document.getElementById('disc'), btn = document.getElementById('play-btn'), nxt = document.getElementById('next-btn');
             if (!playing) {
-                arm.style.transform = 'rotate(-18deg)'; 
-                disc.style.animationPlayState = 'running';
-                player.playVideo();
-                document.body.classList.add('amber-mode');
-                btn.innerText = "APAGAR";
-                nextBtn.style.display = 'block';
-                playing = true;
-                spawnDecorations();
+                arm.style.transform = 'rotate(-18deg)'; disc.style.animationPlayState = 'running';
+                player.playVideo(); document.body.classList.add('amber-mode');
+                btn.innerText = "APAGAR EMISIÓN"; nxt.style.display = 'block'; playing = true; spawnNotes();
             } else {
-                arm.style.transform = 'rotate(25deg)'; 
-                disc.style.animationPlayState = 'paused';
-                player.pauseVideo();
-                document.body.classList.remove('amber-mode');
-                btn.innerText = "SINTONIZAR";
-                nextBtn.style.display = 'none';
-                document.getElementById('song-title').innerText = "";
-                playing = false;
+                arm.style.transform = 'rotate(25deg)'; disc.style.animationPlayState = 'paused';
+                player.pauseVideo(); document.body.classList.remove('amber-mode');
+                btn.innerText = "SINTONIZAR EMISORA"; nxt.style.display = 'none'; document.getElementById('song-title').innerText = ""; playing = false;
             }
         }
 
-        function toggleDonation() {
-            const panel = document.getElementById('donation-panel');
-            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+        function toggleQR() {
+            const qr = document.getElementById('donation-qr');
+            qr.style.display = (qr.style.display === 'block') ? 'none' : 'block';
         }
 
         function nextVideo() { if(player) player.nextVideo(); }
@@ -172,17 +133,16 @@
             document.getElementById('tv-stage').style.display = m === 'tv' ? 'block' : 'none';
         }
 
-        function spawnDecorations() {
+        function spawnNotes() {
             if (!playing) return;
-            const deco = document.createElement('div');
-            deco.className = 'decoration';
-            const icons = ['♪', '♫', '📻', '✨', '💿', '🎧', '🔊'];
-            deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-            deco.style.left = Math.random() * 100 + 'vw';
-            deco.style.bottom = '20px';
-            document.body.appendChild(deco);
-            setTimeout(() => deco.remove(), 4000);
-            setTimeout(spawnDecorations, 700);
+            const note = document.createElement('div');
+            note.className = 'note';
+            note.innerHTML = ['♪', '♫', '📻', '✨', '💿', '🎧', '🔊'][Math.floor(Math.random() * 7)];
+            note.style.left = Math.random() * 100 + 'vw';
+            note.style.bottom = '20px';
+            document.body.appendChild(note);
+            setTimeout(() => note.remove(), 4000);
+            setTimeout(spawnNotes, 700);
         }
     </script>
 </body>
