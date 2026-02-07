@@ -27,13 +27,13 @@
         .tv-vintage { display: none; width: 100%; height: 280px; background: #4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 10px; position: relative; }
         .tv-screen { width: 100%; height: 100%; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #222; }
         
-        #song-title { color: var(--gold); font-size: 0.8rem; margin: 10px 0; font-weight: bold; text-align: center; min-height: 1rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
+        #song-title { color: var(--gold); font-size: 0.8rem; margin: 10px 0; font-weight: bold; text-align: center; min-height: 1.2rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
 
         .btn-main { background: var(--gold); color: black; border: none; padding: 12px 40px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.1rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; pointer-events: none; }
         .btn-main.active { opacity: 1; pointer-events: auto; }
 
         .interaction-area { margin-top: 25px; display: flex; gap: 15px; }
-        .btn-action { background: #111; color: var(--gold); border: 1px solid var(--gold); padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; box-shadow: var(--neon); }
+        .btn-action { background: #111; color: var(--gold); border: 1px solid var(--gold); padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; box-shadow: var(--neon); font-weight: bold; }
         
         #donation-panel { display: none; margin-top: 15px; text-align: center; border: 2px solid var(--gold); padding: 15px; border-radius: 15px; background: rgba(0,0,0,0.8); animation: fadeIn 0.5s; width: 250px; }
         .qr-img { width: 140px; height: 140px; background: white; margin: 10px auto; display: block; border: 2px solid var(--gold); border-radius: 5px; }
@@ -73,8 +73,8 @@
     <button class="btn-main" onclick="togglePlayback()" id="play-btn">CONECTANDO...</button>
 
     <div class="interaction-area">
-        <button class="btn-action" onclick="toggleDonation()">📼 APOYAR SITIO</button>
-        <button class="btn-action" onclick="window.open('https://formspree.io', '_blank')">✉️ CONTACTO</button>
+        <button class="btn-action" onclick="toggleDonation()">📼 APOYAR (CASSETTE)</button>
+        <button class="btn-action" onclick="window.location.href='mailto:borisuria@://gmail.com Radio Altiplano'">✉️ CONTACTO</button>
     </div>
 
     <div id="donation-panel">
@@ -82,25 +82,33 @@
         <img src="takenos.png" alt="Donación" class="qr-img">
     </div>
 
+    <!-- CARGA DE API DE YOUTUBE (MODO SEGURO) -->
+    <script src="https://www.youtube.com"></script>
+
     <script>
         let player;
         let playing = false;
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
 
-        // Carga ESTABLE de la API
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+        // Función que llama YouTube automáticamente
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '100%', width: '100%',
+                height: '100%',
+                width: '100%',
                 playerVars: {
-                    listType: 'playlist', list: playlistId,
-                    autoplay: 0, controls: 0, disablekb: 1, modestbranding: 1, rel: 0
+                    listType: 'playlist',
+                    list: playlistId,
+                    autoplay: 0,
+                    controls: 0,
+                    disablekb: 1,
+                    modestbranding: 1,
+                    rel: 0
                 },
-                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': onPlayerError }
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange,
+                    'onError': onPlayerError
+                }
             });
         }
 
@@ -112,8 +120,8 @@
         }
 
         function onPlayerError(event) {
-            document.getElementById('song-title').innerText = "Saltando video restringido...";
-            setTimeout(() => { player.nextVideo(); }, 1500);
+            console.log("Error de video, saltando...");
+            player.nextVideo();
         }
 
         function onPlayerStateChange(event) {
@@ -121,7 +129,9 @@
                 const videoData = player.getVideoData();
                 document.getElementById('song-title').innerText = "SONANDO: " + videoData.title;
             }
-            if (event.data === YT.PlayerState.ENDED) { player.nextVideo(); }
+            if (event.data === YT.PlayerState.ENDED) {
+                player.nextVideo();
+            }
         }
 
         function togglePlayback() {
@@ -133,7 +143,7 @@
             if (!playing) {
                 arm.style.transform = 'rotate(-18deg)'; 
                 disc.style.animationPlayState = 'running';
-                player.playVideoAt(Math.floor(Math.random() * 25)); 
+                player.playVideo();
                 document.body.classList.add('amber-mode');
                 btn.innerText = "APAGAR";
                 nextBtn.style.display = 'block';
