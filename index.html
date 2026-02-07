@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buenas Noches, Sintonía - Homenaje FM 90</title>
+    <title>Buenas Noches, Sintonía - Homenaje</title>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
         :root { --gold: #ffcc00; --dark-gold: #d4af37; --bg: #05070a; --neon: 0 0 15px rgba(255, 204, 0, 0.6); }
@@ -15,10 +15,14 @@
         .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color: #eee; margin: 5px 0; }
         .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
 
-        .controls-row { display: flex; gap: 10px; margin: 15px 0; z-index: 10; }
-        .btn-view { padding: 8px 15px; cursor: pointer; background: #1a1a1a; color: gold; border: 1px solid gold; font-weight: bold; border-radius: 4px; font-size: 0.8rem; }
+        /* Controles Retro */
+        .controls-row { display: flex; gap: 15px; margin: 20px 0; z-index: 10; }
+        .btn-retro { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; box-shadow: var(--neon); }
+        .btn-retro:hover { background: var(--gold); color: black; }
         
         .stage-container { position: relative; width: 100%; max-width: 550px; display: flex; flex-direction: column; align-items: center; margin: 15px 0; }
+
+        /* Tocadiscos y TV */
         .turntable { width: 320px; height: 320px; background: #221a15; border: 8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
         .vinyl { width: 280px; height: 280px; background: radial-gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 20px auto; position: relative; animation: spin 4s linear infinite; animation-play-state: paused; border: 2px solid #333; }
         .label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border-radius: 50%; border: 2px solid gold; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; text-align: center; color: white; font-weight: bold; }
@@ -29,17 +33,17 @@
         
         #song-title { color: var(--gold); font-size: 0.9rem; margin-top: 15px; font-weight: bold; text-align: center; height: 1.2rem; min-height: 1.2rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
 
-        .btn-main { background: var(--gold); color: black; border: none; padding: 12px 30px; border-radius: 25px; font-weight: 900; cursor: pointer; font-size: 1rem; box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3); transition: 0.3s; pointer-events: none; opacity: 0.5; }
+        .btn-main { background: var(--gold); color: black; border: none; padding: 15px 45px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.2rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; pointer-events: none; margin-top: 10px; }
         .btn-main.active { opacity: 1; pointer-events: auto; }
 
-        /* Botones nuevos */
-        .extra-btns { display: flex; gap: 10px; margin-top: 20px; }
-        .btn-small { background: rgba(255,204,0,0.1); color: var(--gold); border: 1px solid var(--gold); padding: 8px 12px; border-radius: 5px; cursor: pointer; font-size: 0.75rem; text-decoration: none; }
-        #donation-qr { display: none; margin-top: 15px; border: 1px solid var(--gold); padding: 10px; border-radius: 10px; background: #000; }
+        /* Donación */
+        .donation-box { margin-top: 40px; text-align: center; border: 2px solid var(--dark-gold); padding: 20px; border-radius: 20px; background: rgba(0, 0, 0, 0.4); box-shadow: var(--neon); width: 220px; }
+        .qr-img { width: 150px; height: 150px; background: white; margin: 10px auto; display: block; border-radius: 10px; border: 3px solid var(--gold); }
 
+        /* Adornos */
+        .decoration { position: absolute; color: var(--gold); font-size: 24px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; filter: drop-shadow(0 0 5px var(--gold)); }
+        @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); opacity: 0; } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .note { position: absolute; color: var(--gold); font-size: 20px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; }
-        @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -47,13 +51,13 @@
     <header class="main-header">
         <h1 class="main-title">Buenas Noches, Sintonía</h1>
         <div class="conductor">de Gonzalo Gorriti</div>
-        <div class="sub-header">FM 90 RADIO ALTIPLANO LA PAZ</div>
+        <div class="sub-header">FM 90 RADIO ALTIPLANO</div>
     </header>
 
     <div class="controls-row">
-        <button class="btn-view" onclick="setView('radio')">📻 RADIO</button>
-        <button class="btn-view" onclick="setView('tv')">📺 TV</button>
-        <button class="btn-view" onclick="nextVideo()" id="next-btn" style="display:none;">⏭ SIGUIENTE</button>
+        <button class="btn-retro" onclick="setView('radio')">📻 RADIO</button>
+        <button class="btn-retro" onclick="setView('tv')">📺 TV</button>
+        <button class="btn-retro" onclick="nextVideo()" id="next-btn" style="display:none;">⏭ SALTAR</button>
     </div>
 
     <div class="stage-container">
@@ -61,6 +65,7 @@
             <div id="arm"></div>
             <div class="vinyl" id="disc"><div class="label">FM 90<br>RADIO<br>ALTIPLANO</div></div>
         </div>
+
         <div id="tv-stage" class="tv-vintage">
             <div class="tv-screen"><div id="player"></div></div>
         </div>
@@ -69,29 +74,41 @@
 
     <button class="btn-main" onclick="togglePlayback()" id="play-btn">ESPERANDO SEÑAL...</button>
 
-    <div class="extra-btns">
-        <button class="btn-small" onclick="toggleQR()">📼 APOYAR (CASSETTE)</button>
-        <a href="mailto:borisuria@gmail.com" class="btn-small">✉️ CONTACTO</a>
+    <div class="donation-box">
+        <span style="font-size: 0.9rem; color: var(--gold); font-weight: bold;">APOYA EL PROYECTO</span>
+        <img src="takenos.png" alt="Donación QR" class="qr-img">
+        <p style="font-size: 0.8rem; margin-top: 10px;">Escanea para aportar</p>
     </div>
-
-    <div id="donation-qr">
-        <p style="font-size: 0.75rem; color: var(--gold);">Si quieres colaborar para mantener este sitio puedes ayudar:</p>
-        <img src="takenos.png" alt="QR" style="width: 130px; height: 130px; display: block; margin: 0 auto; border: 2px solid var(--gold);">
-    </div>
-
-    <!-- CARGA DE API DE YOUTUBE -->
-    <script src="https://www.youtube.com"></script>
 
     <script>
         let player;
         let playing = false;
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
 
+        // Carga de API YouTube corregida
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '100%', width: '100%',
-                playerVars: { listType: 'playlist', list: playlistId, controls: 0, disablekb: 1, modestbranding: 1, rel: 0, loop: 1 },
-                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': function() { player.nextVideo(); } }
+                height: '100%',
+                width: '100%',
+                playerVars: {
+                    listType: 'playlist',
+                    list: playlistId,
+                    autoplay: 0,
+                    controls: 0,
+                    disablekb: 1,
+                    modestbranding: 1,
+                    rel: 0,
+                    loop: 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
             });
         }
 
@@ -104,45 +121,57 @@
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.PLAYING) {
-                document.getElementById('song-title').innerText = "Sonando: " + player.getVideoData().title;
+                const videoData = player.getVideoData();
+                document.getElementById('song-title').innerText = "Vibrando con: " + videoData.title;
             }
             if (event.data === YT.PlayerState.ENDED) { player.nextVideo(); }
         }
 
         function togglePlayback() {
-            const arm = document.getElementById('arm'), disc = document.getElementById('disc'), btn = document.getElementById('play-btn'), nxt = document.getElementById('next-btn');
+            const arm = document.getElementById('arm');
+            const disc = document.getElementById('disc');
+            const btn = document.getElementById('play-btn');
+            const nextBtn = document.getElementById('next-btn');
+
             if (!playing) {
-                arm.style.transform = 'rotate(-18deg)'; disc.style.animationPlayState = 'running';
-                player.playVideo(); document.body.classList.add('amber-mode');
-                btn.innerText = "APAGAR EMISIÓN"; nxt.style.display = 'block'; playing = true; spawnNotes();
+                arm.style.transform = 'rotate(-18deg)'; 
+                disc.style.animationPlayState = 'running';
+                player.playVideoAt(Math.floor(Math.random() * 20)); 
+                document.body.classList.add('amber-mode');
+                btn.innerText = "APAGAR RADIO";
+                nextBtn.style.display = 'block';
+                playing = true;
+                spawnDecorations();
             } else {
-                arm.style.transform = 'rotate(25deg)'; disc.style.animationPlayState = 'paused';
-                player.pauseVideo(); document.body.classList.remove('amber-mode');
-                btn.innerText = "SINTONIZAR EMISORA"; nxt.style.display = 'none'; document.getElementById('song-title').innerText = ""; playing = false;
+                arm.style.transform = 'rotate(25deg)'; 
+                disc.style.animationPlayState = 'paused';
+                player.pauseVideo();
+                document.body.classList.remove('amber-mode');
+                btn.innerText = "SINTONIZAR EMISORA";
+                nextBtn.style.display = 'none';
+                document.getElementById('song-title').innerText = "";
+                playing = false;
             }
         }
 
-        function toggleQR() {
-            const qr = document.getElementById('donation-qr');
-            qr.style.display = (qr.style.display === 'block') ? 'none' : 'block';
-        }
-
         function nextVideo() { if(player) player.nextVideo(); }
+
         function setView(m) {
             document.getElementById('radio-stage').style.display = m === 'radio' ? 'block' : 'none';
             document.getElementById('tv-stage').style.display = m === 'tv' ? 'block' : 'none';
         }
 
-        function spawnNotes() {
+        function spawnDecorations() {
             if (!playing) return;
-            const note = document.createElement('div');
-            note.className = 'note';
-            note.innerHTML = ['♪', '♫', '📻', '✨', '💿', '🎧', '🔊'][Math.floor(Math.random() * 7)];
-            note.style.left = Math.random() * 100 + 'vw';
-            note.style.bottom = '20px';
-            document.body.appendChild(note);
-            setTimeout(() => note.remove(), 4000);
-            setTimeout(spawnNotes, 700);
+            const deco = document.createElement('div');
+            deco.className = 'decoration';
+            const icons = ['♪', '♫', '📻', '✨', '💿', '🎧', '🔊'];
+            deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            deco.style.left = Math.random() * 100 + 'vw';
+            deco.style.bottom = '20px';
+            document.body.appendChild(deco);
+            setTimeout(() => deco.remove(), 4000);
+            setTimeout(spawnDecorations, 700);
         }
     </script>
 </body>
