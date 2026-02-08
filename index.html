@@ -243,21 +243,56 @@
             margin-top: 40px;
             text-align: center;
             border: 2px solid var(--dark-gold);
-            padding: 20px;
+            padding: 25px;
             border-radius: 20px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             box-shadow: var(--neon);
-            width: 220px;
+            width: 320px;
+            max-width: 90%;
+        }
+
+        .donation-title {
+            font-size: 1rem;
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.3;
         }
 
         .qr-img {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             background: white;
-            margin: 10px auto;
+            margin: 15px auto;
             display: block;
             border-radius: 10px;
             border: 3px solid var(--gold);
+        }
+
+        .donation-footer {
+            font-size: 0.85rem;
+            color: #ddd;
+            margin-top: 15px;
+            line-height: 1.4;
+        }
+
+        /* Mensaje de dedicación */
+        .dedication-message {
+            max-width: 650px;
+            margin: 40px 20px 20px;
+            padding: 25px;
+            border: 1px solid var(--dark-gold);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #eee;
+            text-align: justify;
+        }
+
+        .dedication-message strong {
+            color: var(--gold);
         }
 
         /* Adornos */
@@ -272,17 +307,6 @@
             filter: drop-shadow(0 0 5px var(--gold));
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(-350px) scale(1.2); opacity: 0; }
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         /* Indicador de error */
         .error-message {
             color: #ff4444;
@@ -292,6 +316,17 @@
             min-height: 1rem;
             font-weight: bold;
             text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-350px) scale(1.2); opacity: 0; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -328,9 +363,15 @@
     <button class="btn-main" onclick="togglePlayback()" id="play-btn">ESPERANDO SEÑAL...</button>
 
     <div class="donation-box">
-        <span style="font-size: 0.9rem; color: var(--gold); font-weight: bold;">APOYA EL PROYECTO</span>
+        <div class="donation-title">Este sitio no tiene fines de lucro pero si quieres apoyar a su mantenimiento:</div>
         <img src="takenos.png" alt="Donación QR" class="qr-img">
-        <p style="font-size: 0.8rem; margin-top: 10px;">Escanea para aportar</p>
+        <div class="donation-footer">Escanea para realizar tu aporte voluntario</div>
+    </div>
+
+    <div class="dedication-message">
+        Este sitio está dedicado respetuosamente al excelente programa de radio <strong>"Buenas Noches Sintonía"</strong> creado y conducido por el gran comunicador <strong>Gonzalo Gorriti</strong> (hoy un eximio analista/comentarista deportivo) que se emitía todos los días de 22 a 24 a través de la recordada FM 90 de radio Altiplano, en La Paz, Bolivia.<br><br>
+        
+        El objetivo principal es que un oyente de entonces que esté ahora en cualquier lugar del mundo, recuerde cómo era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, cómo era terminar el día, sintonizar la FM y disfrutar hermosas canciones antes del reparador descanso.
     </div>
 
     <script>
