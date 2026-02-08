@@ -295,6 +295,89 @@
             color: var(--gold);
         }
 
+        /* Footer y contacto */
+        .footer-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 40px auto 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .creator-info {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .creator-info strong {
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 204, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 204, 0, 0.2);
+            width: 100%;
+        }
+
+        .contact-question {
+            font-size: 1rem;
+            color: #ddd;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .contact-button {
+            background: #111;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: var(--neon);
+            margin-bottom: 15px;
+        }
+
+        .contact-button:hover {
+            background: var(--gold);
+            color: black;
+            transform: translateY(-3px);
+        }
+
+        .email-display {
+            display: none;
+            padding: 12px 20px;
+            background: rgba(255, 204, 0, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-top: 10px;
+            animation: fadeIn 0.5s ease-in;
+            word-break: break-all;
+        }
+
+        .email-display a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .email-display a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+
         /* Adornos */
         .decoration {
             position: absolute;
@@ -327,6 +410,29 @@
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .footer-container {
+                gap: 20px;
+                margin: 30px auto 15px;
+            }
+            
+            .contact-question {
+                font-size: 0.95rem;
+                padding: 0 15px;
+            }
+            
+            .dedication-message {
+                padding: 20px;
+                margin: 30px 15px 15px;
+            }
         }
     </style>
 </head>
@@ -372,6 +478,24 @@
         Este sitio está dedicado respetuosamente al excelente programa de radio <strong>"Buenas Noches Sintonía"</strong> creado y conducido por el gran comunicador <strong>Gonzalo Gorriti</strong> (hoy un eximio analista/comentarista deportivo) que se emitía todos los días de 22 a 24 a través de la recordada FM 90 de radio Altiplano, en La Paz, Bolivia.<br><br>
         
         El objetivo principal es que un oyente de entonces que esté ahora en cualquier lugar del mundo, recuerde cómo era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, cómo era terminar el día, sintonizar la FM y disfrutar hermosas canciones antes del reparador descanso.
+    </div>
+
+    <div class="footer-container">
+        <div class="creator-info">
+            Sitio web creado por <strong>buson9</strong> - Un homenaje hecho con cariño para los oyentes de siempre
+        </div>
+        
+        <div class="contact-section">
+            <div class="contact-question">
+                ¿Te acordaste de una canción y quieres que la incluya? ¿Sugerencias? ¿Críticas?
+            </div>
+            
+            <button class="contact-button" onclick="showEmail()">📧 ESCRIBEME</button>
+            
+            <div id="email-display" class="email-display">
+                Mi correo: <a href="mailto:buson9@gmail.com">buson9@gmail.com</a>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -564,6 +688,22 @@
                 videoBtn.style.color = 'black';
                 radioBtn.style.background = '#111';
                 radioBtn.style.color = 'var(--gold)';
+            }
+        }
+
+        function showEmail() {
+            const emailDisplay = document.getElementById('email-display');
+            const contactButton = document.querySelector('.contact-button');
+            
+            if (emailDisplay.style.display === 'block') {
+                emailDisplay.style.display = 'none';
+                contactButton.innerHTML = '📧 ESCRIBEME';
+            } else {
+                emailDisplay.style.display = 'block';
+                contactButton.innerHTML = '📧 OCULTAR CORREO';
+                
+                // Desplazar suavemente hacia el correo
+                emailDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
