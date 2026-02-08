@@ -1,176 +1,223 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buenas Noches, Sintonía - Homenaje FM 90</title>
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
-    <style>
-        :root { --gold: #ffcc00; --dark-gold: #d4af37; --bg: #05070a; --neon: 0 0 15px rgba(255, 204, 0, 0.6); }
-        body { background: radial-gradient(circle at top, #1a2a3a 0%, var(--bg) 80%); color: white; font-family: 'Montserrat', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; transition: 1s; overflow-x: hidden; }
-        body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%, #120a05 80%); }
-
-        .main-header { text-align: center; margin-bottom: 10px; z-index: 10; }
-        .main-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 6vw, 3.5rem); font-style: italic; color: var(--gold); margin: 0; line-height: 1; text-shadow: var(--neon); }
-        .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color: #eee; margin: 5px 0; }
-        .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
-
-        .controls-row { display: flex; gap: 15px; margin: 20px 0; z-index: 10; }
-        .btn-retro { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; box-shadow: var(--neon); }
-        
-        .stage-container { position: relative; width: 100%; max-width: 550px; display: flex; flex-direction: column; align-items: center; margin: 15px 0; }
-        .turntable { width: 320px; height: 320px; background: #221a15; border: 8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
-        .vinyl { width: 280px; height: 280px; background: radial-gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 20px auto; position: relative; animation: spin 4s linear infinite; animation-play-state: paused; border: 2px solid #333; }
-        .label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border-radius: 50%; border: 2px solid gold; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; text-align: center; color: white; font-weight: bold; }
-        #arm { position: absolute; top: 30px; right: 25px; width: 130px; height: 8px; background: #aaa; transform-origin: 90% 50%; transform: rotate(25deg); transition: 1.2s; z-index: 10; border-radius: 4px; }
-
-        .tv-vintage { display: none; width: 100%; height: 320px; background: #4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 12px; position: relative; }
-        .tv-screen { width: 100%; height: 100%; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #222; position: relative; }
-        
-        #song-title { color: var(--gold); font-size: 0.9rem; margin-top: 15px; font-weight: bold; text-align: center; height: 1.2rem; min-height: 1.2rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
-
-        .btn-main { background: var(--gold); color: black; border: none; padding: 15px 45px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.2rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; pointer-events: none; margin-top: 10px; }
-        .btn-main.active { opacity: 1; pointer-events: auto; }
-
-        .homenaje-text { max-width: 700px; text-align: center; margin-top: 50px; font-size: 1rem; color: #ccc; line-height: 1.6; border-top: 1px solid rgba(255,204,0,0.2); padding-top: 20px; }
-
-        #donation-qr { display: none; margin-top: 15px; text-align: center; }
-        .qr-img { width: 150px; border: 3px solid var(--gold); border-radius: 10px; }
-
-        .contact-box { width: 100%; max-width: 400px; margin-top: 30px; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid var(--dark-gold); text-align: center; }
-        .contact-box input, .contact-box textarea { width: 100%; margin-bottom: 10px; background: #000; color: #fff; border: 1px solid #444; padding: 10px; border-radius: 5px; box-sizing: border-box; }
-        .btn-send { width: 100%; background: var(--gold); border: none; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 5px; }
-
-        .decoration { position: absolute; color: var(--gold); font-size: 24px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; }
-        @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); opacity: 0; } }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    </style>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Buenas Noches, Sintonía - Homenaje FM 90</title>
+ <link href="https://fonts.googleapis.com" rel="stylesheet">
+ <style>
+ :root { --gold: #ffcc00; --dark-gold: #d4af37; --bg: #05070a; --neon: 0 
+0 15px rgba(255, 204, 0, 0.6); }
+ body { background: radial-gradient(circle at top, #1a2a3a 0%, var(--bg) 
+80%); color: white; font-family: 'Montserrat', sans-serif; margin: 0; display: 
+flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 
+20px; transition: 1s; overflow-x: hidden; }
+ body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%,
+#120a05 80%); }
+ .main-header { text-align: center; margin-bottom: 10px; z-index: 10; }
+ .main-title { font-family: 'Playfair Display', serif; font-size: 
+clamp(1.8rem, 6vw, 3.5rem); font-style: italic; color: var(--gold); margin: 0; 
+line-height: 1; text-shadow: var(--neon); }
+ .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color:
+#eee; margin: 5px 0; }
+ .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 
+0.8rem; font-weight: bold; text-transform: uppercase; }
+ .controls-row { display: flex; gap: 15px; margin: 20px 0; z-index: 10; }
+ .btn-retro { background: #111; color: var(--gold); border: 2px solid 
+var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: 900; cursor: 
+pointer; text-transform: uppercase; font-size: 0.7rem; transition: 0.3s; box-
+shadow: var(--neon); }
+ .stage-container { position: relative; width: 100%; max-width: 550px; 
+display: flex; flex-direction: column; align-items: center; margin: 15px 0; }
+ .turntable { width: 320px; height: 320px; background: #221a15; border: 
+8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 
+60px rgba(0,0,0,0.8); }
+ .vinyl { width: 280px; height: 280px; background: radial-
+gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 20px auto; 
+position: relative; animation: spin 4s linear infinite; animation-play-state: 
+paused; border: 2px solid #333; }
+ .label { position: absolute; top: 50%; left: 50%; transform: 
+translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border-
+radius: 50%; border: 2px solid gold; display: flex; align-items: center; 
+justify-content: center; font-size: 0.6rem; text-align: center; color: white; 
+font-weight: bold; }
+ #arm { position: absolute; top: 30px; right: 25px; width: 130px; height:
+8px; background: #aaa; transform-origin: 90% 50%; transform: rotate(25deg); 
+transition: 1.2s; z-index: 10; border-radius: 4px; }
+ .tv-vintage { display: none; width: 100%; height: 320px; background: 
+#4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 12px; 
+position: relative; }
+ .tv-screen { width: 100%; height: 100%; background: #000; border-radius:
+12px; overflow: hidden; border: 3px solid #222; position: relative; }
+ #song-title { color: var(--gold); font-size: 0.9rem; margin-top: 15px; 
+font-weight: bold; text-align: center; height: 1.2rem; min-height: 1.2rem; text-
+shadow: 0 0 10px rgba(255,204,0,0.5); }
+ .btn-main { background: var(--gold); color: black; border: none; 
+padding: 15px 45px; border-radius: 50px; font-weight: 900; cursor: pointer; 
+font-size: 1.2rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; 
+pointer-events: none; margin-top: 10px; }
+ .btn-main.active { opacity: 1; pointer-events: auto; }
+ .homenaje-text { max-width: 700px; text-align: center; margin-top: 50px;
+font-size: 1rem; color: #ccc; line-height: 1.6; border-top: 1px solid 
+rgba(255,255,0,0.2); padding-top: 20px; }
+ #donation-qr { display: none; margin-top: 15px; text-align: center; }
+ .qr-img { width: 150px; border: 3px solid var(--gold); border-radius: 
+10px; }
+ .contact-box { width: 100%; max-width: 400px; margin-top: 30px; 
+background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 
+1px solid var(--dark-gold); text-align: center; }
+ .contact-box input, .contact-box textarea { width: 100%; margin-bottom: 
+10px; background: #000; color: #fff; border: 1px solid #444; padding: 10px; 
+border-radius: 5px; box-sizing: border-box; }
+ .btn-send { width: 100%; background: var(--gold); border: none; padding:
+12px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+ .decoration { position: absolute; color: var(--gold); font-size: 24px; 
+opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 
+1; }
+ @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0;
+} 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); 
+opacity: 0; } }
+ @keyframes spin { from { transform: rotate(0deg); } to { transform: 
+rotate(360deg); } }
+ </style>
 </head>
 <body>
+ <header class="main-header">
+ <h1 class="main-title">Buenas Noches, Sintonía</h1>
+ <div class="conductor">de Gonzalo Gorriti</div>
+ <div class="sub-header">FM 90 RADIO ALTIPLANO</div>
+ </header>
+ <div class="controls-row">
+ <button class="btn-retro" onclick="setView('radio')"> RADIO</button> 📻
+ <button class="btn-retro" onclick="setView('tv')"> TV</button> 📺
+ <button class="btn-retro" onclick="if(player) player.nextVideo()" 
+id="next-btn" style="display:none;"> SALTAR</button> ⏭
+ </div>
+ <div class="stage-container">
+ <div id="radio-stage" class="turntable">
+ <div id="arm"></div>
+ <div class="vinyl" id="disc"><div class="label">FM 
+90<br>RADIO<br>ALTIPLANO</div></div>
+ </div>
+ <div id="tv-stage" class="tv-vintage">
+ <div class="tv-screen"><div id="player"></div></div>
+ </div>
+ <div id="song-title"></div>
+ </div>
+ <button class="btn-main" onclick="togglePlayback()" id="play-
+btn">CONECTANDO...</button>
+ <div style="margin-top: 30px; text-align: center;">
+ <p style="color:var(--gold); font-size: 0.8rem; margin-bottom: 
+10px;">Ayuda a mantener este sitio homenaje</p>
+ <button class="btn-retro" onclick="toggleDonation()"> DONAR</button> ❤️
+ <div id="donation-qr">
+ <img src="takenos.png" alt="QR" class="qr-img">
+ </div>
+ </div>
+ <p class="homenaje-text">Este sitio esta dedicado respetuosamente al 
+excelente programa de radio "Buenas Noches Sintonia" creado y conducido por el 
+gran comunicador Gonzalo Gorriti (Hoy un eximio analista/comentarista deportivo)
+que se emitia todos los dias de 22 a 24 a traves de la recordada FM 90 de radio 
+Altiplano, en La Paz Bolivia. El objetivo principal es que un oyente de entonces
+que este ahora en cualquier lugar del mundo, recuerde como era disfrutar y 
+dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas 
+generaciones puedan imaginarse un poco, como era terminar el dia, disfrutando 
+hermosas canciones mientras uno se alistaba para un reparador descanso.</p>
+ <div class="contact-box">
+ <p style="color:var(--gold); font-size: 0.8rem; margin-
+top:0;">¿Recuerdas canciones? Escríbenos:</p>
+ <form action="https://formspree.io" method="POST">
+ <input type="text" name="name" placeholder="Tu Nombre" required>
+ <textarea name="message" placeholder="Tus sugerencias..." 
+required></textarea>
+ <button type="submit" class="btn-send">ENVIAR</button>
+ </form>
+ </div>
+ <!-- CARGA DE API DEFINITIVA -->
+ <script>
+ let player, playing = false;
+ const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
+ // CARGA CORREGIDA DE LA API DE YOUTUBE
+ var tag = document.createElement('script');
+ tag.src = "https://www.youtube.com/iframe_api"; // URL correcta
+ var firstScriptTag = document.getElementsByTagName('script')[0];
+ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    <header class="main-header">
-        <h1 class="main-title">Buenas Noches, Sintonía</h1>
-        <div class="conductor">de Gonzalo Gorriti</div>
-        <div class="sub-header">FM 90 RADIO ALTIPLANO</div>
-    </header>
-
-    <div class="controls-row">
-        <button class="btn-retro" onclick="setView('radio')">📻 RADIO</button>
-        <button class="btn-retro" onclick="setView('tv')">📺 TV</button>
-        <button class="btn-retro" onclick="if(player) player.nextVideo()" id="next-btn" style="display:none;">⏭ SALTAR</button>
-    </div>
-
-    <div class="stage-container">
-        <div id="radio-stage" class="turntable">
-            <div id="arm"></div>
-            <div class="vinyl" id="disc"><div class="label">FM 90<br>RADIO<br>ALTIPLANO</div></div>
-        </div>
-        <div id="tv-stage" class="tv-vintage">
-            <div class="tv-screen"><div id="player"></div></div>
-        </div>
-        <div id="song-title"></div>
-    </div>
-
-    <button class="btn-main" onclick="togglePlayback()" id="play-btn">CONECTANDO...</button>
-
-    <div style="margin-top: 30px; text-align: center;">
-        <p style="color:var(--gold); font-size: 0.8rem; margin-bottom: 10px;">Ayuda a mantener este sitio homenaje</p>
-        <button class="btn-retro" onclick="toggleDonation()">❤️ DONAR</button>
-        <div id="donation-qr">
-            <img src="takenos.png" alt="QR" class="qr-img">
-        </div>
-    </div>
-
-    <p class="homenaje-text">Este sitio esta dedicado respetuosamente al excelente programa de radio "Buenas Noches Sintonia" creado y conducido por el gran comunicador Gonzalo Gorriti (Hoy un eximio analista/comentarista deportivo) que se emitia todos los dias de 22 a 24 a traves de la recordada FM 90 de radio Altiplano, en La Paz Bolivia. El objetivo principal es que un oyente de entonces que este ahora en cualquier lugar del mundo, recuerde como era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, como era terminar el dia, disfrutando hermosas canciones mientras uno se alistaba para un reparador descanso.</p>
-
-    <div class="contact-box">
-        <p style="color:var(--gold); font-size: 0.8rem; margin-top:0;">¿Recuerdas canciones? Escríbenos:</p>
-        <form action="https://formspree.io" method="POST">
-            <input type="text" name="name" placeholder="Tu Nombre" required>
-            <textarea name="message" placeholder="Tus sugerencias..." required></textarea>
-            <button type="submit" class="btn-send">ENVIAR</button>
-        </form>
-    </div>
-
-    <!-- CARGA DE API DEFINITIVA -->
-    <script>
-        let player, playing = false;
-        const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
-
-        // CARGA MANUAL PARA EVITAR ERRORES DE ORDEN
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        if (firstScriptTag) {
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        } else {
-            document.body.appendChild(tag);
-        }
-
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%', width: '100%',
-                playerVars: { listType: 'playlist', list: playlistId, controls: 0, disablekb: 1, modestbranding: 1, rel: 0, loop: 1 },
-                events: { 
-                    'onReady': onPlayerReady, 
-                    'onStateChange': onPlayerStateChange,
-                    'onError': () => { if(player) player.nextVideo(); }
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            const btn = document.getElementById('play-btn');
-            btn.classList.add('active');
-            btn.innerText = "SINTONIZAR EMISORA";
-            player.setShuffle(true);
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.PLAYING) {
-                document.getElementById('song-title').innerText = "Sonando: " + player.getVideoData().title;
-            }
-            if (event.data === YT.PlayerState.ENDED) { player.nextVideo(); }
-        }
-
-        function togglePlayback() {
-            const arm = document.getElementById('arm'), disc = document.getElementById('disc'), btn = document.getElementById('play-btn'), nextBtn = document.getElementById('next-btn');
-            if (!playing) {
-                arm.style.transform = 'rotate(-18deg)'; disc.style.animationPlayState = 'running';
-                player.playVideoAt(Math.floor(Math.random() * 20)); 
-                document.body.classList.add('amber-mode');
-                btn.innerText = "APAGAR RADIO"; nextBtn.style.display = 'block';
-                playing = true; spawnDecorations();
-            } else {
-                arm.style.transform = 'rotate(25deg)'; disc.style.animationPlayState = 'paused';
-                player.pauseVideo(); document.body.classList.remove('amber-mode');
-                btn.innerText = "SINTONIZAR EMISORA"; nextBtn.style.display = 'none';
-                document.getElementById('song-title').innerText = ""; playing = false;
-            }
-        }
-
-        function setView(m) {
-            document.getElementById('radio-stage').style.display = m === 'radio' ? 'block' : 'none';
-            document.getElementById('tv-stage').style.display = m === 'tv' ? 'block' : 'none';
-        }
-
-        function toggleDonation() {
-            const qr = document.getElementById('donation-qr');
-            qr.style.display = (qr.style.display === 'block') ? 'none' : 'block';
-        }
-
-        function spawnDecorations() {
-            if (!playing) return;
-            const deco = document.createElement('div');
-            deco.className = 'decoration';
-            const icons = ['♪', '♫', '📻', '✨', '💿', '🎧', '🔊'];
-            deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-            deco.style.left = Math.random() * 100 + 'vw';
-            deco.style.bottom = '20px';
-            document.body.appendChild(deco);
-            setTimeout(() => deco.remove(), 4000);
-            setTimeout(spawnDecorations, 800);
-        }
-    </script>
+ function onYouTubeIframeAPIReady() {
+ player = new YT.Player('player', {
+ height: '100%', width: '100%',
+ playerVars: { listType: 'playlist', list: playlistId, controls: 
+0, disablekb: 1, modestbranding: 1, rel: 0, loop: 1 },
+ events: { 
+ 'onReady': onPlayerReady, 
+ 'onStateChange': onPlayerStateChange,
+ 'onError': (event) => { // Manejador de error para saltar video
+    console.error("YouTube error:", event.data);
+    if(player) player.nextVideo(); // Salta al siguiente video en caso de error
+ }
+ }
+ });
+ }
+ function onPlayerReady(event) {
+ const btn = document.getElementById('play-btn');
+ btn.classList.add('active');
+ btn.innerText = "SINTONIZAR EMISORA";
+ player.setShuffle(true);
+ }
+ function onPlayerStateChange(event) {
+ if (event.data === YT.PlayerState.PLAYING) {
+ document.getElementById('song-title').innerText = "Sonando: " + 
+player.getVideoData().title;
+ }
+ if (event.data === YT.PlayerState.ENDED) { player.nextVideo(); }
+ }
+ function togglePlayback() {
+ const arm = document.getElementById('arm'), disc = 
+document.getElementById('disc'), btn = document.getElementById('play-btn'), 
+nextBtn = document.getElementById('next-btn');
+ if (!playing) {
+ arm.style.transform = 'rotate(-18deg)'; 
+disc.style.animationPlayState = 'running';
+ player.playVideoAt(Math.floor(Math.random() * 20)); 
+ document.body.classList.add('amber-mode');
+ btn.innerText = "APAGAR RADIO"; nextBtn.style.display = 'block';
+ playing = true; spawnDecorations();
+ } else {
+ arm.style.transform = 'rotate(25deg)'; 
+disc.style.animationPlayState = 'paused';
+ player.pauseVideo(); document.body.classList.remove('amber-
+mode');
+ btn.innerText = "SINTONIZAR EMISORA"; nextBtn.style.display = 
+'none';
+ document.getElementById('song-title').innerText = ""; playing = 
+false;
+ }
+ }
+ function setView(m) {
+ document.getElementById('radio-stage').style.display = m === 'radio'
+? 'block' : 'none';
+ document.getElementById('tv-stage').style.display = m === 'tv' ? 
+'block' : 'none';
+ }
+ function toggleDonation() {
+ const qr = document.getElementById('donation-qr');
+ qr.style.display = (qr.style.display === 'block') ? 'none' : 
+'block';
+ }
+ function spawnDecorations() {
+ if (!playing) return;
+ const deco = document.createElement('div');
+ deco.className = 'decoration';
+ const icons = ['♪', '♫', ' ', ' ', ' ', ' ', ' ']; // Emojis: 📻 ✨ 💿 🎧 🔊
+ deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+ deco.style.left = Math.random() * 100 + 'vw';
+ deco.style.bottom = '20px';
+ document.body.appendChild(deco);
+ setTimeout(() => deco.remove(), 4000);
+ setTimeout(spawnDecorations, 800);
+ }
+ </script>
 </body>
 </html>
+
+
