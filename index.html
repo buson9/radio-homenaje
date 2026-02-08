@@ -130,13 +130,14 @@ hermosas canciones mientras uno se alistaba para un reparador descanso</p>
  let player;
  let playing = false;
  const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
- // Carga de API YouTube corregida
+ // Carga de API YouTube original
  var tag = document.createElement('script');
- tag.src = "https://www.youtube.com";
- var firstScriptTag = document.getElementsByTagName('script')[0]; // Corregida selección de script
+ tag.src = "https://www.youtube.com/iframe_api";
+ var firstScriptTag = document.getElementsByTagName('script')[0]; // Selección original
  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
- function onYouTubeIframeAPIReady() {
+ // Define la función onYouTubeIframeAPIReady a nivel global para asegurar su ejecución
+ window.onYouTubeIframeAPIReady = function() {
  player = new YT.Player('player', {
  height: '100%',
  width: '100%',
