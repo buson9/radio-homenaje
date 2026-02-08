@@ -647,6 +647,7 @@
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
         const maxErrorRetries = 3;
         let mobileOptimized = false;
+        let wasPlayingBeforeSwitch = false; // NUEVA VARIABLE
 
         // ======================
         // FUNCIONES DE COMPARTIR
@@ -679,7 +680,6 @@
         }
 
         function showNotification(message) {
-            // Crear notificación temporal
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
@@ -699,7 +699,6 @@
             notification.textContent = message;
             document.body.appendChild(notification);
             
-            // Remover después de 2 segundos
             setTimeout(() => {
                 notification.style.opacity = '0';
                 notification.style.transform = 'translateX(-50%) translateY(-20px)';
@@ -758,7 +757,6 @@
             
             mobileOptimized = true;
             
-            // Reducir efectos en móvil lento
             const style = document.createElement('style');
             style.textContent = `
                 @media (max-width: 768px) {
@@ -774,7 +772,6 @@
             `;
             document.head.appendChild(style);
             
-            // Cargar sonidos solo cuando sean necesarios
             loadSoundOnInteraction();
         }
 
@@ -791,7 +788,6 @@
                 loaded = true;
             };
             
-            // Cargar en primera interacción
             document.addEventListener('click', loadSounds, { once: true });
             document.addEventListener('touchstart', loadSounds, { once: true });
         }
@@ -817,7 +813,7 @@
                     modestbranding: 1,
                     rel: 0,
                     loop: 1,
-                    playsinline: 1 // Importante para iOS
+                    playsinline: 1
                 },
                 events: {
                     'onReady': onPlayerReady,
@@ -879,7 +875,7 @@
         }
 
         // ======================
-        // FUNCIONES PRINCIPALES
+        // FUNCIONES PRINCIPALES CORREGIDAS
         // ======================
         function togglePlayback() {
             playClickSound();
@@ -887,8 +883,6 @@
             const arm = document.getElementById('arm');
             const disc = document.getElementById('disc');
             const btn = document.getElementById('play-btn');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
 
             if (!playing) {
                 playVinylStartSound();
@@ -902,8 +896,6 @@
                 
                 document.body.classList.add('bolivar-mode');
                 btn.innerText = "APAGAR RADIO";
-                prevBtn.style.visibility = 'visible';
-                nextBtn.style.visibility = 'visible';
                 playing = true;
                 spawnDecorations();
             } else {
@@ -918,12 +910,63 @@
                 
                 document.body.classList.remove('bolivar-mode');
                 btn.innerText = "SINTONIZAR EMISORA";
-                prevBtn.style.visibility = 'visible';
-                nextBtn.style.visibility = 'visible';
                 document.getElementById('song-title').innerText = "";
                 document.getElementById('error-message').innerText = "";
                 playing = false;
                 videoErrorCount = 0;
+            }
+        }
+
+        // FUNCIÓN CORREGIDA - setView
+        function setView(mode) {
+            const radioStage = document.getElementById('radio-stage');
+            const tvStage = document.getElementById('tv-stage');
+            const radioBtn = document.getElementById('radio-btn');
+            const videoBtn = document.getElementById('video-btn');
+            const disc = document.getElementById('disc');
+            const arm = document.getElementById('arm');
+            
+            if (mode === 'radio') {
+                // Guardar estado actual antes de cambiar
+                const wasPlaying = playing;
+                
+                // Cambiar vista
+                radioStage.style.display = 'block';
+                tvStage.style.display = 'none';
+                radioBtn.style.background = 'var(--celeste-neon)';
+                radioBtn.style.color = '#000a1a';
+                videoBtn.style.background = 'rgba(0, 25, 51, 0.8)';
+                videoBtn.style.color = 'var(--celeste-neon)';
+                
+                // Si estaba reproduciendo, reanudar animación del vinilo
+                if (wasPlaying) {
+                    disc.style.animationPlayState = 'running';
+                    arm.style.transform = 'rotate(-18deg)';
+                    // No reanudamos el video aquí, solo mostramos la animación
+                    // El audio sigue reproduciéndose en segundo plano
+                }
+                
+            } else {
+                // Guardar estado actual antes de cambiar
+                wasPlayingBeforeSwitch = playing;
+                
+                // Cambiar vista
+                radioStage.style.display = 'none';
+                tvStage.style.display = 'block';
+                videoBtn.style.background = 'var(--celeste-neon)';
+                videoBtn.style.color = '#000a1a';
+                radioBtn.style.background = 'rgba(0, 25, 51, 0.8)';
+                radioBtn.style.color = 'var(--celeste-neon)';
+                
+                // Pausar animación del vinilo
+                disc.style.animationPlayState = 'paused';
+                arm.style.transform = 'rotate(25deg)';
+                
+                // Si estaba reproduciendo, mostrar controles de YouTube
+                if (wasPlayingBeforeSwitch && player) {
+                    // El video ya está reproduciéndose, solo mostramos los controles
+                    // No necesitamos hacer player.playVideo() porque ya está sonando
+                }
             }
         }
 
@@ -955,34 +998,6 @@
             }
         }
 
-        function setView(mode) {
-            const radioStage = document.getElementById('radio-stage');
-            const tvStage = document.getElementById('tv-stage');
-            const radioBtn = document.getElementById('radio-btn');
-            const videoBtn = document.getElementById('video-btn');
-            
-            if (mode === 'radio') {
-                radioStage.style.display = 'block';
-                tvStage.style.display = 'none';
-                radioBtn.style.background = 'var(--celeste-neon)';
-                radioBtn.style.color = '#000a1a';
-                videoBtn.style.background = 'rgba(0, 25, 51, 0.8)';
-                videoBtn.style.color = 'var(--celeste-neon)';
-                
-                // Optimizar video cuando no es visible
-                if (player && player.pauseVideo) {
-                    player.pauseVideo();
-                }
-            } else {
-                radioStage.style.display = 'none';
-                tvStage.style.display = 'block';
-                videoBtn.style.background = 'var(--celeste-neon)';
-                videoBtn.style.color = '#000a1a';
-                radioBtn.style.background = 'rgba(0, 25, 51, 0.8)';
-                radioBtn.style.color = 'var(--celeste-neon)';
-            }
-        }
-
         function showEmail() {
             const emailDisplay = document.getElementById('email-display');
             const contactButton = document.querySelector('.contact-button');
@@ -1003,7 +1018,6 @@
         function spawnDecorations() {
             if (!playing) return;
             
-            // Limitar decoraciones en móvil
             if (isMobileSlow()) {
                 const decorations = document.querySelectorAll('.decoration');
                 if (decorations.length >= 3) return;
@@ -1040,24 +1054,20 @@
             
             optimizeForMobile();
             
-            // Suavizar entrada
             document.body.style.opacity = '0';
             requestAnimationFrame(() => {
                 document.body.style.transition = 'opacity 0.5s';
                 document.body.style.opacity = '1';
             });
             
-            // Detectar y optimizar para conexiones lentas
             if (navigator.connection) {
                 const connection = navigator.connection;
                 if (connection.saveData || connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
-                    // Desactivar animaciones en conexiones lentas
                     document.querySelectorAll('.decoration').forEach(el => el.style.animation = 'none');
                 }
             }
         });
 
-        // Optimizar en cambio de tamaño
         window.addEventListener('resize', optimizeForMobile);
     </script>
 </body>
