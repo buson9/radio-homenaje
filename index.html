@@ -15,14 +15,12 @@
         .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color: #eee; margin: 5px 0; }
         .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
 
-        /* Controles Retro */
         .controls-row { display: flex; gap: 15px; margin: 20px 0; z-index: 10; }
         .btn-retro { background: #111; color: var(--gold); border: 2px solid var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: 900; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; box-shadow: var(--neon); }
         .btn-retro:hover { background: var(--gold); color: black; }
         
         .stage-container { position: relative; width: 100%; max-width: 550px; display: flex; flex-direction: column; align-items: center; margin: 15px 0; }
 
-        /* Tocadiscos y TV */
         .turntable { width: 320px; height: 320px; background: #221a15; border: 8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
         .vinyl { width: 280px; height: 280px; background: radial-gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 20px auto; position: relative; animation: spin 4s linear infinite; animation-play-state: paused; border: 2px solid #333; }
         .label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border-radius: 50%; border: 2px solid gold; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; text-align: center; color: white; font-weight: bold; }
@@ -31,16 +29,30 @@
         .tv-vintage { display: none; width: 100%; height: 320px; background: #4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 12px; position: relative; }
         .tv-screen { width: 100%; height: 100%; background: #000; border-radius: 12px; overflow: hidden; border: 3px solid #222; position: relative; }
         
+        /* Efecto estática */
+        .tv-static { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('https://media.giphy.com'); background-size: cover; opacity: 0; pointer-events: none; z-index: 20; }
+        .tv-static.active { opacity: 0.5; }
+
         #song-title { color: var(--gold); font-size: 0.9rem; margin-top: 15px; font-weight: bold; text-align: center; height: 1.2rem; min-height: 1.2rem; text-shadow: 0 0 10px rgba(255,204,0,0.5); }
 
         .btn-main { background: var(--gold); color: black; border: none; padding: 15px 45px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.2rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; pointer-events: none; margin-top: 10px; }
         .btn-main.active { opacity: 1; pointer-events: auto; }
 
-        /* Donación */
-        .donation-box { margin-top: 40px; text-align: center; border: 2px solid var(--dark-gold); padding: 20px; border-radius: 20px; background: rgba(0, 0, 0, 0.4); box-shadow: var(--neon); width: 220px; }
-        .qr-img { width: 150px; height: 150px; background: white; margin: 10px auto; display: block; border-radius: 10px; border: 3px solid var(--gold); }
+        /* Homenaje Texto */
+        .homenaje-box { max-width: 700px; text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid rgba(255,204,0,0.2); }
+        .homenaje-text { font-size: 1rem; color: #ccc; line-height: 1.6; text-align: justify; }
 
-        /* Adornos */
+        /* Donación */
+        .donation-section { margin-top: 30px; text-align: center; }
+        #qr-panel { display: none; margin-top: 15px; animation: fadeIn 0.5s; }
+        .qr-img { width: 150px; border: 3px solid var(--gold); border-radius: 10px; }
+
+        /* Contacto */
+        .contact-box { width: 100%; max-width: 450px; margin-top: 40px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border: 1px solid var(--dark-gold); }
+        .contact-box input, .contact-box textarea { width: 100%; padding: 10px; margin: 10px 0; background: #000; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
+        .btn-send { background: var(--gold); color: black; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .decoration { position: absolute; color: var(--gold); font-size: 24px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; filter: drop-shadow(0 0 5px var(--gold)); }
         @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); opacity: 0; } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -67,6 +79,7 @@
         </div>
 
         <div id="tv-stage" class="tv-vintage">
+            <div class="tv-static" id="tv-static"></div>
             <div class="tv-screen"><div id="player"></div></div>
         </div>
         <div id="song-title"></div>
@@ -74,41 +87,45 @@
 
     <button class="btn-main" onclick="togglePlayback()" id="play-btn">ESPERANDO SEÑAL...</button>
 
-    <div class="donation-box">
-        <span style="font-size: 0.9rem; color: var(--gold); font-weight: bold;">APOYA EL PROYECTO</span>
-        <img src="takenos.png" alt="Donación QR" class="qr-img">
-        <p style="font-size: 0.8rem; margin-top: 10px;">Escanea para aportar</p>
+    <div class="donation-section">
+        <p style="color:var(--gold); font-size: 0.9rem; margin-bottom: 10px;">Si te gustó esta radio homenaje, ayúdanos con un pequeño aporte</p>
+        <button class="btn-retro" onclick="toggleQR()">❤️ DONAR</button>
+        <div id="qr-panel">
+            <img src="takenos.png" alt="QR" class="qr-img">
+        </div>
     </div>
+
+    <div class="homenaje-box">
+        <p class="homenaje-text">Este sitio esta dedicado respetuosamente al excelente programa de radio "Buenas Noches Sintonia" creado y conducido por el gran comunicador Gonzalo Gorriti (Hoy un eximio analista/comentarista deportivo) que se emitia todos los dias de 22 a 24 a traves de la recordada FM 90 de radio Altiplano, en La Paz Bolivia. El objetivo principal es que un oyente de entonces que este ahora en cualquier lugar del mundo, recuerde como era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, como era terminar el dia, disfrutando hermosas canciones mientras uno se alistaba para un reparador descanso.</p>
+    </div>
+
+    <div class="contact-box">
+        <p style="color:var(--gold); font-size: 0.8rem; margin: 0;">¿Recuerdas más canciones? ¿Sugerencias? Escríbenos:</p>
+        <form action="https://formspree.io" method="POST">
+            <input type="text" name="name" placeholder="Tu Nombre*" required>
+            <textarea name="message" rows="3" placeholder="Tu mensaje..." required></textarea>
+            <button type="submit" class="btn-send">ENVIAR</button>
+        </form>
+    </div>
+
+    <!-- Sonido estática -->
+    <audio id="static-sound" src="https://www.soundjay.com"></audio>
 
     <script>
         let player;
         let playing = false;
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
 
-        // Carga de API YouTube corregida
         var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
+        tag.src = "https://www.youtube.com";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                playerVars: {
-                    listType: 'playlist',
-                    list: playlistId,
-                    autoplay: 0,
-                    controls: 0,
-                    disablekb: 1,
-                    modestbranding: 1,
-                    rel: 0,
-                    loop: 1
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
+                height: '100%', width: '100%',
+                playerVars: { listType: 'playlist', list: playlistId, controls: 0, disablekb: 1, modestbranding: 1, rel: 0, loop: 1 },
+                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': () => player.nextVideo() }
             });
         }
 
@@ -121,44 +138,49 @@
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.PLAYING) {
-                const videoData = player.getVideoData();
-                document.getElementById('song-title').innerText = "Vibrando con: " + videoData.title;
+                document.getElementById('song-title').innerText = "Vibrando con: " + player.getVideoData().title;
             }
             if (event.data === YT.PlayerState.ENDED) { player.nextVideo(); }
         }
 
         function togglePlayback() {
-            const arm = document.getElementById('arm');
-            const disc = document.getElementById('disc');
-            const btn = document.getElementById('play-btn');
-            const nextBtn = document.getElementById('next-btn');
-
+            const arm = document.getElementById('arm'), disc = document.getElementById('disc'), btn = document.getElementById('play-btn'), nextBtn = document.getElementById('next-btn');
             if (!playing) {
-                arm.style.transform = 'rotate(-18deg)'; 
-                disc.style.animationPlayState = 'running';
+                arm.style.transform = 'rotate(-18deg)'; disc.style.animationPlayState = 'running';
                 player.playVideoAt(Math.floor(Math.random() * 20)); 
                 document.body.classList.add('amber-mode');
-                btn.innerText = "APAGAR RADIO";
-                nextBtn.style.display = 'block';
-                playing = true;
-                spawnDecorations();
+                btn.innerText = "APAGAR RADIO"; nextBtn.style.display = 'block';
+                playing = true; spawnDecorations();
             } else {
-                arm.style.transform = 'rotate(25deg)'; 
-                disc.style.animationPlayState = 'paused';
-                player.pauseVideo();
-                document.body.classList.remove('amber-mode');
-                btn.innerText = "SINTONIZAR EMISORA";
-                nextBtn.style.display = 'none';
-                document.getElementById('song-title').innerText = "";
-                playing = false;
+                arm.style.transform = 'rotate(25deg)'; disc.style.animationPlayState = 'paused';
+                player.pauseVideo(); document.body.classList.remove('amber-mode');
+                btn.innerText = "SINTONIZAR EMISORA"; nextBtn.style.display = 'none';
+                document.getElementById('song-title').innerText = ""; playing = false;
             }
         }
 
         function nextVideo() { if(player) player.nextVideo(); }
 
         function setView(m) {
-            document.getElementById('radio-stage').style.display = m === 'radio' ? 'block' : 'none';
-            document.getElementById('tv-stage').style.display = m === 'tv' ? 'block' : 'none';
+            const staticOverlay = document.getElementById('tv-static');
+            const staticSound = document.getElementById('static-sound');
+            if (m === 'tv') {
+                staticOverlay.classList.add('active');
+                staticSound.play();
+                setTimeout(() => {
+                    document.getElementById('radio-stage').style.display = 'none';
+                    document.getElementById('tv-stage').style.display = 'block';
+                    staticOverlay.classList.remove('active');
+                }, 1000);
+            } else {
+                document.getElementById('radio-stage').style.display = 'block';
+                document.getElementById('tv-stage').style.display = 'none';
+            }
+        }
+
+        function toggleQR() {
+            const panel = document.getElementById('qr-panel');
+            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
         }
 
         function spawnDecorations() {
