@@ -12,8 +12,7 @@
 80%); color: white; font-family: 'Montserrat', sans-serif; margin: 0; display: 
 flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 
 20px; transition: 1s; overflow-x: hidden; }
- body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%,
-#120a05 80%); }
+ body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%,\r\n#120a05 80%); }
  .main-header { text-align: center; margin-bottom: 10px; }
  .main-title { font-family: 'Playfair Display', serif; font-size: 
 clamp(1.8rem, 6vw, 3.5rem); font-style: italic; color: var(--gold); margin: 0; 
@@ -42,7 +41,7 @@ position: relative; animation: spin 4s linear infinite; animation-play-state:
 paused; border: 2px solid #333; }
  .label { position: absolute; top: 50%; left: 50%; transform: 
 translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border-
-radius: 50%; /* ESTE ES EL CODIGO QUE LO HACE REDONDO */
+radius: 50%; /* CORREGIDO: Asegura que el centro sea redondo */
  display: flex; align-items: center; justify-content: center; font-size: 
 0.6rem; text-align: center; color: white; font-weight: bold; border: 2px solid 
 gold; }
@@ -69,17 +68,14 @@ var(--dark-gold); padding: 20px; border-radius: 20px; background: rgba(0, 0, 0,
 0.4); box-shadow: var(--neon); width: 220px; }
  .qr-img { width: 150px; height: 150px; background: white; margin: 10px 
 auto; display: block; border-radius: 10px; border: 3px solid var(--gold); }
- /* Texto Homenaje AÑADIDO */
- .homenaje-text { max-width: 700px; text-align: center; margin-top: 50px;
-font-size: 1rem; color: #ccc; line-height: 1.6; border-top: 1px solid 
-rgba(255,255,0,0.2); padding-top: 20px; }
+ /* Imagen me.png AÑADIDA */
+ .me-img { margin-top: 15px; width: 100%; max-width: 220px; border-radius: 
+10px; }
  /* Adornos */
  .decoration { position: absolute; color: var(--gold); font-size: 24px; 
 opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 
 1; filter: drop-shadow(0 0 5px var(--gold)); }
- @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0;
-} 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); 
-opacity: 0; } }
+ @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0;\r\n} 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); \r\nopacity: 0; } }
  @keyframes spin { from { transform: rotate(0deg); } to { transform: 
 rotate(360deg); } }
  </style>
@@ -91,10 +87,12 @@ rotate(360deg); } }
  <div class="sub-header">FM 90 RADIO ALTIPLANO</div>
  </header>
  <div class="controls-row">
- <button class="btn-retro" onclick="setView('radio')"> RADIO</button> 📻
- <button class="btn-retro" onclick="setView('tv')"> TV</button> 📺
+ <!-- Botones ANTERIOR, RADIO, VIDEO, SIGUIENTE SIN ICONOS -->
+ <button class="btn-retro" onclick="prevVideo()">ANTERIOR</button>
+ <button class="btn-retro" onclick="setView('radio')">RADIO</button>
+ <button class="btn-retro" onclick="setView('tv')">VIDEO</button>
  <button class="btn-retro" onclick="nextVideo()" id="next-btn" 
-style="display:none;"> SALTAR</button> ⏭
+style="display:none;">SIGUIENTE</button>
  </div>
  <div class="stage-container">
  <div id="radio-stage" class="turntable">
@@ -114,26 +112,17 @@ SEÑAL...</button>
 bold;">APOYA EL PROYECTO</span>
  <img src="takenos.png" alt="Donación QR" class="qr-img">
  <p style="font-size: 0.8rem; margin-top: 10px;">Escanea para aportar</p>
+ <!-- Imagen me.png AÑADIDA -->
+ <img src="me.png" alt="Autor" class="me-img">
  </div>
- <!-- Texto de Homenaje AÑADIDO -->
- <p class="homenaje-text">Este sitio esta dedicado respetuosamente al 
-excelente programa de radio "Buenas Noches Sintonia" creado y conducido por el 
-gran comunicador Gonzalo Gorriti (Hoy un eximio analista/comentarista deportivo)
-que se emitia todos los dias de 22 a 24 a traves de la recordada FM 90 de radio 
-Altiplano, en La Paz Bolivia. El objetivo principal es que un oyente de entonces
-que este ahora en cualquier lugar del mundo, recuerde como era disfrutar y 
-dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas 
-generaciones puedan imaginarse un poco, como era terminar el dia, disfrutando 
-hermosas canciones mientras uno se alistaba para un reparador descanso</p>
-
  <script>
  let player;
  let playing = false;
  const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
  // Carga de API YouTube original
  var tag = document.createElement('script');
- tag.src = "https://www.youtube.com/iframe_api";
- var firstScriptTag = document.getElementsByTagName('script')[0]; // Selección original
+ tag.src = "https://www.youtube.com";
+ var firstScriptTag = document.getElementsByTagName('script')[0];
  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
  // Define la función onYouTubeIframeAPIReady a nivel global para asegurar su ejecución
@@ -203,6 +192,7 @@ videoData.title;
  }
  }
  function nextVideo() { if(player) player.nextVideo(); }
+ function prevVideo() { if(player) player.previousVideo(); } // AÑADIDO: Botón anterior
  function setView(m) {
  document.getElementById('radio-stage').style.display = m === 'radio'
 ? 'block' : 'none';
