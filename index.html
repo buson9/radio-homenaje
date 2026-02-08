@@ -15,9 +15,6 @@
             --rojo-fm: #ff3333;
             --dorado: #ffd700;
             --blanco-suave: #f0f8ff;
-            --neon-celeste: 0 0 15px rgba(0, 243, 255, 0.6);
-            --neon-rojo: 0 0 10px rgba(255, 51, 51, 0.5);
-            --neon-dorado: 0 0 10px rgba(255, 215, 0, 0.4);
         }
 
         body {
@@ -29,8 +26,9 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body.bolivar-mode {
@@ -39,107 +37,94 @@
 
         .main-header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .main-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 5vw, 3.2rem);
+            font-size: clamp(1.5rem, 5vw, 2.8rem);
             font-style: italic;
             color: var(--celeste-neon);
             margin: 0;
             line-height: 1.1;
-            text-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
         }
 
         .conductor {
             font-family: 'Alex Brush', cursive;
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             color: var(--dorado);
-            margin: 8px 0;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            margin: 5px 0;
         }
 
         .sub-header {
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             color: var(--celeste);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: bold;
             text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
-            padding: 6px 16px;
-            border: 1px solid rgba(0, 188, 212, 0.3);
-            border-radius: 20px;
-            background: rgba(0, 31, 63, 0.3);
+            padding: 4px 12px;
+            border: 1px solid rgba(0, 188, 212, 0.2);
+            border-radius: 15px;
+            background: rgba(0, 31, 63, 0.2);
             margin-top: 5px;
         }
 
-        /* Controles */
+        /* Controles - Versión liviana */
         .controls-row {
             display: flex;
-            gap: 15px;
-            margin: 25px 0;
-            z-index: 10;
+            gap: 10px;
+            margin: 15px 0;
             align-items: center;
-            background: rgba(0, 10, 26, 0.6);
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid rgba(0, 243, 255, 0.3);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            padding: 12px;
+            border-radius: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .btn-control {
             background: rgba(0, 25, 51, 0.9);
             color: var(--celeste-neon);
-            border: 2px solid var(--celeste-neon);
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: 900;
+            border: 1px solid var(--celeste-neon);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            box-shadow: 0 0 12px rgba(0, 243, 255, 0.5);
-            min-width: 80px;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            min-width: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            letter-spacing: 1px;
         }
 
         .btn-nav {
             background: rgba(0, 25, 51, 0.9);
             color: var(--celeste-neon);
-            border: 2px solid var(--celeste-neon);
-            width: 50px;
-            height: 50px;
+            border: 1px solid var(--celeste-neon);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 0 12px rgba(0, 243, 255, 0.5);
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .btn-control:hover, .btn-nav:hover {
+        .btn-control:active, .btn-nav:active {
             background: var(--celeste-neon);
             color: #000a1a;
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
-        }
-
-        .btn-control:active, .btn-nav:active {
-            transform: translateY(1px);
+            transform: scale(0.95);
         }
 
         /* Botones de Compartir */
         .share-buttons {
             display: flex;
-            gap: 15px;
-            margin: 20px 0;
+            gap: 10px;
+            margin: 15px 0;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -147,66 +132,61 @@
         .share-btn {
             background: rgba(0, 25, 51, 0.9);
             color: var(--celeste-neon);
-            border: 2px solid var(--celeste-neon);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
+            border: 1px solid var(--celeste-neon);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+            gap: 5px;
         }
 
-        .share-btn:hover {
+        .share-btn:active {
             background: var(--celeste-neon);
             color: #000a1a;
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.7);
+            transform: scale(0.95);
         }
 
         .stage-container {
             position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 320px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 20px 0;
+            margin: 10px 0;
         }
 
-        /* Tocadiscos - ANIMACIÓN FIJA */
+        /* Tocadiscos - VINILO que GIRA (ESENCIAL) */
         .turntable {
-            width: 350px;
-            height: 350px;
+            width: 280px;
+            height: 280px;
             background: #111;
-            border: 10px solid #050505;
-            border-radius: 25px;
+            border: 6px solid #050505;
+            border-radius: 15px;
             position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 
-                        0 0 40px rgba(255, 51, 51, 0.3);
+            margin: 0 auto;
         }
 
         .vinyl {
-            width: 280px;
-            height: 280px;
+            width: 220px;
+            height: 220px;
             background: radial-gradient(circle, #111 0%, #000 70%);
             border-radius: 50%;
-            margin: 35px auto;
+            margin: 30px auto;
             position: relative;
-            /* ANIMACIÓN DIRECTA - SIN MEDIA QUERIES */
-            animation: spinVinyl 4s linear infinite;
+            /* ANIMACIÓN DEL VINILO - MANTENIDA */
+            animation: spinVinyl 8s linear infinite;
             animation-play-state: paused;
-            border: 4px solid #222;
-            box-shadow: 0 0 30px rgba(255, 51, 51, 0.5),
-                        inset 0 0 30px rgba(0, 0, 0, 0.8);
-            /* Forzar aceleración GPU */
+            border: 3px solid #222;
+            /* Optimizado para móvil */
             transform: translateZ(0);
-            backface-visibility: hidden;
+            will-change: transform;
         }
 
-        /* DEFINICIÓN DE ANIMACIÓN DE VINILO */
+        /* Animación SUAVE del vinilo */
         @keyframes spinVinyl {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -217,104 +197,90 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%,-50%);
-            width: 90px;
-            height: 90px;
+            width: 70px;
+            height: 70px;
             background: radial-gradient(circle, #cc0000 0%, #990000 100%);
             border-radius: 50%;
-            border: 3px solid var(--dorado);
+            border: 2px solid var(--dorado);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             text-align: center;
             color: white;
             font-weight: bold;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-            box-shadow: 0 0 20px rgba(255, 51, 51, 0.7),
-                        inset 0 0 10px rgba(255, 255, 255, 0.2);
-            padding: 5px;
+            padding: 4px;
         }
 
         #arm {
             position: absolute;
-            top: 35px;
-            right: 30px;
-            width: 140px;
-            height: 8px;
-            background: linear-gradient(to right, #444, #888, #444);
+            top: 25px;
+            right: 20px;
+            width: 110px;
+            height: 6px;
+            background: #666;
             transform-origin: 90% 50%;
             transform: rotate(25deg);
             transition: transform 0.8s ease;
             z-index: 10;
-            border-radius: 4px;
-            box-shadow: 3px 3px 15px rgba(0,0,0,0.6);
+            border-radius: 3px;
         }
 
         .tv-vintage {
             display: none;
             width: 100%;
-            height: 350px;
+            height: 280px;
             background: #1a1a2e;
-            border: 12px solid #0a0a15;
-            border-radius: 25px;
-            padding: 15px;
+            border: 8px solid #0a0a15;
+            border-radius: 15px;
+            padding: 10px;
             position: relative;
-            box-shadow: 0 0 40px rgba(0, 243, 255, 0.4);
         }
 
         .tv-screen {
             width: 100%;
             height: 100%;
             background: #000;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 3px solid #003366;
+            border: 2px solid #003366;
             position: relative;
-            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.8);
         }
 
         #song-title {
             color: var(--dorado);
-            font-size: 1rem;
-            margin-top: 20px;
+            font-size: 0.85rem;
+            margin-top: 15px;
             font-weight: bold;
             text-align: center;
-            min-height: 1.5rem;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-            padding: 10px 25px;
-            background: rgba(0, 31, 63, 0.5);
-            border-radius: 25px;
-            border: 1px solid rgba(255, 215, 0, 0.3);
+            min-height: 1.2rem;
+            padding: 6px 12px;
+            background: rgba(0, 31, 63, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
             width: 90%;
+            word-break: break-word;
         }
 
         .btn-main {
             background: linear-gradient(to right, var(--celeste-neon), var(--azul-bolivar));
             color: white;
             border: none;
-            padding: 18px 50px;
-            border-radius: 50px;
-            font-weight: 900;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
             cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
-            transition: all 0.3s;
+            font-size: 1rem;
             opacity: 0.5;
             pointer-events: none;
-            margin-top: 25px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-            letter-spacing: 1px;
+            margin-top: 15px;
+            transition: all 0.2s;
         }
 
         .btn-main.active {
             opacity: 1;
             pointer-events: auto;
-        }
-
-        .btn-main:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.8);
         }
 
         .btn-main:active {
@@ -323,309 +289,174 @@
 
         /* Donación */
         .donation-box {
-            margin-top: 40px;
+            margin-top: 30px;
             text-align: center;
-            border: 3px solid var(--celeste-neon);
-            padding: 30px;
-            border-radius: 20px;
-            background: rgba(0, 31, 63, 0.6);
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
-            width: 320px;
+            border: 1px solid var(--celeste-neon);
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(0, 31, 63, 0.4);
+            width: 280px;
+            max-width: 90%;
         }
 
         .donation-title {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--dorado);
             font-weight: bold;
-            margin-bottom: 20px;
-            line-height: 1.4;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+            margin-bottom: 15px;
+            line-height: 1.3;
         }
 
         .qr-img {
-            width: 180px;
-            height: 180px;
+            width: 150px;
+            height: 150px;
             background: white;
-            margin: 20px auto;
+            margin: 15px auto;
             display: block;
-            border-radius: 12px;
-            border: 3px solid var(--celeste-neon);
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
-            transition: transform 0.3s;
-        }
-
-        .qr-img:hover {
-            transform: scale(1.03);
+            border-radius: 10px;
+            border: 2px solid var(--celeste-neon);
         }
 
         .donation-footer {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #b3e0ff;
-            margin-top: 15px;
-            line-height: 1.5;
-            font-style: italic;
+            margin-top: 10px;
+            line-height: 1.4;
         }
 
         /* Mensaje de dedicación */
         .dedication-message {
-            max-width: 700px;
-            margin: 40px 20px 30px;
-            padding: 30px;
-            border: 2px solid rgba(0, 243, 255, 0.4);
-            border-radius: 20px;
-            background: rgba(0, 31, 63, 0.4);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            font-size: 0.95rem;
-            line-height: 1.7;
+            max-width: 600px;
+            margin: 30px 15px 20px;
+            padding: 20px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(0, 31, 63, 0.3);
+            font-size: 0.85rem;
+            line-height: 1.5;
             color: #e6f7ff;
             text-align: justify;
         }
 
         .dedication-message strong {
             color: var(--dorado);
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            font-weight: bold;
         }
 
         /* Footer y contacto */
         .footer-container {
             width: 100%;
-            max-width: 800px;
-            margin: 40px auto 30px;
+            max-width: 600px;
+            margin: 30px auto 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 35px;
+            gap: 25px;
         }
 
         .creator-info {
             text-align: center;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: #88c9ff;
             font-style: italic;
-            padding: 15px 30px;
-            background: rgba(0, 31, 63, 0.4);
-            border-radius: 20px;
-            border: 1px solid rgba(0, 188, 212, 0.3);
+            padding: 10px 20px;
+            background: rgba(0, 31, 63, 0.2);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 188, 212, 0.2);
         }
 
         .creator-info strong {
             color: var(--celeste-neon);
-            font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
         }
 
         .contact-section {
             text-align: center;
-            padding: 25px;
-            border-top: 2px solid rgba(0, 243, 255, 0.4);
-            border-bottom: 2px solid rgba(0, 243, 255, 0.4);
+            padding: 15px;
+            border-top: 1px solid rgba(0, 243, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
             width: 100%;
-            background: rgba(0, 10, 26, 0.5);
-            border-radius: 20px;
+            background: rgba(0, 10, 26, 0.3);
+            border-radius: 15px;
         }
 
         .contact-question {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             color: var(--dorado);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-style: italic;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
         }
 
         .contact-button {
             background: rgba(0, 25, 51, 0.9);
             color: var(--celeste-neon);
-            border: 2px solid var(--celeste-neon);
-            padding: 14px 30px;
-            border-radius: 10px;
+            border: 1px solid var(--celeste-neon);
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            margin-bottom: 15px;
         }
 
-        .contact-button:hover {
+        .contact-button:active {
+            transform: scale(0.95);
             background: var(--celeste-neon);
             color: #000a1a;
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
         }
 
         .email-display {
             display: none;
-            padding: 15px 25px;
-            background: rgba(0, 31, 63, 0.8);
-            border: 2px solid var(--celeste-neon);
-            border-radius: 10px;
+            padding: 10px 15px;
+            background: rgba(0, 31, 63, 0.5);
+            border: 1px solid var(--celeste-neon);
+            border-radius: 8px;
             font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             color: var(--dorado);
-            margin-top: 15px;
-            animation: fadeIn 0.5s ease-in;
+            margin-top: 10px;
             word-break: break-all;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
         }
 
         .email-display a {
             color: var(--celeste-neon);
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
         }
 
-        .email-display a:hover {
-            text-decoration: underline;
-            color: white;
-            text-shadow: 0 0 15px rgba(0, 243, 255, 0.8);
-        }
-
-        /* Decoraciones - ANIMACIÓN FIJA */
+        /* Decoraciones LIGERAS - opcionales en móvil */
         .decoration {
             position: absolute;
             color: var(--celeste-neon);
-            font-size: 24px;
+            font-size: 18px;
             opacity: 0;
             pointer-events: none;
-            /* ANIMACIÓN DIRECTA - SIN MEDIA QUERIES */
-            animation: floatUp 3s linear infinite;
             z-index: 1;
-            filter: drop-shadow(0 0 8px var(--celeste-neon));
-            /* Forzar aceleración GPU */
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            will-change: transform, opacity;
+            /* Animación simple */
+            animation: floatSimple 4s linear infinite;
         }
 
-        /* DEFINICIÓN DE ANIMACIÓN DE DECORACIONES */
-        @keyframes floatUp {
-            0% { 
-                transform: translateY(0) scale(0.8); 
-                opacity: 0; 
-            }
-            20% { 
-                opacity: 0.8; 
-                transform: scale(1.1); 
-            }
-            100% { 
-                transform: translateY(-400px) scale(1.2); 
-                opacity: 0; 
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes floatSimple {
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 0.5; }
+            100% { transform: translateY(-200px); opacity: 0; }
         }
 
         /* Indicador de error */
         .error-message {
             color: #ff6b6b;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-align: center;
-            margin-top: 8px;
-            min-height: 1.2rem;
+            margin-top: 5px;
+            min-height: 1rem;
             font-weight: bold;
-            text-shadow: 0 0 8px rgba(255, 107, 107, 0.7);
-            padding: 6px 15px;
+            padding: 4px 10px;
             background: rgba(255, 0, 0, 0.1);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 107, 107, 0.2);
         }
 
-        /* Responsive simple */
-        @media (max-width: 768px) {
-            body {
-                padding: 15px;
-            }
-            
-            .controls-row {
-                gap: 10px;
-                padding: 12px;
-                margin: 20px 0;
-            }
-            
-            .btn-control, .btn-nav {
-                font-size: 0.8rem;
-                padding: 10px 15px;
-                min-width: 70px;
-            }
-            
-            .btn-nav {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            
-            .turntable, .tv-vintage {
-                width: 300px;
-                height: 300px;
-            }
-            
-            .vinyl {
-                width: 240px;
-                height: 240px;
-            }
-            
-            .share-buttons {
-                gap: 10px;
-            }
-            
-            .share-btn {
-                font-size: 0.8rem;
-                padding: 8px 15px;
-            }
-            
-            .donation-box {
-                width: 280px;
-                padding: 20px;
-            }
-            
-            .qr-img {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .dedication-message {
-                padding: 20px;
-                margin: 30px 15px 20px;
-                font-size: 0.9rem;
-            }
-            
-            /* Decoraciones más pequeñas en móvil */
-            .decoration {
-                font-size: 18px;
-                animation: floatUpMobile 2.5s linear infinite;
-            }
-            
-            @keyframes floatUpMobile {
-                0% { 
-                    transform: translateY(0) scale(0.8); 
-                    opacity: 0; 
-                }
-                20% { 
-                    opacity: 0.6; 
-                    transform: scale(1); 
-                }
-                100% { 
-                    transform: translateY(-250px) scale(1.1); 
-                    opacity: 0; 
-                }
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 480px) {
-            .main-title {
-                font-size: clamp(1.5rem, 8vw, 2.2rem);
-            }
-            
-            .conductor {
-                font-size: 1.8rem;
-            }
-            
             .controls-row {
                 gap: 8px;
                 padding: 10px;
@@ -643,34 +474,112 @@
             }
             
             .turntable {
-                width: 260px;
-                height: 260px;
+                width: 250px;
+                height: 250px;
             }
             
             .vinyl {
-                width: 210px;
-                height: 210px;
+                width: 200px;
+                height: 200px;
+            }
+            
+            .share-buttons {
+                gap: 8px;
+            }
+            
+            .share-btn {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+            }
+            
+            /* Decoraciones más pequeñas en móvil */
+            .decoration {
+                font-size: 14px;
+                animation-duration: 3s;
+            }
+        }
+
+        /* Estilos solo para PC - efectos extras */
+        @media (min-width: 769px) {
+            body {
+                padding: 20px;
+            }
+            
+            .main-title {
+                text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
+            }
+            
+            .conductor {
+                text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+            }
+            
+            .controls-row {
+                background: rgba(0, 10, 26, 0.5);
+                border: 1px solid rgba(0, 243, 255, 0.2);
+            }
+            
+            .stage-container {
+                max-width: 400px;
+            }
+            
+            .turntable {
+                width: 320px;
+                height: 320px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+            }
+            
+            .vinyl {
+                width: 250px;
+                height: 250px;
+                box-shadow: 0 0 20px rgba(255, 51, 51, 0.3);
             }
             
             .label {
-                width: 70px;
-                height: 70px;
-                font-size: 0.6rem;
+                width: 80px;
+                height: 80px;
+                font-size: 0.7rem;
+            }
+            
+            /* Efectos hover solo en PC */
+            .btn-control:hover, .btn-nav:hover,
+            .share-btn:hover, .contact-button:hover {
+                background: var(--celeste-neon);
+                color: #000a1a;
+                transform: translateY(-2px);
+            }
+            
+            .btn-main:hover {
+                transform: scale(1.05);
+            }
+            
+            /* Más decoraciones en PC */
+            .decoration {
+                font-size: 22px;
+            }
+        }
+
+        /* Animación más lenta para ahorro de batería */
+        @media (prefers-reduced-motion: reduce) {
+            .vinyl {
+                animation-duration: 12s;
+            }
+            .decoration {
+                animation-duration: 6s;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Audio elements -->
-    <audio id="click-sound" preload="none">
+    <!-- Audio elements - precargados para mejor experiencia -->
+    <audio id="click-sound" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
     </audio>
     
-    <audio id="vinyl-start" preload="none">
+    <audio id="vinyl-start" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-vinyl-record-hit-2913.mp3" type="audio/mpeg">
     </audio>
     
-    <audio id="vinyl-stop" preload="none">
+    <audio id="vinyl-stop" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-plastic-bubble-click-1124.mp3" type="audio/mpeg">
     </audio>
 
@@ -751,67 +660,77 @@
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
         const maxErrorRetries = 3;
         let wasPlayingBeforeSwitch = false;
-        let isDesktop = window.innerWidth > 768;
+        let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        let allowDecorations = true; // Permitir decoraciones por defecto
+
+        // ======================
+        // DETECCIÓN DE RENDIMIENTO INTELIGENTE
+        // ======================
+        function checkPerformance() {
+            // Detectar si es móvil viejo o lento
+            const isOldMobile = isMobile && (navigator.hardwareConcurrency <= 2 || !navigator.hardwareConcurrency);
+            const isLowEnd = window.innerWidth <= 768 && isOldMobile;
+            
+            // En móviles viejos, desactivar decoraciones
+            allowDecorations = !isLowEnd;
+            
+            console.log(`Móvil: ${isMobile ? 'Sí' : 'No'}`);
+            console.log(`Decoraciones: ${allowDecorations ? 'Activadas' : 'Desactivadas (móvil lento)'}`);
+            
+            // Optimizar YouTube para móvil
+            if (isMobile && player) {
+                setTimeout(() => {
+                    try {
+                        player.setPlaybackQuality('small');
+                    } catch (e) {}
+                }, 1500);
+            }
+        }
 
         // ======================
         // FUNCIONES DE COMPARTIR
         // ======================
         function shareOnFacebook() {
             const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de Gonzalo Gorriti - FM 90 Radio Altiplano 📻\n\nUna recreación perfecta de la legendaria radio boliviana con la mejor música de los 80s y 90s. ¡Totalmente gratis y sin anuncios!");
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank', 'width=600,height=400');
-            showNotification("Compartiendo en Facebook...");
+            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de Gonzalo Gorriti - FM 90 Radio Altiplano 📻");
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
         }
 
         function shareOnWhatsApp() {
-            const text = encodeURIComponent("🎧 *Buenas Noches, Sintonía - Homenaje* 🎧\n\nEncontré esta increíble recreación de la mítica radio FM 90 de La Paz, Bolivia. ¡Revive las noches con Gonzalo Gorriti y la mejor música!\n\n" + window.location.href);
+            const text = encodeURIComponent("🎧 *Buenas Noches, Sintonía - Homenaje* 🎧\n\n" + window.location.href);
             window.open(`https://wa.me/?text=${text}`, '_blank');
-            showNotification("Compartiendo en WhatsApp...");
         }
 
         function shareOnTwitter() {
-            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de FM 90 Radio Altiplano - Un homenaje a Gonzalo Gorriti y la mejor música 🎧");
+            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de FM 90 Radio Altiplano");
             const url = encodeURIComponent(window.location.href);
-            const hashtags = encodeURIComponent("BuenasNochesSintonia,FM90,GonzaloGorriti,RadioAltiplano,LaPaz,Bolivia,Nostalgia");
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=${hashtags}`, '_blank', 'width=600,height=400');
-            showNotification("Compartiendo en Twitter...");
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
         }
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href)
-                .then(() => showNotification("✅ Enlace copiado al portapapeles"))
-                .catch(err => showNotification("❌ Error al copiar, intenta manualmente"));
-        }
-
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(0, 31, 63, 0.9);
-                color: var(--celeste-neon);
-                padding: 12px 20px;
-                border-radius: 10px;
-                border: 1px solid var(--celeste-neon);
-                z-index: 10000;
-                font-size: 0.9rem;
-                box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
-                animation: fadeInOut 2s ease-in-out;
-            `;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateX(-50%) translateY(-20px)';
-                setTimeout(() => notification.remove(), 300);
-            }, 2000);
+                .then(() => {
+                    const notification = document.createElement('div');
+                    notification.textContent = "✅ Enlace copiado";
+                    notification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: rgba(0, 31, 63, 0.9);
+                        color: var(--celeste-neon);
+                        padding: 10px 20px;
+                        border-radius: 10px;
+                        z-index: 10000;
+                        font-size: 0.9rem;
+                    `;
+                    document.body.appendChild(notification);
+                    setTimeout(() => notification.remove(), 2000);
+                });
         }
 
         // ======================
-        // FUNCIONES DE SONIDO
+        // FUNCIONES DE SONIDO (siempre activas)
         // ======================
         function playSoundAndCall(funcName, param = null) {
             playClickSound();
@@ -886,21 +805,8 @@
             btn.innerText = "SINTONIZAR EMISORA";
             player.setShuffle(true);
             
-            // Inicializar animaciones
-            initAnimations();
-        }
-
-        // ======================
-        // INICIALIZAR ANIMACIONES
-        // ======================
-        function initAnimations() {
-            const disc = document.getElementById('disc');
-            // Asegurar que la animación está definida
-            disc.style.animation = 'spinVinyl 4s linear infinite';
-            disc.style.animationPlayState = 'paused';
-            
-            // Forzar un reflow para activar la animación
-            void disc.offsetWidth;
+            // Verificar rendimiento
+            checkPerformance();
         }
 
         function onPlayerStateChange(event) {
@@ -910,14 +816,10 @@
                 
                 if (player && player.getVideoData) {
                     const videoData = player.getVideoData();
-                    const title = videoData.title.length > 60 ? 
-                        videoData.title.substring(0, 57) + "..." : 
+                    const title = videoData.title.length > 50 ? 
+                        videoData.title.substring(0, 47) + "..." : 
                         videoData.title;
                     document.getElementById('song-title').innerText = "🎵 " + title;
-                }
-                
-                if (player && player.getPlaylistIndex) {
-                    currentVideoIndex = player.getPlaylistIndex();
                 }
             }
             
@@ -931,13 +833,12 @@
         }
 
         function onPlayerError(event) {
-            console.error('Error YouTube:', event.data);
             videoErrorCount++;
             
-            document.getElementById('error-message').innerText = "Error, saltando al siguiente...";
+            document.getElementById('error-message').innerText = "Error, saltando...";
             
             if (videoErrorCount >= maxErrorRetries) {
-                document.getElementById('error-message').innerText = "Demasiados errores, deteniendo";
+                document.getElementById('error-message').innerText = "Demasiados errores";
                 togglePlayback();
                 return;
             }
@@ -946,7 +847,7 @@
         }
 
         // ======================
-        // FUNCIONES PRINCIPALES
+        // FUNCIONES PRINCIPALES - VINILO SIEMPRE GIRA
         // ======================
         function togglePlayback() {
             playClickSound();
@@ -958,6 +859,7 @@
             if (!playing) {
                 playVinylStartSound();
                 
+                // VINILO COMIENZA A GIRAR
                 arm.style.transform = 'rotate(-18deg)';
                 disc.style.animationPlayState = 'running';
                 
@@ -968,10 +870,15 @@
                 document.body.classList.add('bolivar-mode');
                 btn.innerText = "APAGAR RADIO";
                 playing = true;
-                spawnDecorations();
+                
+                // Decoraciones solo si están permitidas
+                if (allowDecorations) {
+                    spawnDecorations();
+                }
             } else {
                 playVinylStopSound();
                 
+                // VINILO DEJA DE GIRAR
                 arm.style.transform = 'rotate(25deg)';
                 disc.style.animationPlayState = 'paused';
                 
@@ -1007,6 +914,7 @@
                 videoBtn.style.color = 'var(--celeste-neon)';
                 
                 if (wasPlaying) {
+                    // VINILO VUELVE A GIRAR
                     disc.style.animationPlayState = 'running';
                     arm.style.transform = 'rotate(-18deg)';
                 }
@@ -1021,6 +929,7 @@
                 radioBtn.style.background = 'rgba(0, 25, 51, 0.9)';
                 radioBtn.style.color = 'var(--celeste-neon)';
                 
+                // VINILO SE PAUSA (pero la animación sigue definida)
                 disc.style.animationPlayState = 'paused';
                 arm.style.transform = 'rotate(25deg)';
             }
@@ -1035,8 +944,7 @@
             try {
                 player.nextVideo();
             } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('error-message').innerText = "Error al cambiar";
+                document.getElementById('error-message').innerText = "Error";
             }
         }
 
@@ -1049,8 +957,7 @@
             try {
                 player.previousVideo();
             } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('error-message').innerText = "Error al cambiar";
+                document.getElementById('error-message').innerText = "Error";
             }
         }
 
@@ -1064,46 +971,44 @@
             } else {
                 emailDisplay.style.display = 'block';
                 contactButton.innerHTML = '📧 OCULTAR CORREO';
-                emailDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
         // ======================
-        // DECORACIONES SIMPLIFICADAS
+        // DECORACIONES LIGERAS - CONTROLADAS
         // ======================
         function spawnDecorations() {
-            if (!playing) return;
+            if (!playing || !allowDecorations) return;
             
-            const decorationCount = document.querySelectorAll('.decoration').length;
-            const maxDecorations = isDesktop ? 8 : 4;
+            // Cantidad controlada según dispositivo
+            const maxDecorations = isMobile ? 2 : 4;
+            const currentDecorations = document.querySelectorAll('.decoration').length;
             
-            if (decorationCount >= maxDecorations) return;
+            if (currentDecorations >= maxDecorations) {
+                // Si hay muchas, remover una vieja
+                const oldest = document.querySelector('.decoration');
+                if (oldest) oldest.remove();
+            }
             
             const deco = document.createElement('div');
             deco.className = 'decoration';
-            const icons = ['♪', '♫', '✨', '🎵', '🎶', '💎', '🔷'];
+            const icons = ['♪', '♫'];
             deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             deco.style.left = Math.random() * 100 + 'vw';
             deco.style.bottom = '20px';
-            
-            // Tamaño dinámico según dispositivo
-            if (isDesktop) {
-                deco.style.fontSize = (20 + Math.random() * 20) + 'px';
-            } else {
-                deco.style.fontSize = (14 + Math.random() * 10) + 'px';
-            }
-            
+            deco.style.opacity = '0.4'; // Muy transparente para móvil
             document.body.appendChild(deco);
             
-            // Remover después de 3 segundos
+            // Remover después
             setTimeout(() => {
                 if (deco.parentNode) {
-                    deco.remove();
+                    deco.style.opacity = '0';
+                    setTimeout(() => deco.remove(), 300);
                 }
-            }, 3000);
+            }, 4000);
             
-            // Intervalo según dispositivo
-            const interval = isDesktop ? 500 : 800;
+            // Intervalo largo para móvil
+            const interval = isMobile ? 1500 : 800;
             setTimeout(spawnDecorations, interval);
         }
 
@@ -1111,39 +1016,23 @@
         // INICIALIZACIÓN
         // ======================
         window.addEventListener('load', function() {
-            isDesktop = window.innerWidth > 768;
-            
             setView('radio');
             
-            // Cargar sonidos en interacción
-            document.addEventListener('click', function loadSounds() {
-                ['click-sound', 'vinyl-start', 'vinyl-stop'].forEach(id => {
-                    const sound = document.getElementById(id);
-                    if (sound) sound.load();
-                });
-                document.removeEventListener('click', loadSounds);
-            }, { once: true });
+            // Suavizar entrada
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
             
-            // Forzar animaciones en PC
-            if (isDesktop) {
-                setTimeout(() => {
-                    const disc = document.getElementById('disc');
-                    if (disc) {
-                        // Reiniciar animación
-                        disc.style.animation = 'none';
-                        setTimeout(() => {
-                            disc.style.animation = 'spinVinyl 4s linear infinite';
-                            disc.style.animationPlayState = 'paused';
-                        }, 10);
-                    }
-                }, 100);
+            // Asegurar que el vinilo tiene su animación
+            const disc = document.getElementById('disc');
+            if (disc) {
+                disc.style.animation = 'spinVinyl 8s linear infinite';
+                disc.style.animationPlayState = 'paused';
             }
         });
 
-        // Actualizar detección de dispositivo
-        window.addEventListener('resize', function() {
-            isDesktop = window.innerWidth > 768;
-        });
+        // Redetectar al cambiar tamaño
+        window.addEventListener('resize', checkPerformance);
     </script>
 </body>
 </html>
