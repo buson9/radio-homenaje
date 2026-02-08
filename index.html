@@ -12,19 +12,22 @@
 80%); color: white; font-family: 'Montserrat', sans-serif; margin: 0; display: 
 flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 
 20px; transition: 1s; overflow-x: hidden; }
- body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%,\r\n#120a05 80%); }
+ body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%,
+#120a05 80%); }
  .main-header { text-align: center; margin-bottom: 10px; }
  .main-title { font-family: 'Playfair Display', serif; font-size: 
 clamp(1.8rem, 6vw, 3.5rem); font-style: italic; color: var(--gold); margin: 0; 
 line-height: 1; text-shadow: var(--neon); }
- .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color:\r\n#eee; margin: 5px 0; }
+ .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color:
+#eee; margin: 5px 0; }
  .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 
 0.8rem; font-weight: bold; text-transform: uppercase; }
  /* Controles Retro */
  .controls-row { display: flex; gap: 15px; margin: 20px 0; z-index: 10; }
  .btn-retro { background: #111; color: var(--gold); border: 2px solid 
 var(--gold); padding: 10px 20px; border-radius: 5px; font-weight: 900; cursor: 
-pointer; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; box shadow: var(--neon); }
+pointer; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; box-
+shadow: var(--neon); }
  .btn-retro:hover { background: var(--gold); color: black; }
  
  .stage-container { position: relative; width: 100%; max-width: 550px; 
@@ -33,23 +36,28 @@ display: flex; flex-direction: column; align-items: center; margin: 15px 0; }
  .turntable { width: 320px; height: 320px; background: #221a15; border: 
 8px solid #15100d; border-radius: 20px; position: relative; box-shadow: 0 30px 
 60px rgba(0,0,0,0.8); }
- .vinyl { width: 280px; height: 280px; background: radial gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 20px auto; 
+ .vinyl { width: 280px; height: 280px; background: radial-
+gradient(circle, #222 10%, #111 100%); border-radius: 50%; margin: 20px auto; 
 position: relative; animation: spin 4s linear infinite; animation-play-state: 
 paused; border: 2px solid #333; }
  .label { position: absolute; top: 50%; left: 50%; transform: 
-translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border radius: 50%; /* CORREGIDO: Asegura que el centro sea redondo */
+translate(-50%,-50%); width: 85px; height: 85px; background: #b01e1e; border-
+radius: 50%; /* CORREGIDO: Asegura que el centro sea redondo */
  display: flex; align-items: center; justify-content: center; font-size: 
 0.6rem; text-align: center; color: white; font-weight: bold; border: 2px solid 
 gold; }
- #arm { position: absolute; top: 30px; right: 25px; width: 130px; height:\r\n8px; background: #aaa; transform-origin: 90% 50%; transform: rotate(25deg); 
+ #arm { position: absolute; top: 30px; right: 25px; width: 130px; height:
+8px; background: #aaa; transform-origin: 90% 50%; transform: rotate(25deg); 
 transition: 1.2s; z-index: 10; border-radius: 4px; }
  .tv-vintage { display: none; width: 100%; height: 320px; background: 
 #4e342e; border: 10px solid #3e2723; border-radius: 25px; padding: 12px; 
 position: relative; }
- .tv-screen { width: 100%; height: 100%; background: #000; border-radius:\r\n12px; overflow: hidden; border: 3px solid #222; position: relative; }
+ .tv-screen { width: 100%; height: 100%; background: #000; border-radius:
+12px; overflow: hidden; border: 3px solid #222; position: relative; }
  
  #song-title { color: var(--gold); font-size: 0.9rem; margin-top: 15px; 
-font-weight: bold; text-align: center; height: 1.2rem; min-height: 1.2rem; text shadow: 0 0 10px rgba(255,204,0,0.5); }
+font-weight: bold; text-align: center; height: 1.2rem; min-height: 1.2rem; text-
+shadow: 0 0 10px rgba(255,204,0,0.5); }
  .btn-main { background: var(--gold); color: black; border: none; 
 padding: 15px 45px; border-radius: 50px; font-weight: 900; cursor: pointer; 
 font-size: 1.2rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; 
@@ -61,29 +69,17 @@ var(--dark-gold); padding: 20px; border-radius: 20px; background: rgba(0, 0, 0,
 0.4); box-shadow: var(--neon); width: 220px; }
  .qr-img { width: 150px; height: 150px; background: white; margin: 10px 
 auto; display: block; border-radius: 10px; border: 3px solid var(--gold); }
- /* Imagen me.png AÑADIDA */
- .me-img { margin-top: 15px; width: 100%; max-width: 220px; border-radius: 
-10px; }
  
- <style>
-   /* ... el resto de tu CSS anterior ... */
-   /* Texto Homenaje AÑADIDO y estilizado con marco doble y justificado */
-   .homenaje-text-box {
-        max-width: 700px;
-        margin-top: 50px;
-        padding: 25px;
-        border: 4px double var(--gold); /* Marco doble más grueso */
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.05);
-        box-shadow: var(--neon);
-        line-height: 1.6;
-        font-size: 1.1rem; /* Letras ligeramente más grandes */
-        text-align: justify; /* Texto justificado */
-        color: #ccc;
-    }
-   /* ... el resto de tu CSS anterior ... */
+ /* Adornos */
+ .decoration { position: absolute; color: var(--gold); font-size: 24px; 
+opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 
+1; filter: drop-shadow(0 0 5px var(--gold)); }
+ @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0;
+} 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); 
+opacity: 0; } }
+ @keyframes spin { from { transform: rotate(0deg); } to { transform: 
+rotate(360deg); } }
  </style>
-
 </head>
 <body>
  <header class="main-header">
@@ -117,28 +113,19 @@ SEÑAL...</button>
 bold;">APOYA EL PROYECTO</span>
  <img src="takenos.png" alt="Donación QR" class="qr-img">
  <p style="font-size: 0.8rem; margin-top: 10px;">Escanea para aportar</p>
- <!-- Imagen me.png AÑADIDA debajo del QR -->
- <img src="me.png" alt="Autor" class="me-img">
  </div>
-
- <!-- Texto de Homenaje AÑADIDO al final de la página -->
- <div class="homenaje-text-box">
-    <p>Este sitio esta dedicado respetuosamente al excelente programa de radio "Buenas Noches Sintonia" creado y conducido por el gran comunicador Gonzalo Gorriti (Hoy un eximio analista/comentarista deportivo) que se emitia todos los dias de 22 a 24 a traves de la recordada FM 90 de radio Altiplano, en La Paz Bolivia. El objetivo principal es que un oyente de entonces que este ahora en cualquier lugar del mundo, recuerde como era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, como era terminar el dia, disfrutando hermosas canciones mientras uno se alistaba para un reparador descanso</p>
- </div>
-
  <script>
  let player;
  let playing = false;
  const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
  // Carga de API YouTube original
  var tag = document.createElement('script');
- tag.src = "https://www.youtube.com/iframe_api";
- // Se usa getElementsByTagName('script')[0] para asegurar compatibilidad
- var firstScriptTag = document.getElementsByTagName('script')[0];
+ tag.src = "https://www.youtube.com";
+ var firstScriptTag = document.getElementsByTagName('script')[0]; // Selección original
  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
- // Define la función onYouTubeIframeAPIReady a nivel global para asegurar su ejecución
- window.onYouTubeIframeAPIReady = function() { //
+ // Define la función onYouTubeIframeAPIReady a nivel global
+ window.onYouTubeIframeAPIReady = function() {
  player = new YT.Player('player', {
  height: '100%',
  width: '100%',
@@ -157,7 +144,7 @@ bold;">APOYA EL PROYECTO</span>
  'onStateChange': onPlayerStateChange,
  // Manejador de error para saltar videos restringidos
  'onError': function(event) {
- if (event.data == 101 || event.data == 150) { // Errores de restricción Vevo/Embed
+ if (event.data == 101 || event.data == 150) { // Errores de restricción
  player.nextVideo();
  }
  }
@@ -204,7 +191,7 @@ videoData.title;
  }
  }
  function nextVideo() { if(player) player.nextVideo(); }
- function prevVideo() { if(player) player.previousVideo(); }
+ function prevVideo() { if(player) player.previousVideo(); } // Añadido botón anterior
  function setView(m) {
  document.getElementById('radio-stage').style.display = m === 'radio'
 ? 'block' : 'none';
@@ -215,7 +202,6 @@ videoData.title;
  if (!playing) return;
  const deco = document.createElement('div');
  deco.className = 'decoration';
- // Eliminados los iconos visuales, solo texto en botones
  const icons = ['♪', '♫', ' ', ' ', ' ', ' ', ' ']; 
  deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
  deco.style.left = Math.random() * 100 + 'vw';
@@ -227,4 +213,3 @@ videoData.title;
  </script>
 </body>
 </html>
-
