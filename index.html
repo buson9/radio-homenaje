@@ -1,11 +1,10 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buenas Noches, Sintonía - Homenaje</title>
+    <!-- CORRECCIÓN DE FUENTES: Ahora sí tienen los nombres correctos -->
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
         :root { --gold: #ffcc00; --dark-gold: #d4af37; --bg: #05070a; --neon: 0 0 15px rgba(255, 204, 0, 0.6); }
@@ -42,15 +41,13 @@
         .btn-main { background: var(--gold); color: black; border: none; padding: 15px 45px; border-radius: 50px; font-weight: 900; cursor: pointer; font-size: 1.2rem; box-shadow: var(--neon); transition: 0.3s; opacity: 0.5; pointer-events: none; margin-top: 10px; }
         .btn-main.active { opacity: 1; pointer-events: auto; }
 
-        /* Homenaje Texto */
+        /* Homenaje y Contacto */
         .info-homenaje { max-width: 700px; text-align: center; margin-top: 50px; padding: 20px; border-top: 1px solid rgba(255,204,0,0.2); }
         .texto-homenaje { font-size: 1rem; color: #ccc; line-height: 1.6; text-align: justify; }
 
-        /* Donación */
-        #donation-qr { display: none; margin-top: 15px; text-align: center; animation: fadeIn 0.5s; }
+        #donation-qr { display: none; margin-top: 15px; text-align: center; }
         .qr-img { width: 150px; border: 3px solid var(--gold); border-radius: 10px; }
 
-        /* Contacto */
         .contact-section { width: 100%; max-width: 450px; margin-top: 40px; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 15px; border: 1px solid var(--dark-gold); }
         .contact-section input, .contact-section textarea { width: 100%; padding: 10px; margin: 10px 0; background: #000; border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
         .btn-send { background: var(--gold); color: black; border: none; padding: 12px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; }
@@ -58,7 +55,6 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .decoration { position: absolute; color: var(--gold); font-size: 24px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; filter: drop-shadow(0 0 5px var(--gold)); }
         @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); opacity: 0; } }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -80,14 +76,13 @@
             <div id="arm"></div>
             <div class="vinyl" id="disc"><div class="label">FM 90<br>RADIO<br>ALTIPLANO</div></div>
         </div>
-
         <div id="tv-stage" class="tv-vintage">
             <div class="tv-static" id="tv-static"></div>
             <div class="tv-screen"><div id="player"></div></div>
             <div class="tv-mini-controls">
-                <button class="btn-mini" onclick="player.previousVideo()">VOLVER</button>
+                <button class="btn-mini" onclick="if(player) player.previousVideo()">VOLVER</button>
                 <button class="btn-mini" onclick="toggleMute()">MUDO</button>
-                <button class="btn-mini" onclick="player.nextVideo()">SIGUIENTE</button>
+                <button class="btn-mini" onclick="if(player) player.nextVideo()">SIGUIENTE</button>
             </div>
         </div>
         <div id="song-title"></div>
@@ -116,45 +111,46 @@
         </form>
     </div>
 
-    <!-- Sonido estática -->
     <audio id="audio-static" src="https://www.soundjay.com" preload="auto"></audio>
-
-    <!-- CARGA DE API DE YOUTUBE INFALIBLE -->
-    <script src="https://www.youtube.com"></script>
 
     <script>
         let player, playing = false, muted = false;
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
 
-        // Esta función la llama YouTube automáticamente al cargar el script de arriba
+        // CARGA BLINDADA: No dependemos de que cargue primero el HTML
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        if (firstScriptTag) {
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        } else {
+            document.head.appendChild(tag);
+        }
+
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '100%', width: '100%',
-                playerVars: { 
-                    listType: 'playlist', list: playlistId, 
-                    autoplay: 0, controls: 0, disablekb: 1, 
-                    modestbranding: 1, rel: 0, loop: 1 
-                },
+                playerVars: { listType: 'playlist', list: playlistId, autoplay: 0, controls: 0, disablekb: 1, modestbranding: 1, rel: 0, loop: 1 },
                 events: { 
                     'onReady': onPlayerReady, 
                     'onStateChange': onPlayerStateChange,
-                    'onError': () => player.nextVideo() 
+                    'onError': () => { if(player) player.nextVideo(); } 
                 }
             });
         }
 
-        function onPlayerReady(event) {
+        function onPlayerReady() {
             const btn = document.getElementById('play-btn');
             btn.classList.add('active');
             btn.innerText = "SINTONIZAR EMISORA";
-            player.setShuffle(true);
+            if(player) player.setShuffle(true);
         }
 
         function onPlayerStateChange(event) {
             if (event.data === YT.PlayerState.PLAYING) {
                 document.getElementById('song-title').innerText = "Sonando: " + player.getVideoData().title;
             }
-            if (event.data === YT.PlayerState.ENDED) { player.nextVideo(); }
+            if (event.data === YT.PlayerState.ENDED) { nextVideo(); }
         }
 
         function togglePlayback() {
@@ -163,7 +159,7 @@
                 arm.style.transform = 'rotate(-18deg)'; disc.style.animationPlayState = 'running';
                 player.playVideoAt(Math.floor(Math.random() * 20)); 
                 document.body.classList.add('amber-mode');
-                btn.innerText = "APAGAR EMISIÓN"; nextBtn.style.display = 'block';
+                btn.innerText = "APAGAR RADIO"; nextBtn.style.display = 'block';
                 playing = true; spawnDecorations();
             } else {
                 arm.style.transform = 'rotate(25deg)'; disc.style.animationPlayState = 'paused';
@@ -178,7 +174,7 @@
             const staticSound = document.getElementById('audio-static');
             if (m === 'tv') {
                 staticOverlay.classList.add('active');
-                staticSound.play();
+                if(staticSound) staticSound.play();
                 setTimeout(() => {
                     document.getElementById('radio-stage').style.display = 'none';
                     document.getElementById('tv-stage').style.display = 'block';
@@ -191,8 +187,10 @@
         }
 
         function toggleMute() {
-            muted ? player.unMute() : player.mute();
-            muted = !muted;
+            if(player) {
+                muted ? player.unMute() : player.mute();
+                muted = !muted;
+            }
         }
 
         function toggleDonation() {
@@ -217,3 +215,5 @@
     </script>
 </body>
 </html>
+
+
