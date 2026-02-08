@@ -144,7 +144,7 @@ bold;">APOYA EL PROYECTO</span>
  'onStateChange': onPlayerStateChange,
  // Manejador de error para saltar videos restringidos
  'onError': function(event) {
- if (event.data == 101 || event.data == 150) { // Errores de restricción
+ if (event.data == 101 || event.data == 150) { // Errores de restricción Vevo/Embed
  player.nextVideo();
  }
  }
@@ -191,7 +191,7 @@ videoData.title;
  }
  }
  function nextVideo() { if(player) player.nextVideo(); }
- function prevVideo() { if(player) player.previousVideo(); } // Añadido botón anterior
+ function prevVideo() { if(player) player.previousVideo(); }
  function setView(m) {
  document.getElementById('radio-stage').style.display = m === 'radio'
 ? 'block' : 'none';
