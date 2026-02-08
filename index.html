@@ -31,32 +31,10 @@
             min-height: 100vh;
             padding: 20px;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body.bolivar-mode {
             background: radial-gradient(circle at top, #001833 0%, #00050f 80%);
-        }
-
-        /* Desactivar reducción de movimiento solo si el usuario no lo prefirió */
-        @media (prefers-reduced-motion: no-preference) {
-            .vinyl {
-                animation: spinPC 4s linear infinite;
-            }
-            
-            .decoration {
-                animation: floatPC 3s linear infinite;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
         }
 
         .main-header {
@@ -72,10 +50,6 @@
             margin: 0;
             line-height: 1.1;
             text-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
-            background: linear-gradient(135deg, var(--celeste-neon), var(--celeste));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .conductor {
@@ -100,7 +74,7 @@
             margin-top: 5px;
         }
 
-        /* Controles para PC */
+        /* Controles */
         .controls-row {
             display: flex;
             gap: 15px;
@@ -115,7 +89,7 @@
         }
 
         .btn-control {
-            background: linear-gradient(145deg, #001933, #000a1a);
+            background: rgba(0, 25, 51, 0.9);
             color: var(--celeste-neon);
             border: 2px solid var(--celeste-neon);
             padding: 12px 20px;
@@ -134,7 +108,7 @@
         }
 
         .btn-nav {
-            background: linear-gradient(145deg, #001933, #000a1a);
+            background: rgba(0, 25, 51, 0.9);
             color: var(--celeste-neon);
             border: 2px solid var(--celeste-neon);
             width: 50px;
@@ -171,7 +145,7 @@
         }
 
         .share-btn {
-            background: linear-gradient(145deg, #001933, #000a1a);
+            background: rgba(0, 25, 51, 0.9);
             color: var(--celeste-neon);
             border: 2px solid var(--celeste-neon);
             padding: 10px 20px;
@@ -202,17 +176,16 @@
             margin: 20px 0;
         }
 
-        /* Tocadiscos para PC */
+        /* Tocadiscos - ANIMACIÓN FIJA */
         .turntable {
             width: 350px;
             height: 350px;
-            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            background: #111;
             border: 10px solid #050505;
             border-radius: 25px;
             position: relative;
             box-shadow: 0 30px 60px rgba(0,0,0,0.8), 
-                        0 0 40px rgba(255, 51, 51, 0.3),
-                        inset 0 0 20px rgba(0, 243, 255, 0.1);
+                        0 0 40px rgba(255, 51, 51, 0.3);
         }
 
         .vinyl {
@@ -222,15 +195,21 @@
             border-radius: 50%;
             margin: 35px auto;
             position: relative;
+            /* ANIMACIÓN DIRECTA - SIN MEDIA QUERIES */
+            animation: spinVinyl 4s linear infinite;
             animation-play-state: paused;
             border: 4px solid #222;
             box-shadow: 0 0 30px rgba(255, 51, 51, 0.5),
                         inset 0 0 30px rgba(0, 0, 0, 0.8);
+            /* Forzar aceleración GPU */
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
-        @keyframes spinPC {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        /* DEFINICIÓN DE ANIMACIÓN DE VINILO */
+        @keyframes spinVinyl {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .label {
@@ -276,13 +255,12 @@
             display: none;
             width: 100%;
             height: 350px;
-            background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+            background: #1a1a2e;
             border: 12px solid #0a0a15;
             border-radius: 25px;
             padding: 15px;
             position: relative;
-            box-shadow: 0 0 40px rgba(0, 243, 255, 0.4),
-                        inset 0 0 20px rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 40px rgba(0, 243, 255, 0.4);
         }
 
         .tv-screen {
@@ -309,16 +287,10 @@
             border-radius: 25px;
             border: 1px solid rgba(255, 215, 0, 0.3);
             width: 90%;
-            animation: textPulse 3s infinite alternate;
-        }
-
-        @keyframes textPulse {
-            0% { opacity: 0.9; box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-            100% { opacity: 1; box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
         }
 
         .btn-main {
-            background: linear-gradient(145deg, var(--celeste-neon), var(--azul-bolivar));
+            background: linear-gradient(to right, var(--celeste-neon), var(--azul-bolivar));
             color: white;
             border: none;
             padding: 18px 50px;
@@ -326,7 +298,7 @@
             font-weight: 900;
             cursor: pointer;
             font-size: 1.2rem;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6), 0 5px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
             transition: all 0.3s;
             opacity: 0.5;
             pointer-events: none;
@@ -349,22 +321,16 @@
             transform: scale(0.98);
         }
 
-        /* Donación para PC */
+        /* Donación */
         .donation-box {
             margin-top: 40px;
             text-align: center;
             border: 3px solid var(--celeste-neon);
             padding: 30px;
             border-radius: 20px;
-            background: linear-gradient(145deg, rgba(0, 31, 63, 0.8), rgba(0, 10, 26, 0.8));
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.5), 0 10px 30px rgba(0,0,0,0.4);
+            background: rgba(0, 31, 63, 0.6);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
             width: 320px;
-            animation: boxFloatPC 6s infinite alternate ease-in-out;
-        }
-
-        @keyframes boxFloatPC {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-10px); }
         }
 
         .donation-title {
@@ -407,9 +373,8 @@
             padding: 30px;
             border: 2px solid rgba(0, 243, 255, 0.4);
             border-radius: 20px;
-            background: linear-gradient(145deg, rgba(0, 31, 63, 0.6), rgba(0, 10, 26, 0.6));
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 
-                        inset 0 0 20px rgba(0, 243, 255, 0.1);
+            background: rgba(0, 31, 63, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
             font-size: 0.95rem;
             line-height: 1.7;
             color: #e6f7ff;
@@ -422,7 +387,7 @@
             font-weight: bold;
         }
 
-        /* Footer y contacto para PC */
+        /* Footer y contacto */
         .footer-container {
             width: 100%;
             max-width: 800px;
@@ -469,7 +434,7 @@
         }
 
         .contact-button {
-            background: linear-gradient(145deg, #001933, #000a1a);
+            background: rgba(0, 25, 51, 0.9);
             color: var(--celeste-neon);
             border: 2px solid var(--celeste-neon);
             padding: 14px 30px;
@@ -493,7 +458,7 @@
         .email-display {
             display: none;
             padding: 15px 25px;
-            background: linear-gradient(145deg, rgba(0, 31, 63, 0.8), rgba(0, 10, 26, 0.8));
+            background: rgba(0, 31, 63, 0.8);
             border: 2px solid var(--celeste-neon);
             border-radius: 10px;
             font-family: 'Courier New', monospace;
@@ -518,19 +483,25 @@
             text-shadow: 0 0 15px rgba(0, 243, 255, 0.8);
         }
 
-        /* Adornos para PC */
+        /* Decoraciones - ANIMACIÓN FIJA */
         .decoration {
             position: absolute;
             color: var(--celeste-neon);
             font-size: 24px;
             opacity: 0;
             pointer-events: none;
+            /* ANIMACIÓN DIRECTA - SIN MEDIA QUERIES */
+            animation: floatUp 3s linear infinite;
             z-index: 1;
             filter: drop-shadow(0 0 8px var(--celeste-neon));
+            /* Forzar aceleración GPU */
+            transform: translateZ(0);
+            backface-visibility: hidden;
             will-change: transform, opacity;
         }
 
-        @keyframes floatPC {
+        /* DEFINICIÓN DE ANIMACIÓN DE DECORACIONES */
+        @keyframes floatUp {
             0% { 
                 transform: translateY(0) scale(0.8); 
                 opacity: 0; 
@@ -540,9 +511,14 @@
                 transform: scale(1.1); 
             }
             100% { 
-                transform: translateY(-350px) scale(1.2); 
+                transform: translateY(-400px) scale(1.2); 
                 opacity: 0; 
             }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Indicador de error */
@@ -560,12 +536,7 @@
             border: 1px solid rgba(255, 107, 107, 0.3);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsive optimizado para ambos */
+        /* Responsive simple */
         @media (max-width: 768px) {
             body {
                 padding: 15px;
@@ -587,10 +558,6 @@
                 width: 40px;
                 height: 40px;
                 font-size: 1rem;
-            }
-            
-            .btn-control:hover, .btn-nav:hover {
-                transform: none;
             }
             
             .turntable, .tv-vintage {
@@ -615,7 +582,6 @@
             .donation-box {
                 width: 280px;
                 padding: 20px;
-                animation: none;
             }
             
             .qr-img {
@@ -629,23 +595,13 @@
                 font-size: 0.9rem;
             }
             
-            /* Animaciones específicas para móvil */
-            .vinyl {
-                animation: spinMobile 4s linear infinite;
-                animation-play-state: paused;
-            }
-            
-            @keyframes spinMobile {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-            }
-            
+            /* Decoraciones más pequeñas en móvil */
             .decoration {
-                animation: floatMobile 2.5s linear infinite;
                 font-size: 18px;
+                animation: floatUpMobile 2.5s linear infinite;
             }
             
-            @keyframes floatMobile {
+            @keyframes floatUpMobile {
                 0% { 
                     transform: translateY(0) scale(0.8); 
                     opacity: 0; 
@@ -700,15 +656,6 @@
                 width: 70px;
                 height: 70px;
                 font-size: 0.6rem;
-            }
-        }
-
-        /* Forzar aceleración por hardware para PC */
-        @media (min-width: 769px) {
-            .vinyl, .decoration, .btn-control, .btn-nav {
-                transform: translateZ(0);
-                backface-visibility: hidden;
-                perspective: 1000;
             }
         }
     </style>
@@ -939,26 +886,21 @@
             btn.innerText = "SINTONIZAR EMISORA";
             player.setShuffle(true);
             
-            // Configurar animaciones según dispositivo
-            setupAnimations();
+            // Inicializar animaciones
+            initAnimations();
         }
 
         // ======================
-        // CONFIGURACIÓN ANIMACIONES PC/MÓVIL
+        // INICIALIZAR ANIMACIONES
         // ======================
-        function setupAnimations() {
+        function initAnimations() {
             const disc = document.getElementById('disc');
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // Asegurar que la animación está definida
+            disc.style.animation = 'spinVinyl 4s linear infinite';
+            disc.style.animationPlayState = 'paused';
             
-            if (!prefersReducedMotion) {
-                // Aplicar animación correcta según dispositivo
-                if (isDesktop) {
-                    disc.style.animationName = 'spinPC';
-                } else {
-                    disc.style.animationName = 'spinMobile';
-                }
-                disc.style.animationPlayState = 'paused';
-            }
+            // Forzar un reflow para activar la animación
+            void disc.offsetWidth;
         }
 
         function onPlayerStateChange(event) {
@@ -1061,7 +1003,7 @@
                 tvStage.style.display = 'none';
                 radioBtn.style.background = 'var(--celeste-neon)';
                 radioBtn.style.color = '#000a1a';
-                videoBtn.style.background = 'rgba(0, 25, 51, 0.8)';
+                videoBtn.style.background = 'rgba(0, 25, 51, 0.9)';
                 videoBtn.style.color = 'var(--celeste-neon)';
                 
                 if (wasPlaying) {
@@ -1076,7 +1018,7 @@
                 tvStage.style.display = 'block';
                 videoBtn.style.background = 'var(--celeste-neon)';
                 videoBtn.style.color = '#000a1a';
-                radioBtn.style.background = 'rgba(0, 25, 51, 0.8)';
+                radioBtn.style.background = 'rgba(0, 25, 51, 0.9)';
                 radioBtn.style.color = 'var(--celeste-neon)';
                 
                 disc.style.animationPlayState = 'paused';
@@ -1127,34 +1069,33 @@
         }
 
         // ======================
-        // DECORACIONES OPTIMIZADAS PARA PC
+        // DECORACIONES SIMPLIFICADAS
         // ======================
         function spawnDecorations() {
             if (!playing) return;
             
             const decorationCount = document.querySelectorAll('.decoration').length;
-            const maxDecorations = isDesktop ? 5 : 3;
+            const maxDecorations = isDesktop ? 8 : 4;
             
             if (decorationCount >= maxDecorations) return;
             
             const deco = document.createElement('div');
             deco.className = 'decoration';
-            const icons = ['♪', '♫', '✨', '🎵', '🎶'];
+            const icons = ['♪', '♫', '✨', '🎵', '🎶', '💎', '🔷'];
             deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             deco.style.left = Math.random() * 100 + 'vw';
             deco.style.bottom = '20px';
             
+            // Tamaño dinámico según dispositivo
             if (isDesktop) {
-                deco.style.fontSize = (20 + Math.random() * 15) + 'px';
-                deco.style.animation = 'floatPC 3s linear infinite';
+                deco.style.fontSize = (20 + Math.random() * 20) + 'px';
             } else {
-                deco.style.fontSize = (14 + Math.random() * 8) + 'px';
-                deco.style.animation = 'floatMobile 2.5s linear infinite';
+                deco.style.fontSize = (14 + Math.random() * 10) + 'px';
             }
             
             document.body.appendChild(deco);
             
-            // Remover después de la animación
+            // Remover después de 3 segundos
             setTimeout(() => {
                 if (deco.parentNode) {
                     deco.remove();
@@ -1162,7 +1103,7 @@
             }, 3000);
             
             // Intervalo según dispositivo
-            const interval = isDesktop ? 600 : 900;
+            const interval = isDesktop ? 500 : 800;
             setTimeout(spawnDecorations, interval);
         }
 
@@ -1170,42 +1111,39 @@
         // INICIALIZACIÓN
         // ======================
         window.addEventListener('load', function() {
-            // Detectar si es PC
             isDesktop = window.innerWidth > 768;
             
             setView('radio');
             
-            // Suavizar entrada
-            document.body.style.opacity = '0';
-            requestAnimationFrame(() => {
-                document.body.style.transition = 'opacity 0.5s';
-                document.body.style.opacity = '1';
-            });
+            // Cargar sonidos en interacción
+            document.addEventListener('click', function loadSounds() {
+                ['click-sound', 'vinyl-start', 'vinyl-stop'].forEach(id => {
+                    const sound = document.getElementById(id);
+                    if (sound) sound.load();
+                });
+                document.removeEventListener('click', loadSounds);
+            }, { once: true });
             
-            // Verificar preferencias de animación
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-            if (prefersReducedMotion.matches) {
-                console.log("Usuario prefiere movimiento reducido - animaciones limitadas");
+            // Forzar animaciones en PC
+            if (isDesktop) {
+                setTimeout(() => {
+                    const disc = document.getElementById('disc');
+                    if (disc) {
+                        // Reiniciar animación
+                        disc.style.animation = 'none';
+                        setTimeout(() => {
+                            disc.style.animation = 'spinVinyl 4s linear infinite';
+                            disc.style.animationPlayState = 'paused';
+                        }, 10);
+                    }
+                }, 100);
             }
         });
 
-        // Actualizar detección de dispositivo al cambiar tamaño
+        // Actualizar detección de dispositivo
         window.addEventListener('resize', function() {
             isDesktop = window.innerWidth > 768;
         });
-
-        // Forzar repaint para animaciones en PC
-        if (window.innerWidth > 768) {
-            window.requestAnimationFrame(() => {
-                const disc = document.getElementById('disc');
-                if (disc) {
-                    disc.style.display = 'none';
-                    disc.offsetHeight; // Trigger reflow
-                    disc.style.display = 'block';
-                }
-            });
-        }
     </script>
 </body>
 </html>
-
