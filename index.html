@@ -10,7 +10,7 @@
         body { background: radial-gradient(circle at top, #1a2a3a 0%, var(--bg) 80%); color: white; font-family: 'Montserrat', sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; transition: 1s; overflow-x: hidden; }
         body.amber-mode { background: radial-gradient(circle at top, #2b1d0e 0%, #120a05 80%); }
 
-        .main-header { text-align: center; margin-bottom: 10px; }
+        .main-header { text-align: center; margin-bottom: 10px; z-index: 10; }
         .main-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 6vw, 3.5rem); font-style: italic; color: var(--gold); margin: 0; line-height: 1; text-shadow: var(--neon); }
         .conductor { font-family: 'Alex Brush', cursive; font-size: 2rem; color: #eee; margin: 5px 0; }
         .sub-header { letter-spacing: 4px; color: var(--dark-gold); font-size: 0.8rem; font-weight: bold; text-transform: uppercase; }
@@ -36,6 +36,10 @@
 
         #donation-qr { display: none; margin-top: 15px; text-align: center; }
         .qr-img { width: 150px; border: 3px solid var(--gold); border-radius: 10px; }
+
+        .contact-box { width: 100%; max-width: 400px; margin-top: 30px; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid var(--dark-gold); text-align: center; }
+        .contact-box input, .contact-box textarea { width: 100%; margin-bottom: 10px; background: #000; color: #fff; border: 1px solid #444; padding: 10px; border-radius: 5px; box-sizing: border-box; }
+        .btn-send { width: 100%; background: var(--gold); border: none; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 5px; }
 
         .decoration { position: absolute; color: var(--gold); font-size: 24px; opacity: 0; pointer-events: none; animation: float 4s linear infinite; z-index: 1; }
         @keyframes float { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 0.8; } 100% { transform: translateY(-350px) scale(1.2); opacity: 0; } }
@@ -67,7 +71,7 @@
         <div id="song-title"></div>
     </div>
 
-    <button class="btn-main" onclick="togglePlayback()" id="play-btn">ESPERANDO SEÑAL...</button>
+    <button class="btn-main" onclick="togglePlayback()" id="play-btn">CONECTANDO...</button>
 
     <div style="margin-top: 30px; text-align: center;">
         <p style="color:var(--gold); font-size: 0.8rem; margin-bottom: 10px;">Ayuda a mantener este sitio homenaje</p>
@@ -79,21 +83,29 @@
 
     <p class="homenaje-text">Este sitio esta dedicado respetuosamente al excelente programa de radio "Buenas Noches Sintonia" creado y conducido por el gran comunicador Gonzalo Gorriti (Hoy un eximio analista/comentarista deportivo) que se emitia todos los dias de 22 a 24 a traves de la recordada FM 90 de radio Altiplano, en La Paz Bolivia. El objetivo principal es que un oyente de entonces que este ahora en cualquier lugar del mundo, recuerde como era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, como era terminar el dia, disfrutando hermosas canciones mientras uno se alistaba para un reparador descanso.</p>
 
-    <!-- FORMULARIO DE CONTACTO DIRECTO -->
-    <div style="width: 100%; max-width: 400px; margin-top: 30px; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid var(--dark-gold);">
+    <div class="contact-box">
         <p style="color:var(--gold); font-size: 0.8rem; margin-top:0;">¿Recuerdas canciones? Escríbenos:</p>
         <form action="https://formspree.io" method="POST">
-            <input type="text" name="name" placeholder="Tu Nombre" style="width:100%; margin-bottom:10px; background:#000; color:#fff; border:1px solid #444; padding:8px;" required>
-            <textarea name="message" placeholder="Tus sugerencias..." style="width:100%; margin-bottom:10px; background:#000; color:#fff; border:1px solid #444; padding:8px;" required></textarea>
-            <button type="submit" style="width:100%; background:var(--gold); border:none; padding:10px; font-weight:bold; cursor:pointer;">ENVIAR</button>
+            <input type="text" name="name" placeholder="Tu Nombre" required>
+            <textarea name="message" placeholder="Tus sugerencias..." required></textarea>
+            <button type="submit" class="btn-send">ENVIAR</button>
         </form>
     </div>
 
-    <script src="https://www.youtube.com"></script>
-
+    <!-- CARGA DE API DEFINITIVA -->
     <script>
         let player, playing = false;
         const playlistId = 'PLZqJ_GcvNCE5YIWhR6RKb9pyHITolrwMn';
+
+        // CARGA MANUAL PARA EVITAR ERRORES DE ORDEN
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        if (firstScriptTag) {
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        } else {
+            document.body.appendChild(tag);
+        }
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -127,7 +139,7 @@
                 arm.style.transform = 'rotate(-18deg)'; disc.style.animationPlayState = 'running';
                 player.playVideoAt(Math.floor(Math.random() * 20)); 
                 document.body.classList.add('amber-mode');
-                btn.innerText = "APAGAR EMISIÓN"; nextBtn.style.display = 'block';
+                btn.innerText = "APAGAR RADIO"; nextBtn.style.display = 'block';
                 playing = true; spawnDecorations();
             } else {
                 arm.style.transform = 'rotate(25deg)'; disc.style.animationPlayState = 'paused';
@@ -151,7 +163,8 @@
             if (!playing) return;
             const deco = document.createElement('div');
             deco.className = 'decoration';
-            deco.innerHTML = ['♪', '♫', '📻', '✨', '💿', '🎧', '🔊'][Math.floor(Math.random() * 7)];
+            const icons = ['♪', '♫', '📻', '✨', '💿', '🎧', '🔊'];
+            deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             deco.style.left = Math.random() * 100 + 'vw';
             deco.style.bottom = '20px';
             document.body.appendChild(deco);
