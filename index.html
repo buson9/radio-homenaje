@@ -3,6 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ====================== -->
+    <!-- META TAGS PARA FACEBOOK -->
+    <!-- ====================== -->
+    <meta property="og:title" content="Buenas Noches, Sintonía - Homenaje a Gonzalo Gorriti">
+    <meta property="og:description" content="Revive la legendaria radio FM 90 de La Paz, Bolivia. Un homenaje al programa 'Buenas Noches, Sintonía' de Gonzalo Gorriti con la mejor música de los 80s y 90s.">
+    <meta property="og:image" content="https://i.imgur.com/kJtZ8wB.png"> <!-- Cambia esta URL por una imagen real -->
+    <meta property="og:url" content="https://buenasnochessintonia.com"> <!-- Cambia por tu URL real -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Buenas Noches, Sintonía">
+    <meta property="fb:app_id" content="TU_APP_ID"> <!-- Opcional -->
+    
+    <!-- ====================== -->
+    <!-- META TAGS PARA TWITTER -->
+    <!-- ====================== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Buenas Noches, Sintonía - Homenaje a Gonzalo Gorriti">
+    <meta name="twitter:description" content="Revive la legendaria radio FM 90 de La Paz, Bolivia. Un homenaje al programa 'Buenas Noches, Sintonía' de Gonzalo Gorriti.">
+    <meta name="twitter:image" content="https://i.imgur.com/kJtZ8wB.png"> <!-- Cambia esta URL -->
+    
     <title>Buenas Noches, Sintonía - Homenaje</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital@0;1&family=Alex+Brush&display=swap" rel="stylesheet">
     <style>
@@ -69,7 +89,7 @@
             margin-top: 5px;
         }
 
-        /* Controles - Versión liviana */
+        /* Controles */
         .controls-row {
             display: flex;
             gap: 10px;
@@ -159,7 +179,7 @@
             margin: 10px 0;
         }
 
-        /* Tocadiscos - VINILO que GIRA (ESENCIAL) */
+        /* Tocadiscos */
         .turntable {
             width: 280px;
             height: 280px;
@@ -177,16 +197,12 @@
             border-radius: 50%;
             margin: 30px auto;
             position: relative;
-            /* ANIMACIÓN DEL VINILO - MANTENIDA */
             animation: spinVinyl 8s linear infinite;
             animation-play-state: paused;
             border: 3px solid #222;
-            /* Optimizado para móvil */
             transform: translateZ(0);
-            will-change: transform;
         }
 
-        /* Animación SUAVE del vinilo */
         @keyframes spinVinyl {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -423,7 +439,7 @@
             font-weight: bold;
         }
 
-        /* Decoraciones LIGERAS - opcionales en móvil */
+        /* Decoraciones limitadas */
         .decoration {
             position: absolute;
             color: var(--celeste-neon);
@@ -431,14 +447,13 @@
             opacity: 0;
             pointer-events: none;
             z-index: 1;
-            /* Animación simple */
-            animation: floatSimple 4s linear infinite;
+            animation: floatSimple 4s linear forwards;
         }
 
         @keyframes floatSimple {
             0% { transform: translateY(0); opacity: 0; }
-            20% { opacity: 0.5; }
-            100% { transform: translateY(-200px); opacity: 0; }
+            20% { opacity: 0.3; }
+            100% { transform: translateY(-150px); opacity: 0; }
         }
 
         /* Indicador de error */
@@ -491,31 +506,11 @@
                 font-size: 0.75rem;
                 padding: 6px 12px;
             }
-            
-            /* Decoraciones más pequeñas en móvil */
-            .decoration {
-                font-size: 14px;
-                animation-duration: 3s;
-            }
         }
 
-        /* Estilos solo para PC - efectos extras */
         @media (min-width: 769px) {
             body {
                 padding: 20px;
-            }
-            
-            .main-title {
-                text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
-            }
-            
-            .conductor {
-                text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-            }
-            
-            .controls-row {
-                background: rgba(0, 10, 26, 0.5);
-                border: 1px solid rgba(0, 243, 255, 0.2);
             }
             
             .stage-container {
@@ -525,13 +520,11 @@
             .turntable {
                 width: 320px;
                 height: 320px;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.7);
             }
             
             .vinyl {
                 width: 250px;
                 height: 250px;
-                box-shadow: 0 0 20px rgba(255, 51, 51, 0.3);
             }
             
             .label {
@@ -539,38 +532,11 @@
                 height: 80px;
                 font-size: 0.7rem;
             }
-            
-            /* Efectos hover solo en PC */
-            .btn-control:hover, .btn-nav:hover,
-            .share-btn:hover, .contact-button:hover {
-                background: var(--celeste-neon);
-                color: #000a1a;
-                transform: translateY(-2px);
-            }
-            
-            .btn-main:hover {
-                transform: scale(1.05);
-            }
-            
-            /* Más decoraciones en PC */
-            .decoration {
-                font-size: 22px;
-            }
-        }
-
-        /* Animación más lenta para ahorro de batería */
-        @media (prefers-reduced-motion: reduce) {
-            .vinyl {
-                animation-duration: 12s;
-            }
-            .decoration {
-                animation-duration: 6s;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Audio elements - precargados para mejor experiencia -->
+    <!-- Audio elements -->
     <audio id="click-sound" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
     </audio>
@@ -661,50 +627,68 @@
         const maxErrorRetries = 3;
         let wasPlayingBeforeSwitch = false;
         let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        let allowDecorations = true; // Permitir decoraciones por defecto
-
+        let allowDecorations = true;
+        
         // ======================
-        // DETECCIÓN DE RENDIMIENTO INTELIGENTE
+        // CONTADOR PARA LIMPIAR MEMORIA
         // ======================
-        function checkPerformance() {
-            // Detectar si es móvil viejo o lento
-            const isOldMobile = isMobile && (navigator.hardwareConcurrency <= 2 || !navigator.hardwareConcurrency);
-            const isLowEnd = window.innerWidth <= 768 && isOldMobile;
+        let cleanupCounter = 0;
+        const CLEANUP_INTERVAL = 10; // Limpiar cada 10 canciones
+        
+        // ======================
+        // LIMPIAR MEMORIA PERIÓDICAMENTE
+        // ======================
+        function cleanupMemory() {
+            cleanupCounter++;
             
-            // En móviles viejos, desactivar decoraciones
-            allowDecorations = !isLowEnd;
-            
-            console.log(`Móvil: ${isMobile ? 'Sí' : 'No'}`);
-            console.log(`Decoraciones: ${allowDecorations ? 'Activadas' : 'Desactivadas (móvil lento)'}`);
-            
-            // Optimizar YouTube para móvil
-            if (isMobile && player) {
-                setTimeout(() => {
-                    try {
-                        player.setPlaybackQuality('small');
-                    } catch (e) {}
-                }, 1500);
+            if (cleanupCounter >= CLEANUP_INTERVAL) {
+                cleanupCounter = 0;
+                
+                // 1. Limpiar decoraciones viejas
+                const decorations = document.querySelectorAll('.decoration');
+                if (decorations.length > 5) {
+                    for (let i = 0; i < decorations.length - 3; i++) {
+                        decorations[i].remove();
+                    }
+                }
+                
+                // 2. Forzar garbage collection (si es posible)
+                if (window.gc) {
+                    window.gc();
+                }
+                
+                // 3. Limpiar caché de sonidos
+                ['click-sound', 'vinyl-start', 'vinyl-stop'].forEach(id => {
+                    const sound = document.getElementById(id);
+                    if (sound) {
+                        sound.pause();
+                        sound.currentTime = 0;
+                    }
+                });
+                
+                console.log("✅ Memoria limpiada");
             }
         }
 
         // ======================
-        // FUNCIONES DE COMPARTIR
+        // FUNCIONES DE COMPARTIR MEJORADAS
         // ======================
         function shareOnFacebook() {
             const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de Gonzalo Gorriti - FM 90 Radio Altiplano 📻");
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank');
+            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de Gonzalo Gorriti - FM 90 Radio Altiplano 📻\n\nUna recreación perfecta de la legendaria radio boliviana con la mejor música de los 80s y 90s. ¡Totalmente gratis y sin anuncios!");
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank', 'width=600,height=400');
         }
 
         function shareOnWhatsApp() {
-            const text = encodeURIComponent("🎧 *Buenas Noches, Sintonía - Homenaje* 🎧\n\n" + window.location.href);
+            const text = encodeURIComponent("🎧 *Buenas Noches, Sintonía - Homenaje* 🎧\n\nRevive la legendaria radio FM 90 de La Paz, Bolivia con el programa de Gonzalo Gorriti. ¡Música de los 80s y 90s gratis!\n\n" + window.location.href);
             window.open(`https://wa.me/?text=${text}`, '_blank');
         }
 
         function shareOnTwitter() {
-            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de FM 90 Radio Altiplano");
+            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de FM 90 Radio Altiplano - Un homenaje a Gonzalo Gorriti y la mejor música de los 80s/90s 🎧");
             const url = encodeURIComponent(window.location.href);
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+            const hashtags = encodeURIComponent("BuenasNochesSintonia,FM90,GonzaloGorriti,RadioAltiplano,LaPaz,Bolivia,Nostalgia");
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=${hashtags}`, '_blank', 'width=600,height=400');
         }
 
         function copyLink() {
@@ -730,7 +714,7 @@
         }
 
         // ======================
-        // FUNCIONES DE SONIDO (siempre activas)
+        // FUNCIONES DE SONIDO
         // ======================
         function playSoundAndCall(funcName, param = null) {
             playClickSound();
@@ -769,44 +753,64 @@
         }
 
         // ======================
-        // YOUTUBE API
+        // YOUTUBE API CON MANEJO DE ERRORES MEJORADO
         // ======================
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
+        tag.onerror = function() {
+            console.error("Error cargando YouTube API");
+            document.getElementById('error-message').innerText = "Error cargando reproductor. Recarga la página.";
+        };
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '100%',
-                width: '100%',
-                playerVars: {
-                    listType: 'playlist',
-                    list: playlistId,
-                    autoplay: 0,
-                    controls: 0,
-                    disablekb: 1,
-                    modestbranding: 1,
-                    rel: 0,
-                    loop: 1,
-                    playsinline: 1
-                },
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange,
-                    'onError': onPlayerError
-                }
-            });
+            try {
+                player = new YT.Player('player', {
+                    height: '100%',
+                    width: '100%',
+                    playerVars: {
+                        listType: 'playlist',
+                        list: playlistId,
+                        autoplay: 0,
+                        controls: 0,
+                        disablekb: 1,
+                        modestbranding: 1,
+                        rel: 0,
+                        loop: 1,
+                        playsinline: 1
+                    },
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange,
+                        'onError': onPlayerError
+                    }
+                });
+            } catch (error) {
+                console.error("Error inicializando YouTube Player:", error);
+                document.getElementById('play-btn').innerText = "ERROR - RECARGAR";
+            }
         }
 
         function onPlayerReady(event) {
             const btn = document.getElementById('play-btn');
             btn.classList.add('active');
             btn.innerText = "SINTONIZAR EMISORA";
-            player.setShuffle(true);
             
-            // Verificar rendimiento
-            checkPerformance();
+            try {
+                player.setShuffle(true);
+            } catch (e) {
+                console.log("Shuffle no disponible");
+            }
+            
+            // Configurar calidad para móvil
+            if (isMobile && player.setPlaybackQuality) {
+                setTimeout(() => {
+                    try {
+                        player.setPlaybackQuality('small');
+                    } catch (e) {}
+                }, 2000);
+            }
         }
 
         function onPlayerStateChange(event) {
@@ -814,17 +818,32 @@
                 videoErrorCount = 0;
                 document.getElementById('error-message').innerText = "";
                 
+                // Limpiar memoria periódicamente
+                cleanupMemory();
+                
                 if (player && player.getVideoData) {
-                    const videoData = player.getVideoData();
-                    const title = videoData.title.length > 50 ? 
-                        videoData.title.substring(0, 47) + "..." : 
-                        videoData.title;
-                    document.getElementById('song-title').innerText = "🎵 " + title;
+                    try {
+                        const videoData = player.getVideoData();
+                        const title = videoData.title.length > 50 ? 
+                            videoData.title.substring(0, 47) + "..." : 
+                            videoData.title;
+                        document.getElementById('song-title').innerText = "🎵 " + title;
+                    } catch (e) {
+                        document.getElementById('song-title').innerText = "🎵 Reproduciendo...";
+                    }
                 }
             }
             
             if (event.data === YT.PlayerState.ENDED) {
-                setTimeout(() => player.nextVideo(), 500);
+                setTimeout(() => {
+                    try {
+                        if (player && player.nextVideo) {
+                            player.nextVideo();
+                        }
+                    } catch (e) {
+                        console.error("Error al pasar al siguiente video:", e);
+                    }
+                }, 500);
             }
             
             if (event.data === YT.PlayerState.PAUSED) {
@@ -833,131 +852,149 @@
         }
 
         function onPlayerError(event) {
+            console.error("Error YouTube:", event.data);
             videoErrorCount++;
             
             document.getElementById('error-message').innerText = "Error, saltando...";
             
             if (videoErrorCount >= maxErrorRetries) {
-                document.getElementById('error-message').innerText = "Demasiados errores";
+                document.getElementById('error-message').innerText = "Demasiados errores - Deteniendo";
                 togglePlayback();
                 return;
             }
             
-            setTimeout(() => player.nextVideo(), 1000);
+            setTimeout(() => {
+                try {
+                    if (player && player.nextVideo) {
+                        player.nextVideo();
+                    }
+                } catch (e) {
+                    console.error("Error en nextVideo después de error:", e);
+                }
+            }, 1000);
         }
 
         // ======================
-        // FUNCIONES PRINCIPALES - VINILO SIEMPRE GIRA
+        // FUNCIONES PRINCIPALES CON MEJOR MANEJO DE ERRORES
         // ======================
         function togglePlayback() {
-            playClickSound();
-            
-            const arm = document.getElementById('arm');
-            const disc = document.getElementById('disc');
-            const btn = document.getElementById('play-btn');
+            try {
+                playClickSound();
+                
+                const arm = document.getElementById('arm');
+                const disc = document.getElementById('disc');
+                const btn = document.getElementById('play-btn');
 
-            if (!playing) {
-                playVinylStartSound();
-                
-                // VINILO COMIENZA A GIRAR
-                arm.style.transform = 'rotate(-18deg)';
-                disc.style.animationPlayState = 'running';
-                
-                if (player && player.playVideoAt) {
-                    player.playVideoAt(Math.floor(Math.random() * 20));
+                if (!playing) {
+                    playVinylStartSound();
+                    
+                    arm.style.transform = 'rotate(-18deg)';
+                    disc.style.animationPlayState = 'running';
+                    
+                    if (player && player.playVideoAt) {
+                        player.playVideoAt(Math.floor(Math.random() * 20));
+                    }
+                    
+                    document.body.classList.add('bolivar-mode');
+                    btn.innerText = "APAGAR RADIO";
+                    playing = true;
+                    
+                    if (allowDecorations) {
+                        spawnDecorations();
+                    }
+                } else {
+                    playVinylStopSound();
+                    
+                    arm.style.transform = 'rotate(25deg)';
+                    disc.style.animationPlayState = 'paused';
+                    
+                    if (player && player.pauseVideo) {
+                        player.pauseVideo();
+                    }
+                    
+                    document.body.classList.remove('bolivar-mode');
+                    btn.innerText = "SINTONIZAR EMISORA";
+                    document.getElementById('song-title').innerText = "";
+                    document.getElementById('error-message').innerText = "";
+                    playing = false;
+                    videoErrorCount = 0;
+                    
+                    // Limpiar decoraciones al pausar
+                    clearAllDecorations();
                 }
-                
-                document.body.classList.add('bolivar-mode');
-                btn.innerText = "APAGAR RADIO";
-                playing = true;
-                
-                // Decoraciones solo si están permitidas
-                if (allowDecorations) {
-                    spawnDecorations();
-                }
-            } else {
-                playVinylStopSound();
-                
-                // VINILO DEJA DE GIRAR
-                arm.style.transform = 'rotate(25deg)';
-                disc.style.animationPlayState = 'paused';
-                
-                if (player && player.pauseVideo) {
-                    player.pauseVideo();
-                }
-                
-                document.body.classList.remove('bolivar-mode');
-                btn.innerText = "SINTONIZAR EMISORA";
-                document.getElementById('song-title').innerText = "";
-                document.getElementById('error-message').innerText = "";
-                playing = false;
-                videoErrorCount = 0;
+            } catch (error) {
+                console.error("Error en togglePlayback:", error);
+                document.getElementById('error-message').innerText = "Error - Recargar página";
             }
         }
 
         function setView(mode) {
-            const radioStage = document.getElementById('radio-stage');
-            const tvStage = document.getElementById('tv-stage');
-            const radioBtn = document.getElementById('radio-btn');
-            const videoBtn = document.getElementById('video-btn');
-            const disc = document.getElementById('disc');
-            const arm = document.getElementById('arm');
-            
-            if (mode === 'radio') {
-                const wasPlaying = playing;
+            try {
+                const radioStage = document.getElementById('radio-stage');
+                const tvStage = document.getElementById('tv-stage');
+                const radioBtn = document.getElementById('radio-btn');
+                const videoBtn = document.getElementById('video-btn');
+                const disc = document.getElementById('disc');
+                const arm = document.getElementById('arm');
                 
-                radioStage.style.display = 'block';
-                tvStage.style.display = 'none';
-                radioBtn.style.background = 'var(--celeste-neon)';
-                radioBtn.style.color = '#000a1a';
-                videoBtn.style.background = 'rgba(0, 25, 51, 0.9)';
-                videoBtn.style.color = 'var(--celeste-neon)';
-                
-                if (wasPlaying) {
-                    // VINILO VUELVE A GIRAR
-                    disc.style.animationPlayState = 'running';
-                    arm.style.transform = 'rotate(-18deg)';
+                if (mode === 'radio') {
+                    const wasPlaying = playing;
+                    
+                    radioStage.style.display = 'block';
+                    tvStage.style.display = 'none';
+                    radioBtn.style.background = 'var(--celeste-neon)';
+                    radioBtn.style.color = '#000a1a';
+                    videoBtn.style.background = 'rgba(0, 25, 51, 0.9)';
+                    videoBtn.style.color = 'var(--celeste-neon)';
+                    
+                    if (wasPlaying) {
+                        disc.style.animationPlayState = 'running';
+                        arm.style.transform = 'rotate(-18deg)';
+                    }
+                    
+                } else {
+                    wasPlayingBeforeSwitch = playing;
+                    
+                    radioStage.style.display = 'none';
+                    tvStage.style.display = 'block';
+                    videoBtn.style.background = 'var(--celeste-neon)';
+                    videoBtn.style.color = '#000a1a';
+                    radioBtn.style.background = 'rgba(0, 25, 51, 0.9)';
+                    radioBtn.style.color = 'var(--celeste-neon)';
+                    
+                    disc.style.animationPlayState = 'paused';
+                    arm.style.transform = 'rotate(25deg)';
                 }
-                
-            } else {
-                wasPlayingBeforeSwitch = playing;
-                
-                radioStage.style.display = 'none';
-                tvStage.style.display = 'block';
-                videoBtn.style.background = 'var(--celeste-neon)';
-                videoBtn.style.color = '#000a1a';
-                radioBtn.style.background = 'rgba(0, 25, 51, 0.9)';
-                radioBtn.style.color = 'var(--celeste-neon)';
-                
-                // VINILO SE PAUSA (pero la animación sigue definida)
-                disc.style.animationPlayState = 'paused';
-                arm.style.transform = 'rotate(25deg)';
+            } catch (error) {
+                console.error("Error en setView:", error);
             }
         }
 
         function nextVideo() {
-            if (!player || !player.nextVideo) return;
-            
-            videoErrorCount = 0;
-            document.getElementById('error-message').innerText = "";
-            
             try {
+                if (!player || !player.nextVideo) return;
+                
+                videoErrorCount = 0;
+                document.getElementById('error-message').innerText = "";
+                
                 player.nextVideo();
             } catch (error) {
-                document.getElementById('error-message').innerText = "Error";
+                console.error("Error en nextVideo:", error);
+                document.getElementById('error-message').innerText = "Error al cambiar";
             }
         }
 
         function previousVideo() {
-            if (!player || !player.previousVideo) return;
-            
-            videoErrorCount = 0;
-            document.getElementById('error-message').innerText = "";
-            
             try {
+                if (!player || !player.previousVideo) return;
+                
+                videoErrorCount = 0;
+                document.getElementById('error-message').innerText = "";
+                
                 player.previousVideo();
             } catch (error) {
-                document.getElementById('error-message').innerText = "Error";
+                console.error("Error en previousVideo:", error);
+                document.getElementById('error-message').innerText = "Error al cambiar";
             }
         }
 
@@ -975,64 +1012,84 @@
         }
 
         // ======================
-        // DECORACIONES LIGERAS - CONTROLADAS
+        // DECORACIONES CON MEJOR GESTIÓN DE MEMORIA
         // ======================
+        let decorationCount = 0;
+        const MAX_DECORATIONS = 3;
+        
         function spawnDecorations() {
-            if (!playing || !allowDecorations) return;
+            if (!playing || !allowDecorations || decorationCount >= MAX_DECORATIONS) return;
             
-            // Cantidad controlada según dispositivo
-            const maxDecorations = isMobile ? 2 : 4;
-            const currentDecorations = document.querySelectorAll('.decoration').length;
-            
-            if (currentDecorations >= maxDecorations) {
-                // Si hay muchas, remover una vieja
-                const oldest = document.querySelector('.decoration');
-                if (oldest) oldest.remove();
-            }
-            
-            const deco = document.createElement('div');
-            deco.className = 'decoration';
-            const icons = ['♪', '♫'];
-            deco.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-            deco.style.left = Math.random() * 100 + 'vw';
-            deco.style.bottom = '20px';
-            deco.style.opacity = '0.4'; // Muy transparente para móvil
-            document.body.appendChild(deco);
-            
-            // Remover después
-            setTimeout(() => {
-                if (deco.parentNode) {
-                    deco.style.opacity = '0';
-                    setTimeout(() => deco.remove(), 300);
+            try {
+                const deco = document.createElement('div');
+                deco.className = 'decoration';
+                const icons = ['♪'];
+                deco.innerHTML = icons[0];
+                deco.style.left = Math.random() * 100 + 'vw';
+                deco.style.bottom = '20px';
+                deco.style.opacity = '0.2';
+                deco.style.fontSize = '16px';
+                
+                document.body.appendChild(deco);
+                decorationCount++;
+                
+                // Remover automáticamente después de la animación
+                setTimeout(() => {
+                    if (deco.parentNode) {
+                        deco.remove();
+                        decorationCount--;
+                    }
+                }, 4000);
+                
+                // Intervalo largo para reducir carga
+                if (playing && decorationCount < MAX_DECORATIONS) {
+                    setTimeout(spawnDecorations, 2000);
                 }
-            }, 4000);
-            
-            // Intervalo largo para móvil
-            const interval = isMobile ? 1500 : 800;
-            setTimeout(spawnDecorations, interval);
+            } catch (error) {
+                console.error("Error creando decoración:", error);
+            }
+        }
+        
+        function clearAllDecorations() {
+            const decorations = document.querySelectorAll('.decoration');
+            decorations.forEach(deco => deco.remove());
+            decorationCount = 0;
         }
 
         // ======================
-        // INICIALIZACIÓN
+        // INICIALIZACIÓN SEGURA
         // ======================
         window.addEventListener('load', function() {
-            setView('radio');
-            
-            // Suavizar entrada
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-            
-            // Asegurar que el vinilo tiene su animación
-            const disc = document.getElementById('disc');
-            if (disc) {
-                disc.style.animation = 'spinVinyl 8s linear infinite';
-                disc.style.animationPlayState = 'paused';
+            try {
+                setView('radio');
+                
+                // Detectar si es móvil lento
+                const isOldMobile = isMobile && (navigator.hardwareConcurrency <= 2 || !navigator.hardwareConcurrency);
+                allowDecorations = !isOldMobile;
+                
+                // Monitor de memoria (para debugging)
+                if (performance && performance.memory) {
+                    setInterval(() => {
+                        const mem = performance.memory;
+                        console.log(`Memoria: ${Math.round(mem.usedJSHeapSize / 1024 / 1024)}MB / ${Math.round(mem.totalJSHeapSize / 1024 / 1024)}MB`);
+                    }, 30000);
+                }
+                
+                // Limpiar caché periódicamente
+                setInterval(cleanupMemory, 60000); // Cada minuto
+                
+            } catch (error) {
+                console.error("Error en inicialización:", error);
             }
         });
 
-        // Redetectar al cambiar tamaño
-        window.addEventListener('resize', checkPerformance);
+        // Limpiar al cerrar pestaña
+        window.addEventListener('beforeunload', function() {
+            if (player && player.destroy) {
+                player.destroy();
+            }
+            clearAllDecorations();
+        });
     </script>
 </body>
 </html>
