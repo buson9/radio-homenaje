@@ -22,7 +22,6 @@
     <title>Buenas Noches, Sintonía - Homenaje</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital@0;1&family=Alex+Brush&display=swap" rel="stylesheet">
     <style>
-        /* Tu CSS existente se mantiene IGUAL */
         :root {
             --celeste-neon: #00f3ff;
             --celeste: #00bcd4;
@@ -119,7 +118,6 @@
             transform: scale(0.95);
         }
 
-        /* Resto de tu CSS se mantiene IGUAL hasta el final */
         .controls-row {
             display: flex;
             gap: 10px;
@@ -331,6 +329,9 @@
             transform: scale(0.98);
         }
 
+        /* ====================== */
+        /* NUEVO: Botón coLABORA y Modal QR */
+        /* ====================== */
         .donation-box {
             margin-top: 30px;
             text-align: center;
@@ -358,6 +359,94 @@
             display: block;
             border-radius: 10px;
             border: 2px solid var(--celeste-neon);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .qr-img:hover {
+            transform: scale(1.02);
+        }
+
+        /* NUEVO: Botón coLABORA */
+        .collaborate-btn {
+            background: var(--dorado);
+            color: #000a1a;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px auto 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .collaborate-btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        }
+
+        .collaborate-btn span {
+            font-size: 1.3rem;
+        }
+
+        /* NUEVO: Modal para QR grande */
+        .qr-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            backdrop-filter: blur(5px);
+        }
+
+        .qr-modal.active {
+            display: flex;
+        }
+
+        .qr-modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 90%;
+            border: 3px solid var(--celeste-neon);
+        }
+
+        .qr-modal img {
+            width: 570px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .qr-modal-close {
+            margin-top: 20px;
+            background: var(--celeste-neon);
+            color: #000a1a;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .qr-modal-close:active {
+            transform: scale(0.95);
         }
 
         .donation-footer {
@@ -528,6 +617,10 @@
                 font-size: 0.75rem;
                 padding: 6px 12px;
             }
+            
+            .qr-modal img {
+                width: 100%;
+            }
         }
 
         @media (min-width: 769px) {
@@ -558,7 +651,7 @@
     </style>
 </head>
 <body>
-    <!-- Audio elements (sin cambios) -->
+    <!-- Audio elements -->
     <audio id="click-sound" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
     </audio>
@@ -577,14 +670,14 @@
         <div class="sub-header" data-i18n="station">FM 90 RADIO ALTIPLANO</div>
     </header>
 
-    <!-- NUEVO: Selector de idioma -->
+    <!-- Selector de idioma -->
     <div class="language-selector">
         <button class="lang-btn active" onclick="changeLanguage('es')">🇪🇸 ES</button>
         <button class="lang-btn" onclick="changeLanguage('en')">🇬🇧 EN</button>
         <button class="lang-btn" onclick="changeLanguage('pt')">🇧🇷 PT</button>
     </div>
 
-    <!-- Botones de Compartir (se actualizarán dinámicamente) -->
+    <!-- Botones de Compartir -->
     <div class="share-buttons">
         <button class="share-btn" onclick="shareOnFacebook()">📱 <span data-i18n="facebook">Facebook</span></button>
         <button class="share-btn" onclick="shareOnWhatsApp()">💬 <span data-i18n="whatsapp">WhatsApp</span></button>
@@ -617,10 +710,29 @@
 
     <button class="btn-main" onclick="togglePlayback()" id="play-btn" data-i18n="waiting">ESPERANDO SEÑAL...</button>
 
+    <!-- ====================== -->
+    <!-- NUEVO: Sección de donación con botón coLABORA -->
+    <!-- ====================== -->
     <div class="donation-box">
         <div class="donation-title" data-i18n="donationTitle">Este sitio no tiene fines de lucro pero si quieres apoyar a su mantenimiento:</div>
-        <img src="takenos.png" alt="Donation QR" class="qr-img">
+        
+        <!-- NUEVO: Botón coLABORA -->
+        <button class="collaborate-btn" onclick="showQRModal()">
+            <span>🤝</span> coLABORA <span>❤️</span>
+        </button>
+        
+        <!-- QR pequeño (clic para abrir modal) -->
+        <img src="takenos.png" alt="Donation QR" class="qr-img" onclick="showQRModal()">
+        
         <div class="donation-footer" data-i18n="donationFooter">Escanea para realizar tu aporte voluntario</div>
+    </div>
+
+    <!-- NUEVO: Modal para QR grande -->
+    <div id="qrModal" class="qr-modal" onclick="closeQRModal(event)">
+        <div class="qr-modal-content">
+            <img src="takenos.png" alt="QR código para donaciones" width="570" height="542">
+            <button class="qr-modal-close" onclick="closeQRModal()">CERRAR</button>
+        </div>
     </div>
 
     <div class="dedication-message" data-i18n="dedication">
@@ -746,24 +858,21 @@
 
         let currentLanguage = 'es';
 
-        // Detectar idioma del navegador al cargar
         function detectBrowserLanguage() {
             const browserLang = navigator.language || navigator.userLanguage;
-            const langCode = browserLang.split('-')[0]; // 'es-ES' -> 'es'
+            const langCode = browserLang.split('-')[0];
             
             if (translations[langCode]) {
                 return langCode;
             }
-            return 'es'; // Default a español
+            return 'es';
         }
 
-        // Cambiar idioma
         function changeLanguage(lang) {
             if (!translations[lang]) return;
             
             currentLanguage = lang;
             
-            // Actualizar clase activa en botones
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.textContent.includes(lang.toUpperCase())) {
@@ -771,7 +880,6 @@
                 }
             });
             
-            // Actualizar todos los elementos con data-i18n
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang][key]) {
@@ -783,17 +891,13 @@
                 }
             });
             
-            // Actualizar elementos específicos que no tienen data-i18n
             updateDynamicTexts();
             
-            // Guardar preferencia
             localStorage.setItem('preferredLanguage', lang);
             
-            // Actualizar meta tags para SEO
             updateMetaTags(lang);
         }
 
-        // Actualizar textos dinámicos (botón play, título de canción)
         function updateDynamicTexts() {
             const playBtn = document.getElementById('play-btn');
             if (playBtn) {
@@ -804,17 +908,12 @@
                 }
             }
             
-            // Si hay una canción reproduciéndose, actualizar el prefijo
             const songTitle = document.getElementById('song-title');
             if (songTitle.innerText && !songTitle.innerText.includes('⏸️')) {
-                const currentText = songTitle.innerText.replace(/^[^🎵⏸️]*/, '');
-                if (currentText && !currentText.includes(translations[currentLanguage].paused)) {
-                    // Mantener el título de la canción sin traducir (los títulos de YouTube no se traducen)
-                }
+                // Mantener título de canción sin traducir
             }
         }
 
-        // Actualizar meta tags para SEO multiidioma
         function updateMetaTags(lang) {
             const descriptions = {
                 es: "Revive la legendaria radio FM 90 de La Paz, Bolivia. Un homenaje al programa 'Buenas Noches, Sintonía' de Gonzalo Gorriti con la mejor música de los 80s y 90s.",
@@ -826,18 +925,15 @@
             document.querySelector('meta[name="twitter:description"]').setAttribute('content', descriptions[lang]);
             document.querySelector('meta[name="description"]')?.setAttribute('content', descriptions[lang]);
             
-            // Actualizar html lang
             document.documentElement.lang = lang;
         }
 
-        // Inicializar idioma
         function initLanguage() {
             const savedLang = localStorage.getItem('preferredLanguage');
             const detectedLang = detectBrowserLanguage();
             
             currentLanguage = savedLang || detectedLang;
             
-            // Asegurar que el idioma existe
             if (!translations[currentLanguage]) {
                 currentLanguage = 'es';
             }
@@ -846,7 +942,28 @@
         }
 
         // ======================
-        // TU CÓDIGO EXISTENTE (CON PEQUEÑAS MODIFICACIONES)
+        // NUEVA: Función para mostrar QR modal
+        // ======================
+        function showQRModal() {
+            document.getElementById('qrModal').classList.add('active');
+            // Opcional: reproducir sonido de clic si existe
+            if (typeof playClickSound === 'function') {
+                playClickSound();
+            }
+        }
+
+        function closeQRModal(event) {
+            // Si el clic fue en el fondo del modal o en el botón cerrar
+            if (!event || event.target.classList.contains('qr-modal') || event.target.classList.contains('qr-modal-close')) {
+                document.getElementById('qrModal').classList.remove('active');
+                if (typeof playClickSound === 'function') {
+                    playClickSound();
+                }
+            }
+        }
+
+        // ======================
+        // TU CÓDIGO EXISTENTE (sin modificaciones)
         // ======================
         let player;
         let playing = false;
@@ -890,7 +1007,6 @@
             }
         }
 
-        // Funciones de compartir (usando idioma actual)
         function shareOnFacebook() {
             const url = encodeURIComponent(window.location.href);
             const text = encodeURIComponent(translations[currentLanguage].dedication.replace(/<[^>]*>/g, '').substring(0, 200) + '...');
@@ -1272,7 +1388,6 @@
                 
                 setInterval(cleanupMemory, 60000);
                 
-                // Inicializar idioma después de cargar todo
                 initLanguage();
                 
             } catch (error) {
