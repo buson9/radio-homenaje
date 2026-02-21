@@ -5,27 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- ====================== -->
-    <!-- META TAGS PARA FACEBOOK -->
+    <!-- META TAGS MEJORADOS CON i18n -->
     <!-- ====================== -->
     <meta property="og:title" content="Buenas Noches, Sintonía - Homenaje a Gonzalo Gorriti">
     <meta property="og:description" content="Revive la legendaria radio FM 90 de La Paz, Bolivia. Un homenaje al programa 'Buenas Noches, Sintonía' de Gonzalo Gorriti con la mejor música de los 80s y 90s.">
-    <meta property="og:image" content="https://i.imgur.com/kJtZ8wB.png"> <!-- Cambia esta URL por una imagen real -->
-    <meta property="og:url" content="https://buenasnochessintonia.com"> <!-- Cambia por tu URL real -->
+    <meta property="og:image" content="https://i.imgur.com/kJtZ8wB.png">
+    <meta property="og:url" content="https://buenasnochessintonia.com">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Buenas Noches, Sintonía">
-    <meta property="fb:app_id" content="TU_APP_ID"> <!-- Opcional -->
     
-    <!-- ====================== -->
-    <!-- META TAGS PARA TWITTER -->
-    <!-- ====================== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Buenas Noches, Sintonía - Homenaje a Gonzalo Gorriti">
     <meta name="twitter:description" content="Revive la legendaria radio FM 90 de La Paz, Bolivia. Un homenaje al programa 'Buenas Noches, Sintonía' de Gonzalo Gorriti.">
-    <meta name="twitter:image" content="https://i.imgur.com/kJtZ8wB.png"> <!-- Cambia esta URL -->
+    <meta name="twitter:image" content="https://i.imgur.com/kJtZ8wB.png">
     
     <title>Buenas Noches, Sintonía - Homenaje</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:ital@0;1&family=Alex+Brush&display=swap" rel="stylesheet">
     <style>
+        /* Tu CSS existente se mantiene IGUAL */
         :root {
             --celeste-neon: #00f3ff;
             --celeste: #00bcd4;
@@ -89,7 +86,40 @@
             margin-top: 5px;
         }
 
-        /* Controles */
+        /* NUEVO: Selector de idioma */
+        .language-selector {
+            display: flex;
+            gap: 8px;
+            margin: 10px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .lang-btn {
+            background: rgba(0, 25, 51, 0.9);
+            color: var(--celeste);
+            border: 1px solid var(--celeste);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            min-width: 40px;
+        }
+
+        .lang-btn.active {
+            background: var(--celeste-neon);
+            color: #000a1a;
+            border-color: var(--celeste-neon);
+        }
+
+        .lang-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Resto de tu CSS se mantiene IGUAL hasta el final */
         .controls-row {
             display: flex;
             gap: 10px;
@@ -140,7 +170,6 @@
             transform: scale(0.95);
         }
 
-        /* Botones de Compartir */
         .share-buttons {
             display: flex;
             gap: 10px;
@@ -179,7 +208,6 @@
             margin: 10px 0;
         }
 
-        /* Tocadiscos */
         .turntable {
             width: 280px;
             height: 280px;
@@ -303,7 +331,6 @@
             transform: scale(0.98);
         }
 
-        /* Donación */
         .donation-box {
             margin-top: 30px;
             text-align: center;
@@ -340,7 +367,6 @@
             line-height: 1.4;
         }
 
-        /* Mensaje de dedicación */
         .dedication-message {
             max-width: 600px;
             margin: 30px 15px 20px;
@@ -358,7 +384,6 @@
             color: var(--dorado);
         }
 
-        /* Footer y contacto */
         .footer-container {
             width: 100%;
             max-width: 600px;
@@ -439,7 +464,6 @@
             font-weight: bold;
         }
 
-        /* Decoraciones limitadas */
         .decoration {
             position: absolute;
             color: var(--celeste-neon);
@@ -456,7 +480,6 @@
             100% { transform: translateY(-150px); opacity: 0; }
         }
 
-        /* Indicador de error */
         .error-message {
             color: #ff6b6b;
             font-size: 0.75rem;
@@ -470,7 +493,6 @@
             border: 1px solid rgba(255, 107, 107, 0.2);
         }
 
-        /* Responsive */
         @media (max-width: 480px) {
             .controls-row {
                 gap: 8px;
@@ -536,7 +558,7 @@
     </style>
 </head>
 <body>
-    <!-- Audio elements -->
+    <!-- Audio elements (sin cambios) -->
     <audio id="click-sound" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
     </audio>
@@ -550,24 +572,31 @@
     </audio>
 
     <header class="main-header">
-        <h1 class="main-title">Buenas Noches, Sintonía</h1>
-        <div class="conductor">de Gonzalo Gorriti</div>
-        <div class="sub-header">FM 90 RADIO ALTIPLANO</div>
+        <h1 class="main-title" data-i18n="title">Buenas Noches, Sintonía</h1>
+        <div class="conductor" data-i18n="conductor">de Gonzalo Gorriti</div>
+        <div class="sub-header" data-i18n="station">FM 90 RADIO ALTIPLANO</div>
     </header>
 
-    <!-- Botones de Compartir -->
+    <!-- NUEVO: Selector de idioma -->
+    <div class="language-selector">
+        <button class="lang-btn active" onclick="changeLanguage('es')">🇪🇸 ES</button>
+        <button class="lang-btn" onclick="changeLanguage('en')">🇬🇧 EN</button>
+        <button class="lang-btn" onclick="changeLanguage('pt')">🇧🇷 PT</button>
+    </div>
+
+    <!-- Botones de Compartir (se actualizarán dinámicamente) -->
     <div class="share-buttons">
-        <button class="share-btn" onclick="shareOnFacebook()">📱 Facebook</button>
-        <button class="share-btn" onclick="shareOnWhatsApp()">💬 WhatsApp</button>
-        <button class="share-btn" onclick="shareOnTwitter()">🐦 Twitter</button>
-        <button class="share-btn" onclick="copyLink()">📋 Copiar Enlace</button>
+        <button class="share-btn" onclick="shareOnFacebook()">📱 <span data-i18n="facebook">Facebook</span></button>
+        <button class="share-btn" onclick="shareOnWhatsApp()">💬 <span data-i18n="whatsapp">WhatsApp</span></button>
+        <button class="share-btn" onclick="shareOnTwitter()">🐦 <span data-i18n="twitter">Twitter</span></button>
+        <button class="share-btn" onclick="copyLink()">📋 <span data-i18n="copyLink">Copiar Enlace</span></button>
     </div>
 
     <div class="controls-row">
-        <button class="btn-nav" onclick="playSoundAndCall('previousVideo')" id="prev-btn" title="Video anterior">◀</button>
-        <button class="btn-control" onclick="playSoundAndCall(setView, 'radio')" id="radio-btn">RADIO</button>
-        <button class="btn-control" onclick="playSoundAndCall(setView, 'tv')" id="video-btn">VIDEO</button>
-        <button class="btn-nav" onclick="playSoundAndCall('nextVideo')" id="next-btn" title="Video siguiente">▶</button>
+        <button class="btn-nav" onclick="playSoundAndCall('previousVideo')" id="prev-btn" title="Previous video">◀</button>
+        <button class="btn-control" onclick="playSoundAndCall(setView, 'radio')" id="radio-btn"><span data-i18n="radio">RADIO</span></button>
+        <button class="btn-control" onclick="playSoundAndCall(setView, 'tv')" id="video-btn"><span data-i18n="video">VIDEO</span></button>
+        <button class="btn-nav" onclick="playSoundAndCall('nextVideo')" id="next-btn" title="Next video">▶</button>
     </div>
 
     <div class="stage-container">
@@ -586,39 +615,239 @@
         <div id="error-message" class="error-message"></div>
     </div>
 
-    <button class="btn-main" onclick="togglePlayback()" id="play-btn">ESPERANDO SEÑAL...</button>
+    <button class="btn-main" onclick="togglePlayback()" id="play-btn" data-i18n="waiting">ESPERANDO SEÑAL...</button>
 
     <div class="donation-box">
-        <div class="donation-title">Este sitio no tiene fines de lucro pero si quieres apoyar a su mantenimiento:</div>
-        <img src="takenos.png" alt="Donación QR" class="qr-img">
-        <div class="donation-footer">Escanea para realizar tu aporte voluntario</div>
+        <div class="donation-title" data-i18n="donationTitle">Este sitio no tiene fines de lucro pero si quieres apoyar a su mantenimiento:</div>
+        <img src="takenos.png" alt="Donation QR" class="qr-img">
+        <div class="donation-footer" data-i18n="donationFooter">Escanea para realizar tu aporte voluntario</div>
     </div>
 
-    <div class="dedication-message">
+    <div class="dedication-message" data-i18n="dedication">
         Este sitio está dedicado respetuosamente al excelente programa de radio <strong>"Buenas Noches Sintonía"</strong> creado y conducido por el gran comunicador <strong>Gonzalo Gorriti</strong> (hoy un eximio analista/comentarista deportivo) que se emitía todos los días de 22 a 24 a través de la recordada FM 90 de radio Altiplano, en La Paz, Bolivia.<br><br>
         
-        El objetivo principal es que un oyente de entonces que esté ahora en cualquier lugar del mundo, recuerde cómo era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, cómo era terminar el día, sintonizar la FM y disfrutar hermosas canciones antes del reparador descanso.(Gonzalo,si ves esto,comunicate conmigo hermano)
+        El objetivo principal es que un oyente de entonces que esté ahora en cualquier lugar del mundo, recuerde cómo era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, cómo era terminar el día, sintonizar la FM y disfrutar hermosas canciones antes del reparador descanso. (Gonzalo, si ves esto, comunícate conmigo hermano)
     </div>
 
     <div class="footer-container">
-        <div class="creator-info">
+        <div class="creator-info" data-i18n="creator">
             Sitio web creado por <strong>buson9</strong> - Un homenaje hecho con cariño para los oyentes de siempre
         </div>
         
         <div class="contact-section">
-            <div class="contact-question">
+            <div class="contact-question" data-i18n="contactQuestion">
                 ¿Te acordaste de una canción y quieres que la incluya? ¿Sugerencias? ¿Críticas?
             </div>
             
-            <button class="contact-button" onclick="playSoundAndCall('showEmail')">📧 ESCRIBEME</button>
+            <button class="contact-button" onclick="playSoundAndCall('showEmail')">📧 <span data-i18n="writeMe">ESCRIBEME</span></button>
             
             <div id="email-display" class="email-display">
-                Mi correo: <a href="mailto:buson9@gmail.com">buson9@gmail.com</a>
+                <span data-i18n="myEmail">Mi correo</span>: <a href="mailto:buson9@gmail.com">buson9@gmail.com</a>
             </div>
         </div>
     </div>
 
     <script>
+        // ======================
+        // SISTEMA DE IDIOMAS (i18n)
+        // ======================
+        const translations = {
+            es: {
+                title: "Buenas Noches, Sintonía",
+                conductor: "de Gonzalo Gorriti",
+                station: "FM 90 RADIO ALTIPLANO",
+                facebook: "Facebook",
+                whatsapp: "WhatsApp",
+                twitter: "Twitter",
+                copyLink: "Copiar Enlace",
+                radio: "RADIO",
+                video: "VIDEO",
+                waiting: "ESPERANDO SEÑAL...",
+                playing: "APAGAR RADIO",
+                tune: "SINTONIZAR EMISORA",
+                paused: "⏸️ Emisora en pausa",
+                donationTitle: "Este sitio no tiene fines de lucro pero si quieres apoyar a su mantenimiento:",
+                donationFooter: "Escanea para realizar tu aporte voluntario",
+                dedication: `Este sitio está dedicado respetuosamente al excelente programa de radio <strong>"Buenas Noches Sintonía"</strong> creado y conducido por el gran comunicador <strong>Gonzalo Gorriti</strong> (hoy un eximio analista/comentarista deportivo) que se emitía todos los días de 22 a 24 a través de la recordada FM 90 de radio Altiplano, en La Paz, Bolivia.<br><br>
+                El objetivo principal es que un oyente de entonces que esté ahora en cualquier lugar del mundo, recuerde cómo era disfrutar y dejarse sorprender con el exquisito gusto musical de Gonzalo. Y que las nuevas generaciones puedan imaginarse un poco, cómo era terminar el día, sintonizar la FM y disfrutar hermosas canciones antes del reparador descanso. (Gonzalo, si ves esto, comunícate conmigo hermano)`,
+                creator: 'Sitio web creado por <strong>buson9</strong> - Un homenaje hecho con cariño para los oyentes de siempre',
+                contactQuestion: "¿Te acordaste de una canción y quieres que la incluya? ¿Sugerencias? ¿Críticas?",
+                writeMe: "ESCRÍBEME",
+                myEmail: "Mi correo",
+                errorLoading: "Error cargando reproductor. Recarga la página.",
+                errorRetry: "Error, saltando...",
+                tooManyErrors: "Demasiados errores - Deteniendo",
+                copySuccess: "✅ Enlace copiado",
+                nowPlaying: "🎵 Reproduciendo...",
+                nextVideo: "Video siguiente",
+                previousVideo: "Video anterior"
+            },
+            en: {
+                title: "Good Night, Tune In",
+                conductor: "by Gonzalo Gorriti",
+                station: "FM 90 RADIO ALTIPLANO",
+                facebook: "Facebook",
+                whatsapp: "WhatsApp",
+                twitter: "Twitter",
+                copyLink: "Copy Link",
+                radio: "RADIO",
+                video: "VIDEO",
+                waiting: "WAITING FOR SIGNAL...",
+                playing: "TURN OFF RADIO",
+                tune: "TUNE IN STATION",
+                paused: "⏸️ Station paused",
+                donationTitle: "This site is non-profit but if you want to support its maintenance:",
+                donationFooter: "Scan to make your voluntary contribution",
+                dedication: `This site is respectfully dedicated to the excellent radio program <strong>"Good Night, Tune In"</strong> created and hosted by the great communicator <strong>Gonzalo Gorriti</strong> (now a distinguished sports analyst/commentator) that aired daily from 10 PM to 12 AM on the remembered FM 90 of Radio Altiplano, in La Paz, Bolivia.<br><br>
+                The main goal is that a listener from back then, now anywhere in the world, can remember how it was to enjoy and be surprised by Gonzalo's exquisite musical taste. And that new generations can imagine a bit what it was like to end the day, tune in to the FM and enjoy beautiful songs before a restful sleep. (Gonzalo, if you see this, get in touch with me brother)`,
+                creator: 'Website created by <strong>buson9</strong> - A tribute made with love for the listeners of always',
+                contactQuestion: "Did you remember a song and want me to include it? Suggestions? Criticisms?",
+                writeMe: "WRITE ME",
+                myEmail: "My email",
+                errorLoading: "Error loading player. Refresh the page.",
+                errorRetry: "Error, skipping...",
+                tooManyErrors: "Too many errors - Stopping",
+                copySuccess: "✅ Link copied",
+                nowPlaying: "🎵 Now playing...",
+                nextVideo: "Next video",
+                previousVideo: "Previous video"
+            },
+            pt: {
+                title: "Boa Noite, Sintonia",
+                conductor: "por Gonzalo Gorriti",
+                station: "FM 90 RÁDIO ALTIPLANO",
+                facebook: "Facebook",
+                whatsapp: "WhatsApp",
+                twitter: "Twitter",
+                copyLink: "Copiar Link",
+                radio: "RÁDIO",
+                video: "VÍDEO",
+                waiting: "AGUARDANDO SINAL...",
+                playing: "DESLIGAR RÁDIO",
+                tune: "SINTONIZAR ESTAÇÃO",
+                paused: "⏸️ Estação pausada",
+                donationTitle: "Este site não tem fins lucrativos, mas se você quiser apoiar sua manutenção:",
+                donationFooter: "Escaneie para fazer sua contribuição voluntária",
+                dedication: `Este site é dedicado respeitosamente ao excelente programa de rádio <strong>"Boa Noite, Sintonia"</strong> criado e apresentado pelo grande comunicador <strong>Gonzalo Gorriti</strong> (hoje um distinto analista/comentarista esportivo) que ia ao ar diariamente das 22h à meia-noite na lembrada FM 90 da Rádio Altiplano, em La Paz, Bolívia.<br><br>
+                O objetivo principal é que um ouvinte daquela época, agora em qualquer lugar do mundo, possa lembrar como era desfrutar e se surpreender com o requintado gosto musical de Gonzalo. E que as novas gerações possam imaginar um pouco como era terminar o dia, sintonizar a FM e apreciar belas canções antes do descanso reparador. (Gonzalo, se você vir isso, entre em contato comigo irmão)`,
+                creator: 'Site criado por <strong>buson9</strong> - Uma homenagem feita com carinho para os ouvintes de sempre',
+                contactQuestion: "Lembrou de uma música e quer que eu a inclua? Sugestões? Críticas?",
+                writeMe: "ESCREVA-ME",
+                myEmail: "Meu email",
+                errorLoading: "Erro ao carregar o player. Atualize a página.",
+                errorRetry: "Erro, pulando...",
+                tooManyErrors: "Muitos erros - Parando",
+                copySuccess: "✅ Link copiado",
+                nowPlaying: "🎵 Reproduzindo...",
+                nextVideo: "Próximo vídeo",
+                previousVideo: "Vídeo anterior"
+            }
+        };
+
+        let currentLanguage = 'es';
+
+        // Detectar idioma del navegador al cargar
+        function detectBrowserLanguage() {
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.split('-')[0]; // 'es-ES' -> 'es'
+            
+            if (translations[langCode]) {
+                return langCode;
+            }
+            return 'es'; // Default a español
+        }
+
+        // Cambiar idioma
+        function changeLanguage(lang) {
+            if (!translations[lang]) return;
+            
+            currentLanguage = lang;
+            
+            // Actualizar clase activa en botones
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(lang.toUpperCase())) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Actualizar todos los elementos con data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Actualizar elementos específicos que no tienen data-i18n
+            updateDynamicTexts();
+            
+            // Guardar preferencia
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Actualizar meta tags para SEO
+            updateMetaTags(lang);
+        }
+
+        // Actualizar textos dinámicos (botón play, título de canción)
+        function updateDynamicTexts() {
+            const playBtn = document.getElementById('play-btn');
+            if (playBtn) {
+                if (playing) {
+                    playBtn.innerText = translations[currentLanguage].playing;
+                } else {
+                    playBtn.innerText = player ? translations[currentLanguage].tune : translations[currentLanguage].waiting;
+                }
+            }
+            
+            // Si hay una canción reproduciéndose, actualizar el prefijo
+            const songTitle = document.getElementById('song-title');
+            if (songTitle.innerText && !songTitle.innerText.includes('⏸️')) {
+                const currentText = songTitle.innerText.replace(/^[^🎵⏸️]*/, '');
+                if (currentText && !currentText.includes(translations[currentLanguage].paused)) {
+                    // Mantener el título de la canción sin traducir (los títulos de YouTube no se traducen)
+                }
+            }
+        }
+
+        // Actualizar meta tags para SEO multiidioma
+        function updateMetaTags(lang) {
+            const descriptions = {
+                es: "Revive la legendaria radio FM 90 de La Paz, Bolivia. Un homenaje al programa 'Buenas Noches, Sintonía' de Gonzalo Gorriti con la mejor música de los 80s y 90s.",
+                en: "Relive the legendary FM 90 radio from La Paz, Bolivia. A tribute to Gonzalo Gorriti's program 'Good Night, Tune In' with the best music from the 80s and 90s.",
+                pt: "Reviva a lendária rádio FM 90 de La Paz, Bolívia. Uma homenagem ao programa 'Boa Noite, Sintonia' de Gonzalo Gorriti com a melhor música dos anos 80 e 90."
+            };
+            
+            document.querySelector('meta[property="og:description"]').setAttribute('content', descriptions[lang]);
+            document.querySelector('meta[name="twitter:description"]').setAttribute('content', descriptions[lang]);
+            document.querySelector('meta[name="description"]')?.setAttribute('content', descriptions[lang]);
+            
+            // Actualizar html lang
+            document.documentElement.lang = lang;
+        }
+
+        // Inicializar idioma
+        function initLanguage() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const detectedLang = detectBrowserLanguage();
+            
+            currentLanguage = savedLang || detectedLang;
+            
+            // Asegurar que el idioma existe
+            if (!translations[currentLanguage]) {
+                currentLanguage = 'es';
+            }
+            
+            changeLanguage(currentLanguage);
+        }
+
+        // ======================
+        // TU CÓDIGO EXISTENTE (CON PEQUEÑAS MODIFICACIONES)
+        // ======================
         let player;
         let playing = false;
         let currentVideoIndex = 0;
@@ -629,22 +858,15 @@
         let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         let allowDecorations = true;
         
-        // ======================
-        // CONTADOR PARA LIMPIAR MEMORIA
-        // ======================
         let cleanupCounter = 0;
-        const CLEANUP_INTERVAL = 10; // Limpiar cada 10 canciones
-        
-        // ======================
-        // LIMPIAR MEMORIA PERIÓDICAMENTE
-        // ======================
+        const CLEANUP_INTERVAL = 10;
+
         function cleanupMemory() {
             cleanupCounter++;
             
             if (cleanupCounter >= CLEANUP_INTERVAL) {
                 cleanupCounter = 0;
                 
-                // 1. Limpiar decoraciones viejas
                 const decorations = document.querySelectorAll('.decoration');
                 if (decorations.length > 5) {
                     for (let i = 0; i < decorations.length - 3; i++) {
@@ -652,12 +874,10 @@
                     }
                 }
                 
-                // 2. Forzar garbage collection (si es posible)
                 if (window.gc) {
                     window.gc();
                 }
                 
-                // 3. Limpiar caché de sonidos
                 ['click-sound', 'vinyl-start', 'vinyl-stop'].forEach(id => {
                     const sound = document.getElementById(id);
                     if (sound) {
@@ -670,32 +890,29 @@
             }
         }
 
-        // ======================
-        // FUNCIONES DE COMPARTIR MEJORADAS
-        // ======================
+        // Funciones de compartir (usando idioma actual)
         function shareOnFacebook() {
             const url = encodeURIComponent(window.location.href);
-            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de Gonzalo Gorriti - FM 90 Radio Altiplano 📻\n\nUna recreación perfecta de la legendaria radio boliviana con la mejor música de los 80s y 90s. ¡Totalmente gratis y sin anuncios!");
+            const text = encodeURIComponent(translations[currentLanguage].dedication.replace(/<[^>]*>/g, '').substring(0, 200) + '...');
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank', 'width=600,height=400');
         }
 
         function shareOnWhatsApp() {
-            const text = encodeURIComponent("🎧 *Buenas Noches, Sintonía - Homenaje* 🎧\n\nRevive la legendaria radio FM 90 de La Paz, Bolivia con el programa de Gonzalo Gorriti. ¡Música de los 80s y 90s gratis!\n\n" + window.location.href);
+            const text = encodeURIComponent(`🎧 *${translations[currentLanguage].title}* 🎧\n\n${translations[currentLanguage].dedication.replace(/<[^>]*>/g, '').substring(0, 150)}...\n\n${window.location.href}`);
             window.open(`https://wa.me/?text=${text}`, '_blank');
         }
 
         function shareOnTwitter() {
-            const text = encodeURIComponent("🎵 Revive 'Buenas Noches, Sintonía' de FM 90 Radio Altiplano - Un homenaje a Gonzalo Gorriti y la mejor música de los 80s/90s 🎧");
+            const text = encodeURIComponent(`🎵 ${translations[currentLanguage].title} - ${translations[currentLanguage].station} 🎧`);
             const url = encodeURIComponent(window.location.href);
-            const hashtags = encodeURIComponent("BuenasNochesSintonia,FM90,GonzaloGorriti,RadioAltiplano,LaPaz,Bolivia,Nostalgia");
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}&hashtags=${hashtags}`, '_blank', 'width=600,height=400');
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'width=600,height=400');
         }
 
         function copyLink() {
             navigator.clipboard.writeText(window.location.href)
                 .then(() => {
                     const notification = document.createElement('div');
-                    notification.textContent = "✅ Enlace copiado";
+                    notification.textContent = translations[currentLanguage].copySuccess;
                     notification.style.cssText = `
                         position: fixed;
                         top: 20px;
@@ -713,9 +930,6 @@
                 });
         }
 
-        // ======================
-        // FUNCIONES DE SONIDO
-        // ======================
         function playSoundAndCall(funcName, param = null) {
             playClickSound();
             
@@ -752,14 +966,11 @@
             }
         }
 
-        // ======================
-        // YOUTUBE API CON MANEJO DE ERRORES MEJORADO
-        // ======================
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         tag.onerror = function() {
             console.error("Error cargando YouTube API");
-            document.getElementById('error-message').innerText = "Error cargando reproductor. Recarga la página.";
+            document.getElementById('error-message').innerText = translations[currentLanguage].errorLoading;
         };
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -788,14 +999,14 @@
                 });
             } catch (error) {
                 console.error("Error inicializando YouTube Player:", error);
-                document.getElementById('play-btn').innerText = "ERROR - RECARGAR";
+                document.getElementById('play-btn').innerText = "ERROR - RELOAD";
             }
         }
 
         function onPlayerReady(event) {
             const btn = document.getElementById('play-btn');
             btn.classList.add('active');
-            btn.innerText = "SINTONIZAR EMISORA";
+            btn.innerText = translations[currentLanguage].tune;
             
             try {
                 player.setShuffle(true);
@@ -803,7 +1014,6 @@
                 console.log("Shuffle no disponible");
             }
             
-            // Configurar calidad para móvil
             if (isMobile && player.setPlaybackQuality) {
                 setTimeout(() => {
                     try {
@@ -818,7 +1028,6 @@
                 videoErrorCount = 0;
                 document.getElementById('error-message').innerText = "";
                 
-                // Limpiar memoria periódicamente
                 cleanupMemory();
                 
                 if (player && player.getVideoData) {
@@ -829,7 +1038,7 @@
                             videoData.title;
                         document.getElementById('song-title').innerText = "🎵 " + title;
                     } catch (e) {
-                        document.getElementById('song-title').innerText = "🎵 Reproduciendo...";
+                        document.getElementById('song-title').innerText = translations[currentLanguage].nowPlaying;
                     }
                 }
             }
@@ -847,7 +1056,7 @@
             }
             
             if (event.data === YT.PlayerState.PAUSED) {
-                document.getElementById('song-title').innerText = "⏸️ Emisora en pausa";
+                document.getElementById('song-title').innerText = translations[currentLanguage].paused;
             }
         }
 
@@ -855,10 +1064,10 @@
             console.error("Error YouTube:", event.data);
             videoErrorCount++;
             
-            document.getElementById('error-message').innerText = "Error, saltando...";
+            document.getElementById('error-message').innerText = translations[currentLanguage].errorRetry;
             
             if (videoErrorCount >= maxErrorRetries) {
-                document.getElementById('error-message').innerText = "Demasiados errores - Deteniendo";
+                document.getElementById('error-message').innerText = translations[currentLanguage].tooManyErrors;
                 togglePlayback();
                 return;
             }
@@ -874,9 +1083,6 @@
             }, 1000);
         }
 
-        // ======================
-        // FUNCIONES PRINCIPALES CON MEJOR MANEJO DE ERRORES
-        // ======================
         function togglePlayback() {
             try {
                 playClickSound();
@@ -896,7 +1102,7 @@
                     }
                     
                     document.body.classList.add('bolivar-mode');
-                    btn.innerText = "APAGAR RADIO";
+                    btn.innerText = translations[currentLanguage].playing;
                     playing = true;
                     
                     if (allowDecorations) {
@@ -913,18 +1119,17 @@
                     }
                     
                     document.body.classList.remove('bolivar-mode');
-                    btn.innerText = "SINTONIZAR EMISORA";
+                    btn.innerText = translations[currentLanguage].tune;
                     document.getElementById('song-title').innerText = "";
                     document.getElementById('error-message').innerText = "";
                     playing = false;
                     videoErrorCount = 0;
                     
-                    // Limpiar decoraciones al pausar
                     clearAllDecorations();
                 }
             } catch (error) {
                 console.error("Error en togglePlayback:", error);
-                document.getElementById('error-message').innerText = "Error - Recargar página";
+                document.getElementById('error-message').innerText = "Error - Reload page";
             }
         }
 
@@ -980,7 +1185,7 @@
                 player.nextVideo();
             } catch (error) {
                 console.error("Error en nextVideo:", error);
-                document.getElementById('error-message').innerText = "Error al cambiar";
+                document.getElementById('error-message').innerText = "Error";
             }
         }
 
@@ -994,7 +1199,7 @@
                 player.previousVideo();
             } catch (error) {
                 console.error("Error en previousVideo:", error);
-                document.getElementById('error-message').innerText = "Error al cambiar";
+                document.getElementById('error-message').innerText = "Error";
             }
         }
 
@@ -1004,16 +1209,13 @@
             
             if (emailDisplay.style.display === 'block') {
                 emailDisplay.style.display = 'none';
-                contactButton.innerHTML = '📧 ESCRIBEME';
+                contactButton.innerHTML = `📧 ${translations[currentLanguage].writeMe}`;
             } else {
                 emailDisplay.style.display = 'block';
-                contactButton.innerHTML = '📧 OCULTAR CORREO';
+                contactButton.innerHTML = `📧 ${translations[currentLanguage].myEmail}`;
             }
         }
 
-        // ======================
-        // DECORACIONES CON MEJOR GESTIÓN DE MEMORIA
-        // ======================
         let decorationCount = 0;
         const MAX_DECORATIONS = 3;
         
@@ -1033,7 +1235,6 @@
                 document.body.appendChild(deco);
                 decorationCount++;
                 
-                // Remover automáticamente después de la animación
                 setTimeout(() => {
                     if (deco.parentNode) {
                         deco.remove();
@@ -1041,7 +1242,6 @@
                     }
                 }, 4000);
                 
-                // Intervalo largo para reducir carga
                 if (playing && decorationCount < MAX_DECORATIONS) {
                     setTimeout(spawnDecorations, 2000);
                 }
@@ -1056,18 +1256,13 @@
             decorationCount = 0;
         }
 
-        // ======================
-        // INICIALIZACIÓN SEGURA
-        // ======================
         window.addEventListener('load', function() {
             try {
                 setView('radio');
                 
-                // Detectar si es móvil lento
                 const isOldMobile = isMobile && (navigator.hardwareConcurrency <= 2 || !navigator.hardwareConcurrency);
                 allowDecorations = !isOldMobile;
                 
-                // Monitor de memoria (para debugging)
                 if (performance && performance.memory) {
                     setInterval(() => {
                         const mem = performance.memory;
@@ -1075,15 +1270,16 @@
                     }, 30000);
                 }
                 
-                // Limpiar caché periódicamente
-                setInterval(cleanupMemory, 60000); // Cada minuto
+                setInterval(cleanupMemory, 60000);
+                
+                // Inicializar idioma después de cargar todo
+                initLanguage();
                 
             } catch (error) {
                 console.error("Error en inicialización:", error);
             }
         });
 
-        // Limpiar al cerrar pestaña
         window.addEventListener('beforeunload', function() {
             if (player && player.destroy) {
                 player.destroy();
@@ -1093,4 +1289,3 @@
     </script>
 </body>
 </html>
-
