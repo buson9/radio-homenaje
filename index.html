@@ -724,7 +724,7 @@
     <button class="btn-main" onclick="togglePlayback()" id="play-btn" data-i18n="waiting">ESPERANDO SEÑAL...</button>
 
     <!-- ====================== -->
-    <!-- NUEVO: Sección de donación con botón coLABORA -->
+    <!-- NUEVO: Sección de donación con botón coLABORA y AIRTM -->
     <!-- ====================== -->
     <div class="donation-box">
         <div class="donation-title" data-i18n="donationTitle">Este sitio no tiene fines de lucro pero si quieres apoyar a su mantenimiento:</div>
@@ -733,6 +733,19 @@
         <button class="collaborate-btn" onclick="showQRModal()">
             <span>🤝</span> coLABORA <span>❤️</span>
         </button>
+        
+        <!-- NUEVO: Sección Airtm (multiidioma) -->
+        <div class="airtm-section" style="margin: 15px 0; padding: 10px; border-top: 1px solid rgba(0, 243, 255, 0.3); border-bottom: 1px solid rgba(0, 243, 255, 0.3);">
+            <div style="font-size: 0.9rem; color: var(--dorado); margin-bottom: 8px;" data-i18n="airtmTitle">💸 Donación rápida vía Airtm:</div>
+            <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;">
+                <a href="https://airtm.me/buson9" target="_blank" style="color: var(--celeste-neon); font-size: 1rem; font-weight: bold; text-decoration: none; background: rgba(0, 25, 51, 0.8); padding: 8px 15px; border-radius: 30px; border: 1px solid var(--celeste-neon); width: fit-content;">
+                    🔗 <span data-i18n="airtmLink">airtm.me/buson9</span>
+                </a>
+                <div style="color: var(--blanco-suave); font-size: 0.9rem;">
+                    📩 <span data-i18n="airtmId">Airtm ID:</span> borisuria@gmail.com
+                </div>
+            </div>
+        </div>
         
         <!-- QR pequeño (clic para abrir modal) -->
         <img src="takenos.png" alt="Donation QR" class="qr-img" onclick="showQRModal()">
@@ -805,7 +818,11 @@
                 copySuccess: "✅ Enlace copiado",
                 nowPlaying: "🎵 Reproduciendo...",
                 nextVideo: "Video siguiente",
-                previousVideo: "Video anterior"
+                previousVideo: "Video anterior",
+                // NUEVAS LÍNEAS PARA AIRTM
+                airtmTitle: "💸 Donación rápida vía Airtm:",
+                airtmLink: "airtm.me/buson9",
+                airtmId: "Airtm ID:"
             },
             en: {
                 title: "Good Night, Tune In",
@@ -835,7 +852,11 @@
                 copySuccess: "✅ Link copied",
                 nowPlaying: "🎵 Now playing...",
                 nextVideo: "Next video",
-                previousVideo: "Previous video"
+                previousVideo: "Previous video",
+                // NUEVAS LÍNEAS PARA AIRTM
+                airtmTitle: "💸 Quick donation via Airtm:",
+                airtmLink: "airtm.me/buson9",
+                airtmId: "Airtm ID:"
             },
             pt: {
                 title: "Boa Noite, Sintonia",
@@ -865,7 +886,11 @@
                 copySuccess: "✅ Link copiado",
                 nowPlaying: "🎵 Reproduzindo...",
                 nextVideo: "Próximo vídeo",
-                previousVideo: "Vídeo anterior"
+                previousVideo: "Vídeo anterior",
+                // NUEVAS LÍNEAS PARA AIRTM
+                airtmTitle: "💸 Doação rápida via Airtm:",
+                airtmLink: "airtm.me/buson9",
+                airtmId: "Airtm ID:"
             }
         };
 
